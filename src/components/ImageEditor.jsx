@@ -39,7 +39,7 @@ export default function ImageEditor() {
     }, [imageModificada, processingImage])
 
     return (
-        <div className="mx-auto">
+        <div className="mx-auto lg:max-w-lg">
             <two-up>
                 <img src={imageOriginal} alt="Imagen original subida por el usuario" />
                 {processingImage 
