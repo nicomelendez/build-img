@@ -1,6 +1,6 @@
 import useEditor from "@/hooks/useEditor"
 import { useEffect, useRef, useState } from "react"
-import 'two-up-element/dist/two-up'
+import 'two-up-element/dist/two-up.mjs'
 import 'two-up-element/lib/styles.css';
 import Cargando from "./Cargando"
 import { grayscale, blur, backgroundRemoval} from "@cloudinary/url-gen/actions/effect"
