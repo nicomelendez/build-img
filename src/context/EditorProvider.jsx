@@ -8,7 +8,20 @@ const EditorProvider = ({ children }) => {
     const [imageStatus, setImageStatus] = useState(ImageStatus.READY)
     const [imageOriginal, setImageOriginal] = useState(null)
     const [imageModificada, setImageModificada] = useState(null)
+    const [datosDeImagen, setDatosDeImagen] = useState(null)
     const router = useRouter()
+
+    const cambiarImagenModificada = (url) =>{
+        setImageModificada(url)
+    }
+
+    
+
+    useEffect(()=>{
+        localStorage.setItem('imagenOriginal', JSON.stringify(imageOriginal))
+        localStorage.setItem('imagenModificada', JSON.stringify(imageModificada))
+    },[imageOriginal, imageModificada])
+
     return(
         <EditorContext.Provider value={{
             imageStatus,
@@ -17,7 +30,10 @@ const EditorProvider = ({ children }) => {
             setImageModificada,
             setImageOriginal,
             imageOriginal,
-            router
+            router,
+            cambiarImagenModificada,
+            setDatosDeImagen,
+            datosDeImagen
         }}>
             { children }
         </EditorContext.Provider>

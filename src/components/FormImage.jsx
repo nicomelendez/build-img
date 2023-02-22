@@ -1,15 +1,11 @@
-import Image from 'next/image';
-import React, {useEffect, useState} from 'react';
 import { useDropzone } from 'react-dropzone';
-import { Cloudinary } from "@cloudinary/url-gen";
-import { backgroundRemoval } from "@cloudinary/url-gen/actions/effect"
 import useEditor from '@/hooks/useEditor';
 import { ImageStatus } from '@/context/types.d';
 import Cargando from './Cargando';
 
 export default function FormImage() {
 
-  const {setImageOriginal, setImageModificada, setImageStatus, imageStatus, router} = useEditor()
+  const {setImageOriginal, setImageModificada, setImageStatus, imageStatus, router, setDatosDeImagen} = useEditor()
   
   const {getRootProps, getInputProps, open} = useDropzone({
     noClick: true,
@@ -19,15 +15,6 @@ export default function FormImage() {
     onDrop: acceptedFiles => {
       handleDrop(acceptedFiles)
     }
-  });
-
-  const cloudinary = new Cloudinary({
-    cloud: {
-      cloudName: "djslvlh8h",
-    },
-    url: {
-      secure: true,
-    },
   });
   
   const uploadImage = async (file) => {
@@ -49,13 +36,9 @@ export default function FormImage() {
     if(response.ok){
       const data = await response.json();
       const { public_id: publicId, secure_url: url } = data
-     
-      const imageWithoutBackground = cloudinary
-      .image(publicId)
-      .effect(backgroundRemoval())
-      console.log(imageWithoutBackground.toURL())
-      console.log(imageWithoutBackground.toURL())
-      setImageModificada(imageWithoutBackground.toURL())
+    
+      setDatosDeImagen(data)
+      setImageModificada(url)
       setImageOriginal(url)
       setImageStatus(ImageStatus.DONE)
       router.push('/editor')
