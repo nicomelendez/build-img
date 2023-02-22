@@ -9,13 +9,18 @@ const EditorProvider = ({ children }) => {
     const [imageOriginal, setImageOriginal] = useState(null)
     const [imageModificada, setImageModificada] = useState(null)
     const [datosDeImagen, setDatosDeImagen] = useState(null)
+    const [processingImage, setProcessingImage] = useState(true)
+
     const router = useRouter()
 
     const cambiarImagenModificada = (url) =>{
         setImageModificada(url)
     }
 
-    
+    const cambiarProcesoDeImagen = (valor) => {
+        setProcessingImage(valor)
+    }
+
 
     useEffect(()=>{
         localStorage.setItem('imagenOriginal', JSON.stringify(imageOriginal))
@@ -27,6 +32,8 @@ const EditorProvider = ({ children }) => {
             imageStatus,
             setImageStatus,
             imageModificada,
+            cambiarProcesoDeImagen,
+            processingImage,
             setImageModificada,
             setImageOriginal,
             imageOriginal,
