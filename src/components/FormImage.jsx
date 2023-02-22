@@ -54,7 +54,7 @@ export default function FormImage() {
   
 
   return (
-    <section className="card mx-auto w-full h-2/5 lg:w-3/5  aspect-video">
+    <section className="card mx-auto w-full lg:w-2/5 aspect-square">
       {imageStatus === ImageStatus.UPLOADING 
       ? (<Cargando />) 
       : (<div {...getRootProps({className: 'dropzone'})}>

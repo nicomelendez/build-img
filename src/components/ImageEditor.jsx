@@ -1,5 +1,5 @@
 import useEditor from "@/hooks/useEditor"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import 'two-up-element'
 import Cargando from "./Cargando"
 import { grayscale, blur, backgroundRemoval} from "@cloudinary/url-gen/actions/effect"
@@ -9,6 +9,8 @@ export default function ImageEditor() {
     
     const { imageOriginal, imageModificada, datosDeImagen, cambiarImagenModificada } = useEditor()
     const [processingImage, setProcessingImage] = useState(true)
+    const rango = useRef()
+    const [blurId, setBlur] = useState(0);
 
     const cloudinary = new Cloudinary({
       cloud: {
@@ -33,7 +35,7 @@ export default function ImageEditor() {
     cambiarImagenModificada(imageWithoutBackground.toURL())
     }
     
-    // const handlerTexto = () =>{
+    const handlerTexto = () =>{
     //  const imageConTexto = .resize(scale().width(1000))
     //  .reshape(
     //    cutByImage(
@@ -55,11 +57,11 @@ export default function ImageEditor() {
     //  )
     //  .effect(sepia())
     //  cambiarImagenModificada(imageConTexto.toURL())
-    // }
+    }
 
     const handlerBlur = () => {
     setProcessingImage(true)
-    const imagenGris = cloudinary.image(datosDeImagen.public_id).effect(blur().strength(500));
+    const imagenGris = cloudinary.image(datosDeImagen.public_id).effect(blur().strength(blurId));
     cambiarImagenModificada(imagenGris.toURL())
     }
 
@@ -97,7 +99,9 @@ export default function ImageEditor() {
       
       }
     ]
-
+    const blurMedida = (event) =>{
+      setBlur(event.target.value)
+    }
     useEffect(() => {
         let intervalId
         let tries = 0
@@ -131,27 +135,32 @@ export default function ImageEditor() {
    
       return (
         <>
-        {imageOriginal !== null ? (<div className="w-full flex flex-col flex-wrap">
-           
-           <div className="w-full flex flex-col">
-             <div className="w-4/5 mx-auto flex justify-evenly py-5">
+        {imageOriginal !== null 
+        ? (
+        <div className="w-full flex flex-col flex-wrap">
+           <p className="text-center text-white font-bold my-5">Comienza a modificar tu imagen</p>
+           <div className="w-full flex items-start flex-col">
+             <div className="w-full sm:w-4/5 mx-auto flex justify-evenly pb-3">
               {herramientas.map(her=>{
-               return(<div className="h-14 w-14 flex justify-center items-center rounded-full hover:cursor-pointer bg-slate-300" key={her.id}>
+               return(<div className="h-10 w-10 flex justify-center items-center rounded-full hover:cursor-pointer bg-slate-300" key={her.id}>
                    <button className="h-fit w-fit" onClick={her.action ? her.action : ()=>{}}>{her.name}</button>
                </div>)
               })}
              </div>
-
+             <div className="flex flex-col items-center justify-center mx-auto space-y-2 mb-5">
+              <label htmlFor="" className="text-white">Elegir grado de blur </label>
+              <input className="" type='range' ref={rango} min='0' max='1000' onChange={blurMedida}/>
+             </div>
        
               {processingImage && 
-              (<div className="flex flex-col justify-center items-center">
-                <p className="text-center text-white font-bold my-5">Procesando imagen...</p>
+              (<div className="flex flex-col justify-center items-center w-full">
+                <p className="text-center text-white font-bold mb-5">Procesando imagen...</p>
               </div>)}
       
 
              <div className='mx-auto lg:max-w-lg'>
                <two-up>
-                   <img src={imageOriginal} alt="Imagen original subida por el usuario" />
+                   <img className="lg:max-h-[500px]" src={imageOriginal} alt="Imagen original subida por el usuario" />
                    {processingImage 
                        ? (
                            <div className="flex flex-col justify-center items-center">
@@ -161,13 +170,13 @@ export default function ImageEditor() {
                            </div>
                        ) 
                        : (
-                           <img src={imageModificada} alt="Imagen sin fondo subida por el usuario" />
+                           <img className="lg:max-h-[500px]" src={imageModificada} alt="Imagen sin fondo subida por el usuario" />
                        )
                    }
                </two-up>
              </div>
            </div>
-           <a download href={imageModificada} className="hover:cursor-pointer hover:underline text-white rounded-full bg-gradient-to-r from-blue-500 to-violet-600 mt-10 text-bold px-6 py-4 text-center">Descargar imagen</a>
+           <a download href={imageModificada} className="hover:cursor-pointer hover:underline text-white rounded-full bg-gradient-to-r from-blue-500 to-violet-600 mt-10 text-bold px-6 py-4 text-center mx-auto">Descargar imagen</a>
          </div>) : (<>Debe elegir una imagen</>)}
         </>
       )
