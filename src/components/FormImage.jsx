@@ -37,7 +37,7 @@ export default function FormImage() {
       const data = await response.json();
       const { public_id: publicId, secure_url: url } = data
     
-      setDatosDeImagen(data)
+      setDatosDeImagen(publicId)
       setImageModificada(url)
       setImageOriginal(url)
       setImageStatus(ImageStatus.DONE)
