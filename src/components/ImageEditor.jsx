@@ -1,10 +1,10 @@
 import useEditor from "@/hooks/useEditor"
 import { useEffect, useRef, useState } from "react"
-import 'two-up-element'
+import 'two-up-element/dist/two-up'
 import 'two-up-element/lib/styles.css';
 import Cargando from "./Cargando"
 import { grayscale, blur, backgroundRemoval} from "@cloudinary/url-gen/actions/effect"
-import { Cloudinary, CloudinaryImage } from "@cloudinary/url-gen";
+import { Cloudinary } from "@cloudinary/url-gen";
 
 export default function ImageEditor() {
     
@@ -160,7 +160,7 @@ export default function ImageEditor() {
       
 
              <div className='mx-auto lg:max-w-lg'>
-               {/* <two-up>
+               <two-up>
                    <img className="lg:max-h-[500px]" src={imageOriginal} alt="Imagen original subida por el usuario" />
                    {processingImage 
                        ? (
@@ -174,13 +174,7 @@ export default function ImageEditor() {
                            <img className="lg:max-h-[500px]" src={imageModificada} alt="Imagen sin fondo subida por el usuario" />
                        )
                    }
-               </two-up> */}
-               {imageOriginal !== null && !processingImage &&
-                  <two-up>
-                    <img className="lg:max-h-[500px]" src={imageOriginal} alt="Imagen original subida por el usuario" />
-                    <img className="lg:max-h-[500px]" src={imageModificada} alt="Imagen sin fondo subida por el usuario" />
-                  </two-up>
-                }
+               </two-up>
              </div>
            </div>
            <a download href={imageModificada} className="hover:cursor-pointer hover:underline text-white rounded-full bg-gradient-to-r from-blue-500 to-violet-600 mt-10 text-bold px-6 py-4 text-center mx-auto">Descargar imagen</a>
