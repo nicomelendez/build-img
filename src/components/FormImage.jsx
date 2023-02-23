@@ -2,11 +2,13 @@ import { useDropzone } from 'react-dropzone';
 import useEditor from '@/hooks/useEditor';
 import { ImageStatus } from '@/context/types.d';
 import Cargando from './Cargando';
+import useCloudinary from '@/hooks/useCloudinary';
 
 export default function FormImage() {
 
-  const {setImageOriginal, setImageModificada, setImageStatus, imageStatus, router, setDatosDeImagen} = useEditor()
-  
+  const {imageStatus} = useEditor()
+  const {uploadImage} = useCloudinary()
+
   const {getRootProps, getInputProps, open} = useDropzone({
     noClick: true,
     accept: {
@@ -16,35 +18,6 @@ export default function FormImage() {
       handleDrop(acceptedFiles)
     }
   });
-  
-  const uploadImage = async (file) => {
-    setImageStatus(ImageStatus.UPLOADING)
-    const formData = new FormData();
-    formData.append("upload_preset", "mi0or3cn");
-    formData.append("timestamp", Date.now() / 1000);
-    formData.append("api_key", 456894211284456);
-    formData.append("file", file);
-  
-    const response = await fetch(
-      "https://api.cloudinary.com/v1_1/djslvlh8h/image/upload",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-
-    if(response.ok){
-      const data = await response.json();
-      const { public_id: publicId, secure_url: url } = data
-    
-      setDatosDeImagen(publicId)
-      setImageModificada(url)
-      setImageOriginal(url)
-      setImageStatus(ImageStatus.DONE)
-      router.push('/editor')
-    }
-    setImageStatus(ImageStatus.READY)
-  };
   
   const handleDrop = async (acceptedFiles) => {
     await Promise.all(

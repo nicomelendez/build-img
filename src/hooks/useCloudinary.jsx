@@ -8,9 +8,41 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import useEditor from "./useEditor";
 import { text } from "@cloudinary/url-gen/qualifiers/source";
 import { TextStyle } from '@cloudinary/transformation-builder-sdk/qualifiers/textStyle'
+import { ImageStatus } from '@/context/types.d';
+
 export default function useCloudinary() {
 
-    const {setDatosDeImagen} = useEditor()
+    const {setDatosDeImagen, setImageOriginal, setImageModificada, setImageStatus, router} = useEditor()
+
+  
+  const uploadImage = async (file) => {
+    setImageStatus(ImageStatus.UPLOADING)
+    const formData = new FormData();
+    formData.append("upload_preset", "mi0or3cn");
+    formData.append("timestamp", Date.now() / 1000);
+    formData.append("api_key", 456894211284456);
+    formData.append("file", file);
+  
+    const response = await fetch(
+      "https://api.cloudinary.com/v1_1/djslvlh8h/image/upload",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    if(response.ok){
+      const data = await response.json();
+      const { public_id: publicId, secure_url: url } = data
+    
+      setDatosDeImagen(publicId)
+      setImageModificada(url)
+      setImageOriginal(url)
+      setImageStatus(ImageStatus.DONE)
+      router.push('/editor')
+    }
+    setImageStatus(ImageStatus.READY)
+  };
 
     const cloudinary = new Cloudinary({
       cloud: {
@@ -96,6 +128,7 @@ export default function useCloudinary() {
     filtroPrimavera,
     filtroOtnio,
     filtroInvierno,
-    filtroGif
+    filtroGif,
+    uploadImage
   }
 }

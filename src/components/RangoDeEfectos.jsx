@@ -70,7 +70,7 @@ export default function RangoDeEfectos({ accion }) {
         cambiarImagenModificada(imagenEditada)
     }
 
-    const estilosButton = 'mx-auto w-4/5 px-4 py-2 bg-indigo-600 rounded-lg text-white '
+    const estilosButton = 'mx-auto w-4/5 px-4 py-2 bg-gradient-to-r from-blue-500 to-violet-600 font-semibold rounded-lg text-white '
     const estilosContent = 'min-w-[200px] bg-slate-100 mx-auto p-4 w-4/5 rounded-xl shadow flex flex-col items-center space-y-5'
     const estiloItem = 'hover:underline hover:cursor-pointer'
     const estilosTitulos = 'text-center font-bold text-lg'

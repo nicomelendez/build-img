@@ -61,7 +61,7 @@ export default function ImageEditor() {
 
            </div>
            
-           <button onClick={()=>{router.push('/resultado')}} className="hover:cursor-pointer hover:underline text-white rounded-full bg-gradient-to-r from-blue-500 to-violet-600 mt-10 text-bold px-6 py-4 text-center mx-auto">Terminar edición</button>
+           <button onClick={()=>{router.push('/resultado')}} className="hover:cursor-pointer hover:underline text-white rounded-full bg-gradient-to-r from-blue-500 to-violet-600 font-bold mt-10 text-bold px-6 py-4 text-center mx-auto">Terminar edición</button>
          </div>) : (<>Debe elegir una imagen</>)}
         </>
       )
