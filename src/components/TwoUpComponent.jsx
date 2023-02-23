@@ -1,18 +1,24 @@
-import { useLayoutEffect } from 'react';
-import dynamic from 'next/dynamic';
+import { useEffect, useRef } from 'react';
 
-const TwoUp = dynamic(() => import('two-up-element').then(module => module.TwoUp), { ssr: false });
+const TwoUp = ({imageOriginal, imagenModificada}) => {
+  const ref = useRef();
 
-const TwoUpComponent = ({imageOriginal, imagenModificada}) => {
-  useLayoutEffect(() => {
-    if (!window.customElements.get('two-up')) {
-      window.customElements.define('two-up', TwoUp);
-    }
+  useEffect(() => {
+    import('two-up-element').then(module => {
+      const TwoUp = module.TwoUp;
+      if (!window.customElements.get('two-up')) {
+        window.customElements.define('two-up', TwoUp);
+      }
+
+      if (ref.current) {
+        ref.current.orientation = 'horizontal';
+      }
+    });
   }, []);
 
   return (
     <div>
-      <two-up orientation="horizontal">
+      <two-up ref={ref}>
         <img slot="before" src={imageOriginal} alt="Before" />
         <img slot="after" src={imagenModificada} alt="After" />
       </two-up>
@@ -20,4 +26,4 @@ const TwoUpComponent = ({imageOriginal, imagenModificada}) => {
   );
 };
 
-export default TwoUpComponent;
+export default TwoUp;
