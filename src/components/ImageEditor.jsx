@@ -8,9 +8,7 @@ import Herramientas from "./Herramientas";
 export default function ImageEditor() {
     
     const { imageOriginal, imageModificada, processingImage, cambiarProcesoDeImagen, router} = useEditor()
-
-
-    
+   
 
     useEffect(() => {
         let intervalId
@@ -49,15 +47,17 @@ export default function ImageEditor() {
         ? (
         <div className="w-full flex flex-col flex-wrap">
            <p className="text-center text-xl text-white font-bold my-5">Comienza a modificar tu imagen</p>
-           <div className="w-full flex  items-center gap-4 ">
-            <div className="w-56">
+           <div className="w-full flex flex-col lg:flex-row  items-center justify-center gap-4">
+            
+            <div className="w-full lg:w-56">
               <Herramientas />
             </div>
-             <div className='mx-auto lg:max-w-lg'>
+
+             <div className='mx-auto lg:px-12'>
                 {processingImage ? 
-                (<div className="flex flex-col justify-center h-52 items-center w-full">
+                (<div className="flex w-[290px] lg:w-[500px] flex-col justify-center h-52 items-center">
                   <Cargando />
-                </div>) : (<img className="max-w-lg" src={imageModificada} alt='Imagen para editar'/>)}
+                </div>) : (<img className="w-full" src={imageModificada} alt='Imagen para editar'/>)}
                
              </div>
 

@@ -11,7 +11,7 @@ export default function Layout({ children, pagina }) {
         </Head>
         <div className="flex flex-col justify-start items-center h-screen w-full">
             <Nav />
-            <main className='md:w-8/12 xl:w-3/4 mx-auto mb-10 sm:p-5'>
+            <main className='max-w-[1000px] mx-auto mb-10 sm:p-5'>
                 { children }
             </main>
             <Footer />
