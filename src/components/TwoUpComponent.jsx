@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import Cargando from './Cargando';
 
 const TwoUp = ({ imageOriginal, imagenModificada }) => {
   const [twoUpLoaded, setTwoUpLoaded] = useState(false);
@@ -26,7 +27,7 @@ const TwoUp = ({ imageOriginal, imagenModificada }) => {
   }, []);
 
   if (!twoUpLoaded) {
-    return <div>Loading...</div>;
+    return <Cargando />
   }
 
   return (

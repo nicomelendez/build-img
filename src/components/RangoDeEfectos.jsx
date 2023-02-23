@@ -4,12 +4,18 @@ import { useState } from "react";
 
 export default function RangoDeEfectos({ accion }) {
 
-    const { datosDeImagen, cambiarProcesoDeImagen, cambiarImagenModificada, largo, alto ,blurMedida, blurId, cambiarLargo, cambiarAlto } = useEditor()
-    const {filtroGris, filtroBlur, filtroSacarFondo, filtroSize, filtroAvatar, filtroPrimavera,filtroInvierno,filtroOtnio} = useCloudinary()
+    const { datosDeImagen, cambiarProcesoDeImagen, cambiarImagenModificada, largo, alto ,blurMedida, blurId, cambiarLargo, cambiarAlto, cambiarLetras, cambiarSizeLetras, letras, sizeLetra } = useEditor()
+    const {filtroGris, filtroBlur, filtroSacarFondo, filtroSize, filtroAvatar, filtroPrimavera,filtroInvierno,filtroOtnio, filtroGif} = useCloudinary()
     
     const handlerGris = () => {
         cambiarProcesoDeImagen(true)
         const imagenEditada = filtroGris(datosDeImagen)
+        cambiarImagenModificada(imagenEditada)
+    }
+
+    const handlerGif = () => {
+        cambiarProcesoDeImagen(true)
+        const imagenEditada = filtroGif(datosDeImagen)
         cambiarImagenModificada(imagenEditada)
     }
 
@@ -41,8 +47,12 @@ export default function RangoDeEfectos({ accion }) {
         if(largo === 0 || alto === 0){
             return false
             }
+        if(letras && !sizeLetra){
+            alert('Debe elegir un tamño de fuente')
+            return false
+        }
         cambiarProcesoDeImagen(true)  
-        const imagenEditada = filtroAvatar(datosDeImagen, largo, alto)
+        const imagenEditada = filtroAvatar(datosDeImagen, largo, alto, letras, sizeLetra)
         cambiarImagenModificada(imagenEditada)
     }
     const handlerSize = () =>{
@@ -86,11 +96,19 @@ export default function RangoDeEfectos({ accion }) {
 
                 <div className="">
                     <label className="text-black">Largo</label>
-                    <input className="w-[150px]" onChange={cambiarLargo} type='number' />
+                    <input className="w-full" onChange={cambiarLargo} type='number' />
                 </div>
                 <div>
                     <label className="text-black">Alto</label>
-                    <input className="w-[150px]" onChange={cambiarAlto} type='number' />
+                    <input className="w-full" onChange={cambiarAlto} type='number' />
+                </div>
+                <div>
+                    <label className="text-black">Texto - Opcional</label>
+                    <input className="w-full" onChange={cambiarLetras} type='text' />
+                </div>
+                <div>
+                    <label className="text-black">Tamaño de fuente</label>
+                    <input className="w-full" onChange={cambiarSizeLetras} type='number' />
                 </div>
                 <button className={estilosButton} onClick={handlerAvatar}>Aplicar</button>
             </div>
@@ -102,11 +120,11 @@ export default function RangoDeEfectos({ accion }) {
                 <p className={estilosTitulos}>Modificar tamaño</p>
                 <div>
                     <label className="text-black">Largo</label>
-                    <input className="w-[150px]" onChange={cambiarLargo} type='number' />
+                    <input className="w-full" onChange={cambiarLargo} type='number' />
                 </div>
                 <div>
                     <label className="text-black">Alto</label>
-                    <input className="w-[150px]" onChange={cambiarAlto} type='number' />
+                    <input className="w-full" onChange={cambiarAlto} type='number' />
                 </div>
                 <button className={estilosButton} onClick={handlerSize}>Aplicar</button>
             </div>

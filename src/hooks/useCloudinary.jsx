@@ -1,11 +1,13 @@
 import { max } from "@cloudinary/url-gen/actions/roundCorners"
 import { grayscale, blur, backgroundRemoval, colorize } from "@cloudinary/url-gen/actions/effect"
 import { focusOn } from "@cloudinary/url-gen/qualifiers/gravity";
+import { source } from "@cloudinary/url-gen/actions/overlay";
 import { face } from "@cloudinary/url-gen/qualifiers/focusOn";
 import { Resize } from "@cloudinary/url-gen/actions/resize";
 import { Cloudinary } from "@cloudinary/url-gen";
 import useEditor from "./useEditor";
-
+import { text } from "@cloudinary/url-gen/qualifiers/source";
+import { TextStyle } from '@cloudinary/transformation-builder-sdk/qualifiers/textStyle'
 export default function useCloudinary() {
 
     const {setDatosDeImagen} = useEditor()
@@ -40,6 +42,11 @@ export default function useCloudinary() {
       return imagenInvierno.toURL()
     }
     
+    const filtroGif = async(image_url) => {
+     
+
+    }
+
     const filtroSacarFondo = (public_id) => {
     const imageWithoutBackground = cloudinary
     .image(public_id)
@@ -60,7 +67,21 @@ export default function useCloudinary() {
     return imagenBlur.toURL()
     }
 
-    const filtroAvatar = (public_id, largo, alto) => {
+    const filtroAvatar = (public_id, largo, alto, letras, sizeLetras) => {
+
+      console.log(letras, sizeLetras)
+      if(letras && sizeLetras){
+        const imagenAvatar = cloudinary.image(public_id).effect(Resize.fill().width(largo).height(alto).gravity(focusOn(face()))).roundCorners(max()).effect(blur().strength(200)).overlay(
+          source(
+            text(letras, new TextStyle("Arial", sizeLetras).fontWeight("bold")).textColor(
+              "white"
+            )
+          )
+        )
+        setDatosDeImagen(imagenAvatar.publicID)
+        return imagenAvatar.toURL()
+      }
+
     const imagenAvatar = cloudinary.image(public_id).effect(Resize.fill().width(largo).height(alto).gravity(focusOn(face()))).roundCorners(max())
     setDatosDeImagen(imagenAvatar.publicID)
     return imagenAvatar.toURL()
@@ -74,6 +95,7 @@ export default function useCloudinary() {
     filtroAvatar,
     filtroPrimavera,
     filtroOtnio,
-    filtroInvierno
+    filtroInvierno,
+    filtroGif
   }
 }

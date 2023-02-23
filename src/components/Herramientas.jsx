@@ -45,7 +45,7 @@ export default function Herramientas() {
         <div className="mx-auto w-full flex flex-row flex-wrap lg:space-y-4 lg:flex-col justify-evenly pb-3">
             {herramientas.map(her=>{
             return(
-                    <div className="bg-slate-300 w-14 h-14 text-xs flex flex-col items-center justify-center hover:cursor-pointer rounded-full" onClick={()=>{handlerEfecto(her)}} key={her.id}>
+                    <div className="bg-slate-300 w-12 h-12 text-[10px] lg:w-14 lg:h-14 lg:text-xs flex flex-col items-center justify-center hover:cursor-pointer rounded-full" onClick={()=>{handlerEfecto(her)}} key={her.id}>
                         <div className="">
                             <span>{her.icons}</span>
                         </div>

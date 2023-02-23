@@ -13,8 +13,17 @@ const EditorProvider = ({ children }) => {
     const [blurId, setBlur] = useState(0)
     const [largo, setLargo] = useState(0)
     const [alto, setAlto] = useState(0)
+    const [letras, setLetras] = useState(null)
+    const [sizeLetra, setSizeLetras] = useState(null)
 
 
+    const cambiarLetras = (event) => {
+        setLetras(event.target.value)
+    }
+
+    const cambiarSizeLetras = (event) => {
+        setSizeLetras(event.target.value)
+    }
 
     const conseguirImagenOriginalLocalSotre = () => {
         const imagenOrg = localStorage.getItem('imagenOriginal')
@@ -102,6 +111,10 @@ const EditorProvider = ({ children }) => {
             router,
             cambiarImagenModificada,
             setDatosDeImagen,
+            cambiarLetras,
+            letras,
+            sizeLetra,
+            cambiarSizeLetras,
             datosDeImagen
         }}>
             { children }
