@@ -1,28 +1,17 @@
-import { useEffect, useRef } from 'react';
+import React from 'react';
 
 const TwoUp = ({imageOriginal, imagenModificada}) => {
     
-  const ref = useRef();
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      import('two-up-element/dist/two-up.ts').then(module => {
-        const TwoUp = module.TwoUp;
-        if (!window.customElements.get('two-up')) {
-          window.customElements.define('two-up', TwoUp);
-        }
-        if (ref.current) {
-          ref.current.orientation = 'horizontal';
-        }
-      });
-    }
-  }, []);
+  React.useEffect(() =>{
+    import('two-up-element')
+  } 
+  , [])
 
   return (
     <div>
-      <two-up ref={ref}>
-        <img slot="before" src={imageOriginal} alt="Before" />
-        <img slot="after" src={imagenModificada} alt="After" />
+      <two-up>
+        <img src={imageOriginal} alt="Before" />
+        <img src={imagenModificada} alt="After" />
       </two-up>
     </div>
   );
