@@ -6,7 +6,7 @@ const TwoUp = ({imageOriginal, imagenModificada}) => {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      import('two-up-element/dist/index').then(module => {
+      import('two-up-element/dist/two-up-min').then(module => {
         const TwoUp = module.TwoUp;
         if (!window.customElements.get('two-up')) {
           window.customElements.define('two-up', TwoUp);
