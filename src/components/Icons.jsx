@@ -42,7 +42,7 @@ export const IconCloudBinary = () => {
   return (
     <svg  
     xmlns="http://www.w3.org/2000/svg"
-    className="p-2 rounded-full bg-white w-36"
+    className="p-2 rounded-full bg-white w-24 lg:w-36"
     viewBox="0 0 500 96.77"
   >
     <g data-name="Layer 2">
