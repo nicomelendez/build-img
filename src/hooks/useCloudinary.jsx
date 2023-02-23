@@ -47,9 +47,6 @@ export default function useCloudinary() {
     }
 
     const filtroAvatar = (public_id, largo, alto) => {
-        if(largo === 0 || alto === 0){
-            return false
-        }
     const imagenGris = cloudinary.image(public_id).effect(Resize.fill().width(largo).height(alto).gravity(focusOn(face()))).roundCorners(max())
     setDatosDeImagen(imagenGris.publicID)
     return imagenGris.toURL()

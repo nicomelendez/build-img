@@ -32,6 +32,9 @@ export default function Herramientas() {
         cambiarImagenModificada(imagenEditada)
     }
     const handlerSize = () =>{
+      if(largo === 0 || alto === 0){
+        return false
+      }
       cambiarProcesoDeImagen(true)
       const imagenEditada = filtroSize(datosDeImagen, largo, alto)
       cambiarImagenModificada(imagenEditada)
