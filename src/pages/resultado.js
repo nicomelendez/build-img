@@ -2,12 +2,12 @@ import useEditor from '@/hooks/useEditor';
 import Layout from '@/layout/Layout'
 import dynamic from 'next/dynamic';
 const TwoUp = dynamic(() => import('two-up-element').then(module => module.TwoUp), { ssr: false });
-import React, { useEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 
 export default function Resultado() {
   const { imageOriginal, imageModificada } = useEditor()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!window.customElements.get('two-up')) {
       window.customElements.define('two-up', TwoUp);
     }
