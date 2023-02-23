@@ -7,7 +7,7 @@ export default function Nav() {
 
 
   return (
-    <nav className="bg-[#07182E] w-full border-gray-200">
+    <nav className="bg-[#07182E] px-5 w-full border-gray-200">
         <div className="flex justify-center sm:justify-start mx-auto max-w-screen-xl">
             <div className="flex items-center justify-center py-5 hover:cursor-default">
                 <button onClick={()=>{router.push('/')}} className="">
