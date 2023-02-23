@@ -15,6 +15,10 @@
   border-radius: 20px;
 }
 
+.sombra{
+  filter: drop-shadow(-2px 2px 15px rgba(0, 0, 0, 0.473));
+}
+
 .card div {
   z-index: 1;
   color: white;
