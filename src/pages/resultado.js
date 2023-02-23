@@ -1,6 +1,7 @@
 import useEditor from '@/hooks/useEditor';
 import Layout from '@/layout/Layout'
-import { TwoUp } from 'two-up-element';
+import dynamic from 'next/dynamic';
+const TwoUp = dynamic(() => import('two-up-element').then(module => module.TwoUp), { ssr: false });
 import React, { useEffect } from 'react'
 
 export default function Resultado() {
