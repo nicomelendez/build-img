@@ -31,7 +31,7 @@ const TwoUp = ({ imageOriginal, imagenModificada }) => {
   }
 
   return (
-    <div>
+    <div className='sombra'>
       <two-up ref={ref}>
         <img slot="before" src={imageOriginal} alt="Before" />
         <img slot="after" src={imagenModificada} alt="After" />
