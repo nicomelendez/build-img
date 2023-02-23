@@ -44,7 +44,7 @@ export default function ImageEditor() {
         {imageOriginal !== null 
         ? (
         <div className="w-full flex flex-col flex-wrap">
-           <p className="text-center text-xl text-white font-bold my-5">Comienza a modificar tu imagen</p>
+           <p className="text-center text-2xl text-white font-bold my-5">Comienza a personalizar tu imagen</p>
            <div className="w-full flex flex-col lg:flex-row  items-center justify-center gap-4">
             
             <div className="w-full lg:w-56">

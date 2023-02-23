@@ -45,11 +45,11 @@ export default function RangoDeEfectos({ accion }) {
 
     const handlerAvatar = () => {
         if(largo === 0 || alto === 0){
-            return false
+            return alert('Debe ingresar un tamaño')
+            
             }
         if(letras && !sizeLetra){
-            alert('Debe elegir un tamño de fuente')
-            return false
+            return alert('Debe elegir un tamaño de fuente')
         }
         cambiarProcesoDeImagen(true)  
         const imagenEditada = filtroAvatar(datosDeImagen, largo, alto, letras, sizeLetra)
@@ -57,7 +57,7 @@ export default function RangoDeEfectos({ accion }) {
     }
     const handlerSize = () =>{
         if(largo === 0 || alto === 0){
-        return false
+        return alert('Debe ingresar un tamaño')
         }
         cambiarProcesoDeImagen(true)
         const imagenEditada = filtroSize(datosDeImagen, largo, alto)
