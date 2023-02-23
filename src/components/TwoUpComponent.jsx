@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 const TwoUp = ({imageOriginal, imagenModificada}) => {
+    
   const ref = useRef();
 
   useEffect(() => {
