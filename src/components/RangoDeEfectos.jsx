@@ -1,75 +1,142 @@
+import useCloudinary from "@/hooks/useCloudinary";
 import useEditor from "@/hooks/useEditor";
-import { useEffect } from "react";
+import { useState } from "react";
 
 export default function RangoDeEfectos({ accion }) {
 
-    const { blurMedida, blurId, cambiarLargo, cambiarAlto } = useEditor()
+    const { datosDeImagen, cambiarProcesoDeImagen, cambiarImagenModificada, largo, alto ,blurMedida, blurId, cambiarLargo, cambiarAlto } = useEditor()
+    const {filtroGris, filtroBlur, filtroSacarFondo, filtroSize, filtroAvatar, filtroPrimavera,filtroInvierno,filtroOtnio} = useCloudinary()
+    
+    const handlerGris = () => {
+        cambiarProcesoDeImagen(true)
+        const imagenEditada = filtroGris(datosDeImagen)
+        cambiarImagenModificada(imagenEditada)
+    }
 
+    const handlerPrimavera = () => {
+        cambiarProcesoDeImagen(true)
+        const imagenEditada = filtroPrimavera(datosDeImagen)
+        cambiarImagenModificada(imagenEditada)
+    }
 
+    const handlerOtnio = () => {
+        cambiarProcesoDeImagen(true)
+        const imagenEditada = filtroOtnio(datosDeImagen)
+        cambiarImagenModificada(imagenEditada)
+    }
+
+    const handlerInvierno = () => {
+        cambiarProcesoDeImagen(true)
+        const imagenEditada = filtroInvierno(datosDeImagen)
+        cambiarImagenModificada(imagenEditada)
+    }
+
+    const handlerSacarFondo = () => {
+        cambiarProcesoDeImagen(true)  
+        const imagenEditada = filtroSacarFondo(datosDeImagen)
+        cambiarImagenModificada(imagenEditada)
+    }
+
+    const handlerAvatar = () => {
+        if(largo === 0 || alto === 0){
+            return false
+            }
+        cambiarProcesoDeImagen(true)  
+        const imagenEditada = filtroAvatar(datosDeImagen, largo, alto)
+        cambiarImagenModificada(imagenEditada)
+    }
+    const handlerSize = () =>{
+        if(largo === 0 || alto === 0){
+        return false
+        }
+        cambiarProcesoDeImagen(true)
+        const imagenEditada = filtroSize(datosDeImagen, largo, alto)
+        cambiarImagenModificada(imagenEditada)
+    }
+
+    const handlerBlur = () => {
+        cambiarProcesoDeImagen(true)
+        const imagenEditada = filtroBlur(datosDeImagen, blurId);
+        cambiarImagenModificada(imagenEditada)
+    }
+
+    const estilosButton = 'mx-auto w-4/5 px-4 py-2 bg-indigo-600 rounded-lg text-white '
+    const estilosContent = 'min-w-[200px] bg-slate-100 mx-auto p-4 w-4/5 rounded-xl shadow flex flex-col items-center space-y-5'
+    const estiloItem = 'hover:underline hover:cursor-pointer'
+    const estilosTitulos = 'text-center font-bold text-lg'
+    
     if(accion === 'Blur'){
         return (
-            <div className="w-[167px]">
-                <p>Añadir blur</p>
-                <div className="flex flex-col items-center justify-start mx-auto space-y-2 my-5">
+            <div className={estilosContent}>
+                <p className={estilosTitulos}>Añadir blur</p>
+                <div className="flex flex-col items-center justify-start space-y-2 my-5">
                     <label htmlFor="" className="text-black text-sm">Grado de blur <strong>{blurId}</strong></label>
                     <input className="" type='range' min='0' max='1000' onChange={blurMedida}/>
+                    <button className={estilosButton} onClick={handlerBlur}>Aplicar</button>
                 </div>
             </div>
         )
-    }
+    }    
     if(accion === 'Avatar'){
         return (
-            <div className="flex w-[167px] flex-col space-y-5">
-                <p>Modificar tamaño</p>
-                <div>
-                    <label className="text-black font-bold">Largo</label>
+            <div className={estilosContent}>
+                <p className={estilosTitulos}>Crear un avatar</p>
+
+                <p>Define las medidas</p>
+
+                <div className="">
+                    <label className="text-black">Largo</label>
                     <input className="w-[150px]" onChange={cambiarLargo} type='number' />
                 </div>
                 <div>
-                    <label className="text-black font-bold">Alto</label>
+                    <label className="text-black">Alto</label>
                     <input className="w-[150px]" onChange={cambiarAlto} type='number' />
                 </div>
+                <button className={estilosButton} onClick={handlerAvatar}>Aplicar</button>
             </div>
         )
     }
     if(accion === 'Ajustar'){
         return (
-            <div className="flex w-[167px] flex-col space-y-5">
-                <p>Modificar tamaño</p>
+            <div className={estilosContent}>
+                <p className={estilosTitulos}>Modificar tamaño</p>
                 <div>
-                    <label className="text-black font-bold">Largo</label>
+                    <label className="text-black">Largo</label>
                     <input className="w-[150px]" onChange={cambiarLargo} type='number' />
                 </div>
                 <div>
-                    <label className="text-black font-bold">Alto</label>
+                    <label className="text-black">Alto</label>
                     <input className="w-[150px]" onChange={cambiarAlto} type='number' />
                 </div>
+                <button className={estilosButton} onClick={handlerSize}>Aplicar</button>
             </div>
         )
     }
-    if(accion === 'Recorte'){
+    if(accion === 'Recortar'){
         return (
-            <div>RangoDeEfectos</div>
+            <div className={estilosContent}>
+                <p className={estilosTitulos}>Recortar fondo</p>
+                <button className={estilosButton} onClick={handlerSacarFondo}>Aplicar</button>
+            </div>
         )
     }
-    if(accion === 'Gris'){
+    if(accion === 'Efectos'){
         return (
-            <div className="w-[167px]">
-                <p>Aplicar efectos</p>
-                <div>
-                    <ul>
-                        <li>Gris</li>
-                        <li>Primavera</li>
-                        <li>Otoño</li>
-                        <li>Invierno</li>
-                    </ul>
-                </div>
+            <div className={estilosContent}>
+                <p className={estilosTitulos}>Elige un efecto</p>
+                <ul className="flex flex-row flex-wrap gap-5 lg:gap-0 lg:items-start justify-around items-center w-full lg:flex-col lg:space-y-5 pt-4 font-semibold">
+                    <li><button className={estiloItem} onClick={handlerGris}>Gris</button></li>
+                    <li><button className={estiloItem} onClick={handlerPrimavera}>Primavera</button></li>
+                    <li><button className={estiloItem} onClick={handlerOtnio}>Otoño</button></li>
+                    <li><button className={estiloItem} onClick={handlerInvierno}>Invierno</button></li>
+                </ul>
+           
             </div>
         )
     }
     else{
         return (
-            <div className="w-full">
+            <div className={estilosContent + ' justify-center'}>
                 <p className="text-center ">Eliga un efecto para comenzar a modificar su imagen</p>
             </div>
         )

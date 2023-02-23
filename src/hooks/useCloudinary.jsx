@@ -1,5 +1,5 @@
 import { max } from "@cloudinary/url-gen/actions/roundCorners"
-import { grayscale, blur, backgroundRemoval } from "@cloudinary/url-gen/actions/effect"
+import { grayscale, blur, backgroundRemoval, colorize } from "@cloudinary/url-gen/actions/effect"
 import { focusOn } from "@cloudinary/url-gen/qualifiers/gravity";
 import { face } from "@cloudinary/url-gen/qualifiers/focusOn";
 import { Resize } from "@cloudinary/url-gen/actions/resize";
@@ -22,10 +22,24 @@ export default function useCloudinary() {
     const filtroGris = (public_id) => {
       const imagenGris = cloudinary.image(public_id).effect(grayscale());
       setDatosDeImagen(imagenGris.publicID)
-      console.log(imagenGris)
       return imagenGris.toURL()
     }
-
+    const filtroPrimavera = (public_id) => {
+      const imagenPrimaver = cloudinary.image(public_id).effect(colorize().level(10).color("#A1F36F")).effect(colorize().level(10).color("#0E8B42")).effect(colorize().level(10).color("#FFFFFF"));;
+      setDatosDeImagen(imagenPrimaver.publicID)
+      return imagenPrimaver.toURL()
+    }
+    const filtroOtnio = (public_id) => {
+      const imagenOtnio = cloudinary.image(public_id).effect(colorize().level(10).color("#FFA902")).effect(colorize().level(10).color("#FAFF07")).effect(colorize().level(10).color("#FFFFFF"));
+      setDatosDeImagen(imagenOtnio.publicID)
+      return imagenOtnio.toURL()
+    }
+    const filtroInvierno = (public_id) => {
+      const imagenInvierno = cloudinary.image(public_id).effect(colorize().level(10).color("#02F0FF")).effect(colorize().level(10).color("#076FFF")).effect(colorize().level(10).color("#FFFFFF"));;
+      setDatosDeImagen(imagenInvierno.publicID)
+      return imagenInvierno.toURL()
+    }
+    
     const filtroSacarFondo = (public_id) => {
     const imageWithoutBackground = cloudinary
     .image(public_id)
@@ -35,21 +49,21 @@ export default function useCloudinary() {
     }
     
     const filtroSize = (public_id, largo, alto) =>{
-     const imageConTexto = cloudinary.image(public_id).effect(Resize.fill().width(largo).height(alto));
-     setDatosDeImagen(imageConTexto.publicID)
-     return imageConTexto.toURL()
+     const imageSize= cloudinary.image(public_id).effect(Resize.fill().width(largo).height(alto));
+     setDatosDeImagen(imageSize.publicID)
+     return imageSize.toURL()
     }
 
     const filtroBlur = (public_id, gradoBlur) => {
-    const imagenGris = cloudinary.image(public_id).effect(blur().strength(gradoBlur));
-    setDatosDeImagen(imagenGris.publicID)
-    return imagenGris.toURL()
+    const imagenBlur = cloudinary.image(public_id).effect(blur().strength(gradoBlur));
+    setDatosDeImagen(imagenBlur.publicID)
+    return imagenBlur.toURL()
     }
 
     const filtroAvatar = (public_id, largo, alto) => {
-    const imagenGris = cloudinary.image(public_id).effect(Resize.fill().width(largo).height(alto).gravity(focusOn(face()))).roundCorners(max())
-    setDatosDeImagen(imagenGris.publicID)
-    return imagenGris.toURL()
+    const imagenAvatar = cloudinary.image(public_id).effect(Resize.fill().width(largo).height(alto).gravity(focusOn(face()))).roundCorners(max())
+    setDatosDeImagen(imagenAvatar.publicID)
+    return imagenAvatar.toURL()
     }
 
   return {
@@ -57,6 +71,9 @@ export default function useCloudinary() {
     filtroGris,
     filtroSacarFondo,
     filtroSize,
-    filtroAvatar
+    filtroAvatar,
+    filtroPrimavera,
+    filtroOtnio,
+    filtroInvierno
   }
 }

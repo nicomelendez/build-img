@@ -15,6 +15,20 @@ const EditorProvider = ({ children }) => {
     const [alto, setAlto] = useState(0)
 
 
+
+    const conseguirImagenOriginalLocalSotre = () => {
+        const imagenOrg = localStorage.getItem('imagenOriginal')
+        if(imagenOrg){
+            return imagenOrg
+        }
+    }
+    const conseguirImagenModificadaLocalSotre = () => {
+       const imageMod = localStorage.getItem('imagenModificada')
+       if(imageMod){
+        return imageMod
+       }
+    }
+ 
     const resetearLargoAlto = () => {
         setAlto(0)
         setLargo(0)
@@ -44,9 +58,29 @@ const EditorProvider = ({ children }) => {
 
 
     useEffect(()=>{
-        localStorage.setItem('imagenOriginal', JSON.stringify(imageOriginal))
-        localStorage.setItem('imagenModificada', JSON.stringify(imageModificada))
+        if(imageModificada !== null || imageOriginal !== null){
+            let imageMod = conseguirImagenModificadaLocalSotre()
+            let imagenOrg = conseguirImagenOriginalLocalSotre()
+
+            if(imageModificada !== imageMod || imageOriginal !== imagenOrg){
+                localStorage.setItem('imagenOriginal', JSON.stringify(imageOriginal))
+                localStorage.setItem('imagenModificada', JSON.stringify(imageModificada))
+            }
+          
+        }
     },[imageOriginal, imageModificada])
+
+    useEffect(()=>{
+        if(imageOriginal === null || imageModificada === null){
+            let imageMod = conseguirImagenModificadaLocalSotre()
+            let imagenOrg = conseguirImagenOriginalLocalSotre()   
+            if(imageMod || imagenOrg){
+                setImageModificada(String(imageMod))
+                setImageOriginal(String(imagenOrg))
+            }     
+        }
+        
+    },[])
 
     return(
         <EditorContext.Provider value={{

@@ -1,7 +1,5 @@
 import useEditor from "@/hooks/useEditor"
 import { useEffect} from "react"
-import 'two-up-element/dist/two-up.mjs'
-import 'two-up-element/lib/styles.css';
 import Cargando from "./Cargando"
 import Herramientas from "./Herramientas";
 
