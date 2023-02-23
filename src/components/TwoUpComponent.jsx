@@ -5,17 +5,17 @@ const TwoUp = ({imageOriginal, imagenModificada}) => {
   const ref = useRef();
 
   useEffect(() => {
-    import('two-up-element').then(module => {
-      const TwoUp = module.TwoUp;
-      if (typeof window !== 'undefined' && window.customElements) {
+    if (typeof window !== 'undefined') {
+      import('two-up-element').then(module => {
+        const TwoUp = module.TwoUp;
         if (!window.customElements.get('two-up')) {
           window.customElements.define('two-up', TwoUp);
         }
         if (ref.current) {
           ref.current.orientation = 'horizontal';
         }
-      }
-    });
+      });
+    }
   }, []);
 
   return (
