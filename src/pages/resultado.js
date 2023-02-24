@@ -8,7 +8,7 @@ export default function Resultado() {
 
   return (
     <Layout pagina='Resultados'>
-      <div className='w-full flex flex-col pt-5 space-y-5 items-center justify-center mx-auto'>
+      <div className='w-full flex flex-col py-5 space-y-5 items-center justify-center mx-auto'>
         <h2 className='text-4xl font-extrabold text-white'>¡Resultado final!</h2>
 
         <TwoUp imagenModificada={imageModificada} imageOriginal={imageOriginal}/>

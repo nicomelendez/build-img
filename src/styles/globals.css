@@ -19,12 +19,12 @@
 }
 #poster{
   transition: box-shadow .1s, transform .1s;
-  
 }
-.imagen{
-   
-  
+
+#poster:hover{
+  filter: drop-shadow(-2px 2px 15px rgba(215, 210, 210, 0.473));
 }
+
 .sombra{
   filter: drop-shadow(-2px 2px 15px rgba(0, 0, 0, 0.473));
 }
