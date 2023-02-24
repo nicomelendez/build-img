@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 .card {
-  
   background: #07182E;
   position: relative;
   display: -webkit-box;
@@ -14,7 +13,18 @@
   overflow: hidden;
   border-radius: 20px;
 }
-
+.aver{
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+}
+#poster{
+  transition: box-shadow .1s, transform .1s;
+  
+}
+.imagen{
+   
+  
+}
 .sombra{
   filter: drop-shadow(-2px 2px 15px rgba(0, 0, 0, 0.473));
 }
@@ -131,4 +141,10 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
 }
-
+@media screen and (max-width:1020px){
+.aver{
+  padding: 14px 0px;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+}

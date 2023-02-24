@@ -41,7 +41,7 @@ export default function Herramientas() {
             setAccion(her.name)
       }
   return (
-    <div className="flex flex-col lg:flex-row  w-full gap-4 justify-around">
+    <div className="flex flex-col lg:flex-row gap-4 justify-around">
         <div className="mx-auto w-full flex flex-row flex-wrap lg:space-y-4 lg:flex-col justify-evenly pb-3">
             {herramientas.map(her=>{
             return(

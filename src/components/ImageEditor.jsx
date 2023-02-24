@@ -44,13 +44,8 @@ export default function ImageEditor() {
         {imageOriginal !== null 
         ? (
         <div className="w-full flex flex-col flex-wrap">
-           <p className="text-center text-2xl text-white font-bold my-5">Comienza a personalizar tu imagen</p>
            <div className="w-full flex flex-col lg:flex-row  items-center justify-center gap-4">
             
-            <div className="w-full lg:w-56">
-              <Herramientas />
-            </div>
-
              <div className='mx-auto lg:px-12'>
                 {processingImage ? 
                 (<div className="flex w-[290px] lg:w-[500px] flex-col justify-center h-52 items-center">
