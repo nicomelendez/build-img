@@ -7,13 +7,13 @@ export default function Layout({ children, pagina }) {
   let clase = ''
 
   if(pagina === 'Inicio'){
-    clase = 'max-w-[1000px] grid place-content sm:grid-cols-2 mx-auto sm:p-5'
+    clase = 'max-w-[1000px] grid place-content sm:grid-cols-2 mx-auto p-5'
   }
   if(pagina === 'Editar imagen'){
-    clase = 'max-w-[1000px] grid place-content mx-auto sm:p-5 aver'
+    clase = 'max-w-[1000px] grid place-content mx-auto p-5 aver'
   }
   if(pagina === 'Resultados'){
-    clase = 'max-w-[1000px] grid place-content mx-auto sm:p-5'
+    clase = 'max-w-[1000px] grid place-content mx-auto p-5'
   }
 
   return (
