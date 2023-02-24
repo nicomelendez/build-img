@@ -2,12 +2,12 @@ import { IconCloudBinary } from "./Icons";
 
 export default function Footer() {
   return (
-    <footer className="p-5 flex flex-col text-xs gap-4 lg:flex-row lg:gap-0 justify-around items-center text-white lg:text-xl w-full mx-auto bg-[#07182E] rounded-t-lg">
+    <footer className="p-5 flex flex-col text-xs sm:gap-4 lg:flex-row lg:gap-0 justify-around items-center text-white lg:text-xl w-full mx-auto bg-[#07182E] rounded-t-lg">
       <div>
         <p className="text-center pb-2">
           Diseñado por <strong>Nicolás Meléndez</strong>
         </p>
-        <div class="card2 mx-auto">
+        <div class="card2 scale-50 sm:scale-100 mx-auto">
           <span>Contactos</span>
           <a class="social-link" href="https://github.com/nicomelendez">
             <svg
@@ -67,7 +67,7 @@ export default function Footer() {
         rel="noreferrer"
       >
         {" "}
-        Hecho con <IconCloudBinary />
+        <span className="">Hecho con</span> <IconCloudBinary />
       </a>
     </footer>
   );
