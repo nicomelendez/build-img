@@ -8,7 +8,7 @@ export default function Home() {
   
   return (
     <Layout pagina='Inicio' >
-      <div>
+      <div className='flex justify-start items-center'>
         <IconPhotoHome />
       </div>
       <div className='h-full flex flex-col items-center justify-center'>

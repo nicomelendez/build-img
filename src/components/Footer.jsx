@@ -7,9 +7,9 @@ export default function Footer() {
         <p className="text-center pb-2">
           Diseñado por <strong>Nicolás Meléndez</strong>
         </p>
-        <div class="card2 scale-50 sm:scale-100 mx-auto">
+        <div className="card2 scale-50 sm:scale-100 mx-auto">
           <span>Contactos</span>
-          <a class="social-link" href="https://github.com/nicomelendez">
+          <a className="social-link" href="https://github.com/nicomelendez">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="1024"
@@ -25,7 +25,7 @@ export default function Footer() {
               ></path>
             </svg>
           </a>
-          <a class="social-link" href="#">
+          <a className="social-link" href="#">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="800"
@@ -41,7 +41,7 @@ export default function Footer() {
               </g>
             </svg>
           </a>
-          <a class="social-link" href="https://www.linkedin.com/in/nicol%C3%A1s-mel%C3%A9ndez-60ba32160/">
+          <a className="social-link" href="https://www.linkedin.com/in/nicol%C3%A1s-mel%C3%A9ndez-60ba32160/">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="800"

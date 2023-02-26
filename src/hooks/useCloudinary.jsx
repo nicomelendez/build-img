@@ -9,10 +9,11 @@ import useEditor from "./useEditor";
 import { text } from "@cloudinary/url-gen/qualifiers/source";
 import { TextStyle } from '@cloudinary/transformation-builder-sdk/qualifiers/textStyle'
 import { ImageStatus } from '@/context/types.d';
+import { almacenarFotos } from "@/helpers/almacenarFotos";
 
 export default function useCloudinary() {
 
-    const {setDatosDeImagen, setImageOriginal, setImageModificada, setImageStatus, router} = useEditor()
+    const {setDatosDeImagen, setImageOriginal, setImageModificada, setImageStatus, router, setMultipleEdicion} = useEditor()
 
   
   const uploadImage = async (file) => {
@@ -36,8 +37,10 @@ export default function useCloudinary() {
       const { public_id: publicId, secure_url: url } = data
     
       setDatosDeImagen(publicId)
+      almacenarFotos(url, url, publicId)
       setImageModificada(url)
       setImageOriginal(url)
+      setMultipleEdicion(url)
       setImageStatus(ImageStatus.DONE)
       router.push('/editor')
     }
@@ -53,24 +56,29 @@ export default function useCloudinary() {
       },
     });
 
+
+    
+
     const filtroGris = (public_id) => {
       const imagenGris = cloudinary.image(public_id).effect(grayscale());
-      setDatosDeImagen(imagenGris.publicID)
+     
+      setDatosDeImagen(String(imagenGris.publicID))
       return imagenGris.toURL()
     }
     const filtroPrimavera = (public_id) => {
+   
       const imagenPrimaver = cloudinary.image(public_id).effect(colorize().level(10).color("#A1F36F")).effect(colorize().level(10).color("#0E8B42")).effect(colorize().level(10).color("#FFFFFF"));;
-      setDatosDeImagen(imagenPrimaver.publicID)
+      setDatosDeImagen(String(imagenPrimaver.publicID))
       return imagenPrimaver.toURL()
     }
     const filtroOtnio = (public_id) => {
       const imagenOtnio = cloudinary.image(public_id).effect(colorize().level(10).color("#FFA902")).effect(colorize().level(10).color("#FAFF07")).effect(colorize().level(10).color("#FFFFFF"));
-      setDatosDeImagen(imagenOtnio.publicID)
+      setDatosDeImagen(String(imagenOtnio.publicID))
       return imagenOtnio.toURL()
     }
     const filtroInvierno = (public_id) => {
       const imagenInvierno = cloudinary.image(public_id).effect(colorize().level(10).color("#02F0FF")).effect(colorize().level(10).color("#076FFF")).effect(colorize().level(10).color("#FFFFFF"));;
-      setDatosDeImagen(imagenInvierno.publicID)
+      setDatosDeImagen(String(imagenInvierno.publicID))
       return imagenInvierno.toURL()
     }
     
@@ -83,25 +91,25 @@ export default function useCloudinary() {
     const imageWithoutBackground = cloudinary
     .image(public_id)
     .effect(backgroundRemoval())
-    setDatosDeImagen(imageWithoutBackground.publicID)
+    setDatosDeImagen(String(imageWithoutBackground.publicID))
     return imageWithoutBackground.toURL()
     }
     
     const filtroSize = (public_id, largo, alto) =>{
      const imageSize= cloudinary.image(public_id).effect(Resize.fill().width(largo).height(alto));
-     setDatosDeImagen(imageSize.publicID)
+     setDatosDeImagen(String(imageSize.publicID))
      return imageSize.toURL()
     }
 
     const filtroBlur = (public_id, gradoBlur) => {
     const imagenBlur = cloudinary.image(public_id).effect(blur().strength(gradoBlur));
-    setDatosDeImagen(imagenBlur.publicID)
+    setDatosDeImagen(String(imagenBlur.publicID))
     return imagenBlur.toURL()
     }
 
     const filtroAvatar = (public_id, largo, alto, letras, sizeLetras) => {
 
-      console.log(letras, sizeLetras)
+  
       if(letras && sizeLetras){
         const imagenAvatar = cloudinary.image(public_id).effect(Resize.fill().width(largo).height(alto).gravity(focusOn(face()))).roundCorners(max()).effect(blur().strength(200)).overlay(
           source(
@@ -110,12 +118,12 @@ export default function useCloudinary() {
             )
           )
         )
-        setDatosDeImagen(imagenAvatar.publicID)
+        setDatosDeImagen(String(imagenAvatar.publicID))
         return imagenAvatar.toURL()
       }
 
     const imagenAvatar = cloudinary.image(public_id).effect(Resize.fill().width(largo).height(alto).gravity(focusOn(face()))).roundCorners(max())
-    setDatosDeImagen(imagenAvatar.publicID)
+    setDatosDeImagen(String(imagenAvatar.publicID))
     return imagenAvatar.toURL()
     }
 

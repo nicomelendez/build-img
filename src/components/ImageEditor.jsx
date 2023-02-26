@@ -1,12 +1,10 @@
 import useEditor from "@/hooks/useEditor"
 import { useEffect} from "react"
 import Cargando from "./Cargando"
-import Herramientas from "./Herramientas";
 
 export default function ImageEditor() {
     
-    const { imageOriginal, imageModificada, processingImage, cambiarProcesoDeImagen, router} = useEditor()
-   
+    const { imageOriginal, imageModificada, processingImage, cambiarProcesoDeImagen, router } = useEditor()
 
     useEffect(() => {
         let intervalId
@@ -38,8 +36,7 @@ export default function ImageEditor() {
         }
     }, [imageModificada, processingImage, cambiarProcesoDeImagen])
 
-   
-      return (
+    return (
         <>
         {imageOriginal !== null 
         ? (
@@ -50,7 +47,7 @@ export default function ImageEditor() {
                 {processingImage ? 
                 (<div className="flex w-[290px] lg:w-[500px] flex-col justify-center h-52 items-center">
                   <Cargando />
-                </div>) : (<img className="w-full" src={imageModificada} alt='Imagen para editar'/>)}
+                </div>) : (<img className="w-full" src={ imageModificada } alt='Imagen para editar'/>)}
                
              </div>
 

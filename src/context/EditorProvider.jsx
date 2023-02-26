@@ -1,10 +1,17 @@
 import { useState, useEffect, createContext } from "react";
 import { useRouter } from "next/router";
 import { ImageStatus } from './types.d'
+import { conseguirFotos } from "@/helpers/conseguirFotos";
+import { almacenarFotos } from "@/helpers/almacenarFotos";
+import { conseguirUltimaEdicion } from "@/helpers/conseguirUltimaEdicion.js";
+import { crearUltimaEdicion } from "@/helpers/crearUltimaEdicion";
+import { crearUrlConEfectos } from "@/helpers/crearUrlConEfectos";
+
 const EditorContext = createContext();
 
 const EditorProvider = ({ children }) => {
 
+ 
     const [imageStatus, setImageStatus] = useState(ImageStatus.READY)
     const [imageOriginal, setImageOriginal] = useState(null)
     const [imageModificada, setImageModificada] = useState(null)
@@ -15,8 +22,8 @@ const EditorProvider = ({ children }) => {
     const [alto, setAlto] = useState(0)
     const [letras, setLetras] = useState(null)
     const [sizeLetra, setSizeLetras] = useState(null)
-
-
+    const [ multipleEdicion, setMultipleEdicion ] = useState(null)
+      
     const cambiarLetras = (event) => {
         setLetras(event.target.value)
     }
@@ -25,18 +32,11 @@ const EditorProvider = ({ children }) => {
         setSizeLetras(event.target.value)
     }
 
-    const conseguirImagenOriginalLocalSotre = () => {
-        const imagenOrg = localStorage.getItem('imagenOriginal')
-        if(imagenOrg){
-            return imagenOrg
-        }
+    
+    const conseguirImagenLocalSotre = () => {
+        return conseguirFotos()
     }
-    const conseguirImagenModificadaLocalSotre = () => {
-       const imageMod = localStorage.getItem('imagenModificada')
-       if(imageMod){
-        return imageMod
-       }
-    }
+
  
     const resetearLargoAlto = () => {
         setAlto(0)
@@ -64,32 +64,61 @@ const EditorProvider = ({ children }) => {
     const cambiarProcesoDeImagen = (valor) => {
         setProcessingImage(valor)
     }
-
-
+    
     useEffect(()=>{
-        if(imageModificada !== null || imageOriginal !== null){
-            let imageMod = conseguirImagenModificadaLocalSotre()
-            let imagenOrg = conseguirImagenOriginalLocalSotre()
-
-            if(imageModificada !== imageMod || imageOriginal !== imagenOrg){
-                localStorage.setItem('imagenOriginal', JSON.stringify(imageOriginal))
-                localStorage.setItem('imagenModificada', JSON.stringify(imageModificada))
-            }
-          
-        }
-    },[imageOriginal, imageModificada])
-
-    useEffect(()=>{
+    
         if(imageOriginal === null || imageModificada === null){
-            let imageMod = conseguirImagenModificadaLocalSotre()
-            let imagenOrg = conseguirImagenOriginalLocalSotre()   
-            if(imageMod || imagenOrg){
-                setImageModificada(String(imageMod))
-                setImageOriginal(String(imagenOrg))
-            }     
+            const { imagenOriginal, imagenModificada, datosImagen } = conseguirFotos()
+            const { ultimaEdicion } = conseguirUltimaEdicion()
+            if(ultimaEdicion){
+                cambiarImagenModificada(ultimaEdicion)
+                setDatosDeImagen(datosImagen)
+                setImageOriginal(imagenOriginal)
+                setMultipleEdicion(ultimaEdicion)
+                return () => {}
+            }
+            if(!imagenOriginal || !imagenModificada){
+                return () => {}
+            }
+            if(!imageModificada){
+                cambiarImagenModificada(imagenOriginal)
+            }
+            setMultipleEdicion(ultimaEdicion)
+            setDatosDeImagen(datosImagen)
+            cambiarImagenModificada(imagenModificada)
+            setImageOriginal(imagenOriginal)
         }
         
-    },[])
+        return () => {}
+        },[])
+        
+    useEffect(()=>{
+        if(imageModificada !== imageOriginal){
+            const { ultimaEdicion } = conseguirUltimaEdicion()
+            if(!ultimaEdicion || imageModificada !== null){
+                const ima = crearUltimaEdicion(imageModificada)
+                setMultipleEdicion(ima)
+                console.log(ima)
+                almacenarFotos(imageOriginal, imageModificada, datosDeImagen, ima)
+            }else if(ultimaEdicion !== imageModificada && imageModificada !== null){
+                const ima = crearUrlConEfectos(imageModificada, ultimaEdicion)
+                console.log(ima)
+                setMultipleEdicion(ima)
+                almacenarFotos(imageOriginal, imageModificada, datosDeImagen, ima)
+            }
+        }
+        
+        if(imageModificada !== null){}
+        return () => {}
+    },[imageModificada, imageOriginal, datosDeImagen])
+
+    useEffect(()=>{
+        
+        cambiarImagenModificada(multipleEdicion)
+        
+        if(multipleEdicion !== null){}
+        return () => {}
+    },[multipleEdicion])
 
     return(
         <EditorContext.Provider value={{
@@ -101,6 +130,7 @@ const EditorProvider = ({ children }) => {
             setImageModificada,
             setImageOriginal,
             imageOriginal,
+            conseguirImagenLocalSotre,
             blurId,
             cambiarLargo,
             cambiarAlto,
@@ -110,7 +140,10 @@ const EditorProvider = ({ children }) => {
             blurMedida,
             router,
             cambiarImagenModificada,
+            almacenarFotos,
             setDatosDeImagen,
+            setMultipleEdicion,
+            multipleEdicion,
             cambiarLetras,
             letras,
             sizeLetra,
