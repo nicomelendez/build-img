@@ -10,6 +10,7 @@ import { text } from "@cloudinary/url-gen/qualifiers/source";
 import { TextStyle } from '@cloudinary/transformation-builder-sdk/qualifiers/textStyle'
 import { ImageStatus } from '@/context/types.d';
 import { almacenarFotos } from "@/helpers/almacenarFotos";
+import { cutByImage } from '@cloudinary/url-gen/actions/reshape'
 
 export default function useCloudinary() {
 
@@ -106,6 +107,12 @@ export default function useCloudinary() {
     setDatosDeImagen(String(imagenBlur.publicID))
     return imagenBlur.toURL()
     }
+    const filtroTitulo = (public_id, texto)=>{
+      const imagenTitulo = cloudinary.image(public_id).reshape(
+        cutByImage(text(String(texto), new TextStyle("Coustard", 160).fontWeight("bold")))
+      );
+      return imagenTitulo.toURL()
+    }
 
     const filtroAvatar = (public_id, largo, alto, letras, sizeLetras) => {
 
@@ -137,6 +144,7 @@ export default function useCloudinary() {
     filtroOtnio,
     filtroInvierno,
     filtroGif,
+    filtroTitulo,
     uploadImage
   }
 }
