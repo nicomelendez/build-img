@@ -169,7 +169,7 @@ export default function RangoDeEfectos() {
     "min-w-[200px] bg-slate-100 mx-auto px-6 p-2 sm:p-4 w-4/5 rounded-xl shadow flex flex-col items-center space-y-2 sm:space-y-5 text-[11px] sm:text-sm sombra";
   const estiloItem = "hover:underline hover:cursor-pointer";
   const estilosTitulos = "text-center font-bold text-sm sm:text-lg";
-
+  const estiloP = 'font-bold text-[10px] sm:text-sm text-center border-t border-black pt-2'
   if (accion === "Blur") {
     return (
       <div className={estilosContent}>
@@ -189,6 +189,7 @@ export default function RangoDeEfectos() {
             Aplicar
           </button>
         </div>
+        <p className={estiloP}>Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el boton deshacer.</p>
       </div>
     );
   }
@@ -201,13 +202,13 @@ export default function RangoDeEfectos() {
 
         <select onChange={cambiarTamAvatar} className="py-2 text-center">
           <option>Elige el tamaño</option>
-          <option value='100'>100x100</option>
-          <option value='200'>200x200</option>
-          <option value='300'>300x300</option>
-          <option value='400'>400x400</option>
-          <option value='500'>500x500</option>
-          <option value='600'>600x600</option>
-          <option value='700'>700x700</option>
+          <option value='100'>100 x 100</option>
+          <option value='200'>200 x 200</option>
+          <option value='300'>300 x 300</option>
+          <option value='400'>400 x 400</option>
+          <option value='500'>500 x 500</option>
+          <option value='600'>600 x 600</option>
+          <option value='700'>700 x 700</option>
         </select>
         <div className="w-full">
           <label className="text-black">Texto - Opcional</label>
@@ -225,6 +226,7 @@ export default function RangoDeEfectos() {
         <button className={estilosButton} onClick={handlerAvatar}>
           Aplicar
         </button>
+        <p className={estiloP}>Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el boton deshacer.</p>
       </div>
     );
   }
@@ -243,6 +245,7 @@ export default function RangoDeEfectos() {
         <button className={estilosButton} onClick={handlerSize}>
           Aplicar
         </button>
+        <p className={estiloP}>Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el boton deshacer.</p>
       </div>
     );
   }
@@ -253,6 +256,7 @@ export default function RangoDeEfectos() {
         <button className={estilosButton} onClick={handlerSacarFondo}>
           Aplicar
         </button>
+        <p className={estiloP}>Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el boton deshacer.</p>
       </div>
     );
   }
@@ -282,6 +286,7 @@ export default function RangoDeEfectos() {
             </button>
           </li>
         </ul>
+        <p className={estiloP}>Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el boton deshacer.</p>
       </div>
     );
   }
@@ -292,6 +297,7 @@ export default function RangoDeEfectos() {
         <button className={estilosButton} onClick={handlerVolverOriginal}>
           Limpiar
         </button>
+        <p className={estiloP}>Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el boton deshacer.</p>
       </div>
     );
   }
@@ -302,6 +308,7 @@ export default function RangoDeEfectos() {
         <button className={estilosButton} onClick={handlerDeshacer}>
           Vovler
         </button>
+        <p className="font-bold text-sm text-center">Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el boton deshacer.</p>
       </div>
     );
   }
@@ -325,12 +332,12 @@ export default function RangoDeEfectos() {
         <button className={estilosButton} onClick={handlerCrearTitulo}>
           Crear
         </button>
+        <p className={estiloP}>Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el boton deshacer.</p>
       </div>
     );
   } else {
     return (
       <div className={estilosContent + " justify-start lg:pt-5"}>
-        <p className="font-bold text-center">Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el boton deshacer.</p>
         <p className="text-center">
           Eliga un efecto para comenzar a modificar su imagen.
         </p>
