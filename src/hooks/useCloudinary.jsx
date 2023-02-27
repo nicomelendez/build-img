@@ -19,6 +19,7 @@ export default function useCloudinary() {
   
   const uploadImage = async (file) => {
     setImageStatus(ImageStatus.UPLOADING)
+    localStorage.clear()
     const formData = new FormData();
     formData.append("upload_preset", "mi0or3cn");
     formData.append("timestamp", Date.now() / 1000);
