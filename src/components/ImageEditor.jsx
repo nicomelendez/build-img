@@ -1,6 +1,7 @@
 import useEditor from "@/hooks/useEditor";
 import { useEffect } from "react";
 import Cargando from "./Cargando";
+import SinImagen from "./SinImagen";
 
 export default function ImageEditor() {
   const {
@@ -88,7 +89,7 @@ export default function ImageEditor() {
           </button>
         </div>
       ) : (
-        <>Debe elegir una imagen</>
+        <SinImagen />
       )}
     </>
   );

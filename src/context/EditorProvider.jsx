@@ -25,6 +25,7 @@ const EditorProvider = ({ children }) => {
   const [titulo, setTitulo] = useState('')
   const [sizeFuente, setSizeFuente] = useState(null);
   const [listaDeEfectos, setListaDeEfectos] = useState([])
+  const [herramienta, setHerramienta] = useState(null)
 
   const cambiarLetras = (event) => {
     setLetras(event.target.value);
@@ -151,6 +152,8 @@ const EditorProvider = ({ children }) => {
         setDatosDeImagen,
         setMultipleEdicion,
         multipleEdicion,
+        setHerramienta,
+        herramienta,
         cambiarLetras,
         letras,
         sizeLetra,

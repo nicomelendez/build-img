@@ -4,7 +4,7 @@ import Layout from '@/layout/Layout'
 
 
 export default function Resultado() {
-  const { imageOriginal, imageModificada } = useEditor()
+  const { imageOriginal, imageModificada, router } = useEditor()
 
   return (
     <Layout pagina='Resultados'>
@@ -13,8 +13,10 @@ export default function Resultado() {
 
         <TwoUp imagenModificada={imageModificada} imageOriginal={imageOriginal}/>
  
-        <div className='text-center pt-5'>
-         <a download href={imageModificada} className="hover:cursor-pointer hover:underline text-white rounded-full bg-gradient-to-r from-blue-500 to-violet-600 mt-10 text-bold px-6 py-4 text-center mx-auto sombra">Descargar imagen</a>
+        <div className='text-center flex flex-col gap-y-4'>
+         <a download href={imageModificada} className="hover:cursor-pointer hover:underline text-white rounded-full bg-gradient-to-r from-blue-500 to-violet-600 mt-5 sm:mt-10 text-bold px-6 py-4 text-center mx-auto sombra">Descargar imagen</a>
+
+         <button className="hover:cursor-pointer hover:underline text-white rounded-full bg-gradient-to-r from-blue-500 to-violet-600 text-bold px-6 py-4 text-center mx-auto sombra" onClick={()=>{router.push('/')}}>Editar otra imagen</button>
         </div>
       </div>
     </Layout>

@@ -172,19 +172,20 @@ export default function RangoDeEfectos({ accion }) {
 
         <div className="w-full">
           <label className="text-black">Largo</label>
-          <input className="w-full" onChange={cambiarLargo} type="number" />
+          <input className="w-full" placeholder="Ej: 300" onChange={cambiarLargo} type="number" />
         </div>
         <div className="w-full">
           <label className="text-black">Alto</label>
-          <input className="w-full" onChange={cambiarAlto} type="number" />
+          <input className="w-full" placeholder="Ej: 500" onChange={cambiarAlto} type="number" />
         </div>
         <div className="w-full">
           <label className="text-black">Texto - Opcional</label>
-          <input className="w-full" onChange={cambiarLetras} type="text" />
+          <input className="w-full" placeholder="Ej: NM" onChange={cambiarLetras} type="text" />
         </div>
         <div className="w-full">
           <label className="text-black">Tamaño de fuente</label>
           <input
+            placeholder="Ej: 60"
             className="w-full"
             onChange={cambiarSizeLetras}
             type="number"
@@ -202,11 +203,11 @@ export default function RangoDeEfectos({ accion }) {
         <p className={estilosTitulos}>Modificar tamaño</p>
         <div>
           <label className="text-black">Largo</label>
-          <input className="w-full" onChange={cambiarLargo} type="number" />
+          <input className="w-full" placeholder="Ej: 300" onChange={cambiarLargo} type="number" />
         </div>
         <div>
           <label className="text-black">Alto</label>
-          <input className="w-full" onChange={cambiarAlto} type="number" />
+          <input className="w-full" placeholder="Ej: 200" onChange={cambiarAlto} type="number" />
         </div>
         <button className={estilosButton} onClick={handlerSize}>
           Aplicar
@@ -228,7 +229,7 @@ export default function RangoDeEfectos({ accion }) {
     return (
       <div className={estilosContent}>
         <p className={estilosTitulos}>Elige un efecto</p>
-        <ul className="flex flex-row flex-wrap gap-5 lg:gap-0 lg:items-start justify-around items-center w-full lg:flex-col lg:space-y-5 pt-4 font-semibold">
+        <ul className="flex flex-row flex-wrap gap-5 lg:gap-0 lg:items-start justify-around items-center w-full lg:flex-col lg:space-y-5 pt-4 font-semibold list-disc px-4">
           <li>
             <button className={estiloItem} onClick={handlerGris}>
               Gris
@@ -279,11 +280,12 @@ export default function RangoDeEfectos({ accion }) {
         <p className={estilosTitulos}>Crea un texto texturado</p>
         <div className="w-full">
           <label className="text-black">Texto</label>
-          <input className="w-full" onChange={cambiarTitulo} type="text" />
+          <input className="w-full" placeholder="Ej: MiduDev" onChange={cambiarTitulo} type="text" />
         </div>
         <div className="w-full">
           <label className="text-black">Tamaño de fuente</label>
           <input
+            placeholder="Ej: 120"
             className="w-full"
             onChange={cambiarSizeFuente}
             type="number"
