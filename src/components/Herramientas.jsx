@@ -52,11 +52,11 @@ export default function Herramientas() {
               <div className="mx-auto w-full grid grid-cols-3 gap-4 lg:grid-cols-1 place-content-center">
                   {herramientas.map(her=>{
                   return(
-                          <div className={`${herramienta === her.name ? 'bg-gradient-to-r from-blue-500 to-violet-600 text-white' : 'bg-slate-100'} mx-auto text-gray-900 w-12 h-12 text-[7px] lg:w-14 lg:h-14 lg:text-[10px] flex flex-col items-center justify-center hover:cursor-pointer rounded-full`} onClick={()=>{handlerEfecto(her)}} key={her.id}>
+                          <div className={`${herramienta === her.name ? 'bg-gradient-to-r from-blue-500 to-violet-600' : 'bg-slate-100'} mx-auto text-gray-900 w-12 h-12 text-[7px] lg:w-14 lg:h-14 lg:text-[10px] flex flex-col items-center justify-center hover:cursor-pointer rounded-full`} onClick={()=>{handlerEfecto(her)}} key={her.id}>
                               <div className="">
                                   <span>{her.icons}</span>
                               </div>
-                              <div>
+                              <div className={herramienta === her.name ? 'text-white' : 'text-black'}>
                                   <strong>{her.name}</strong>
                               </div>
                           </div>
