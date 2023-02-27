@@ -27,7 +27,7 @@ export default function FormImage() {
   
 
   return (
-    <section className="card mx-auto flex flex-col w-11/12 lg:min-w-[400px] sm:max-h-[400px] aspect-square sombra">
+    <section {...getRootProps({className: 'dropzone'})} className="card mx-auto flex flex-col w-11/12 lg:min-w-[400px] sm:max-h-[400px] aspect-square sombra">
      <div>
       <h2 className='text-center px-2 text-xl lg:text-2xl font-black text-white uppercase pb-5 sombra' style={{ lineHeight: '1.2', wordWrap: 'break-word' }}>
           <span className='block'>¡Sube una <span className='bg-gradient-to-r text-transparent from-blue-500 to-violet-600 bg-clip-text'>imagen</span></span> y comienza a <span className='bg-gradient-to-r text-transparent from-blue-500 to-violet-600 bg-clip-text'>personalizarla</span>!
@@ -35,7 +35,7 @@ export default function FormImage() {
      </div>
       {imageStatus === ImageStatus.UPLOADING 
       ? (<Cargando />) 
-      : (<div {...getRootProps({className: 'dropzone'})}>
+      : (<div >
             <input {...getInputProps()} />
             <div className='flex flex-col gap-4'>
               <button type="button" onClick={open} className='hover:cursor-pointer hover:underline text-white rounded-full bg-gradient-to-r from-blue-500 to-violet-600 text-bold px-6 py-4'>Subir archivo</button>
