@@ -127,7 +127,11 @@ export default function RangoDeEfectos() {
 
   const handlerSize = () => {
     if (largo === 0 || alto === 0) {
-      return alert("Debe ingresar un tamaño");
+      return Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Debes elegir un tamaño!',
+      })
     }
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroSize(datosDeImagen, largo, alto);
@@ -140,6 +144,20 @@ export default function RangoDeEfectos() {
     cambiarImagenModificada(imagenEditada);
   };
   const handlerCrearTitulo = () =>{
+    if(!sizeFuente){
+      return Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Debes elegir un tamaño!',
+      })
+    }
+    if(!titulo){
+      return Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Debes escribir un texto!',
+      })
+    }
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroTitulo(datosDeImagen, titulo, sizeFuente);
     cambiarImagenModificada(imagenEditada);
