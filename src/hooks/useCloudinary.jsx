@@ -115,11 +115,10 @@ export default function useCloudinary() {
       return imagenTitulo.toURL()
     }
 
-    const filtroAvatar = (public_id, largo, alto, letras, sizeLetras) => {
-
-  
+    const filtroAvatar = (public_id, tamAvatar, letras, sizeLetras) => {
+        console.log(tamAvatar)
       if(letras && sizeLetras){
-        const imagenAvatar = cloudinary.image(public_id).effect(Resize.fill().width(largo).height(alto).gravity(focusOn(face()))).roundCorners(max()).effect(blur().strength(200)).overlay(
+        const imagenAvatar = cloudinary.image(public_id).effect(Resize.fill().width(Number(tamAvatar)).height(Number(tamAvatar)).gravity(focusOn(face()))).roundCorners(max()).effect(blur().strength(200)).overlay(
           source(
             text(letras, new TextStyle("Arial", sizeLetras).fontWeight("bold")).textColor(
               "white"
@@ -130,7 +129,7 @@ export default function useCloudinary() {
         return imagenAvatar.toURL()
       }
 
-    const imagenAvatar = cloudinary.image(public_id).effect(Resize.fill().width(largo).height(alto).gravity(focusOn(face()))).roundCorners(max())
+    const imagenAvatar = cloudinary.image(public_id).effect(Resize.fill().width(Number(tamAvatar)).height(Number(tamAvatar)).gravity(focusOn(face()))).roundCorners(max())
     setDatosDeImagen(String(imagenAvatar.publicID))
     return imagenAvatar.toURL()
     }

@@ -28,7 +28,9 @@ export default function RangoDeEfectos() {
     setMultipleEdicion,
     listaDeEfectos,
     setListaDeEfectos,
-    accion
+    accion,
+    cambiarTamAvatar,
+    tamAvatar
   } = useEditor();
   const {
     filtroGris,
@@ -85,7 +87,7 @@ export default function RangoDeEfectos() {
   };
 
   const handlerAvatar = () => {
-    if (largo === 0 || alto === 0) {
+    if (tamAvatar === '') {
       return alert("Debe ingresar un tamaño");
     }
     if (letras && !sizeLetra) {
@@ -94,8 +96,7 @@ export default function RangoDeEfectos() {
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroAvatar(
       datosDeImagen,
-      largo,
-      alto,
+      tamAvatar,
       letras,
       sizeLetra
     );
@@ -171,14 +172,16 @@ export default function RangoDeEfectos() {
 
         <p>Define las medidas</p>
 
-        <div className="w-full">
-          <label className="text-black">Largo</label>
-          <input className="w-full" placeholder="Ej: 300" onChange={cambiarLargo} type="number" />
-        </div>
-        <div className="w-full">
-          <label className="text-black">Alto</label>
-          <input className="w-full" placeholder="Ej: 500" onChange={cambiarAlto} type="number" />
-        </div>
+        <select onChange={cambiarTamAvatar} className="py-2">
+          <option>Elige el tamaño</option>
+          <option value='100'>100x100</option>
+          <option value='200'>200x200</option>
+          <option value='300'>300x300</option>
+          <option value='400'>400x400</option>
+          <option value='500'>500x500</option>
+          <option value='600'>600x600</option>
+          <option value='700'>700x700</option>
+        </select>
         <div className="w-full">
           <label className="text-black">Texto - Opcional</label>
           <input className="w-full" placeholder="Ej: NM" onChange={cambiarLetras} type="text" />

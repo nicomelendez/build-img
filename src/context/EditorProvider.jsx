@@ -27,11 +27,15 @@ const EditorProvider = ({ children }) => {
   const [listaDeEfectos, setListaDeEfectos] = useState([])
   const [herramienta, setHerramienta] = useState(null)
   const [accion, setAccion] = useState('')
+  const [tamAvatar, setTamAvatar] = useState('')
 
   const cambiarLetras = (event) => {
     setLetras(event.target.value);
   };
 
+  const cambiarTamAvatar = (event) => {
+    setTamAvatar(event.target.value);
+  };
   const cambiarSizeLetras = (event) => {
     setSizeLetras(event.target.value);
   };
@@ -152,6 +156,8 @@ const EditorProvider = ({ children }) => {
         sizeFuente,
         cambiarImagenModificada,
         almacenarFotos,
+        cambiarTamAvatar,
+        tamAvatar,
         setDatosDeImagen,
         setMultipleEdicion,
         multipleEdicion,
