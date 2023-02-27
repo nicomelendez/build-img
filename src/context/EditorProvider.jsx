@@ -24,6 +24,7 @@ const EditorProvider = ({ children }) => {
   const [multipleEdicion, setMultipleEdicion] = useState(null);
   const [titulo, setTitulo] = useState('')
   const [sizeFuente, setSizeFuente] = useState(null);
+  const [listaDeEfectos, setListaDeEfectos] = useState([])
 
   const cambiarLetras = (event) => {
     setLetras(event.target.value);
@@ -96,25 +97,26 @@ const EditorProvider = ({ children }) => {
   }, [])
   
   useEffect(()=>{
+    console.log(listaDeEfectos)
       if(imageModificada !== imageOriginal){
 
           const { ultimaEdicion } = conseguirUltimaEdicion()
-          
           if(!ultimaEdicion){
               const ima = crearUltimaEdicion(imageModificada)
               setMultipleEdicion(ima)
+              setListaDeEfectos([...listaDeEfectos, ima])
               almacenarUltimaEdicion(ima)
               almacenarFotos(imageOriginal, imageModificada, datosDeImagen)
               return
           }else if(ultimaEdicion !== imageModificada){
               const ima = crearUrlConEfectos(imageModificada, ultimaEdicion)
               almacenarUltimaEdicion(ima)
+              setListaDeEfectos([...listaDeEfectos, ima])
               setMultipleEdicion(ima)
               almacenarFotos(imageOriginal, imageModificada, datosDeImagen)
               return
           }
       }
-
       return () => {}
   },[imageModificada, imageOriginal, datosDeImagen])
 
@@ -134,10 +136,12 @@ const EditorProvider = ({ children }) => {
         imageOriginal,
         conseguirImagenLocalSotre,
         blurId,
+        listaDeEfectos,
         cambiarLargo,
         cambiarAlto,
         resetearLargoAlto,
         cambiarSizeFuente,
+        setListaDeEfectos,
         largo,
         alto,
         blurMedida,

@@ -1,3 +1,6 @@
+import { almacenarFotos } from "@/helpers/almacenarFotos";
+import { almacenarUltimaEdicion } from "@/helpers/almacenarUltimaEdicion";
+import { eliminarUltimoEffecto } from "@/helpers/eliminarUltimoEffecto";
 import useCloudinary from "@/hooks/useCloudinary";
 import useEditor from "@/hooks/useEditor";
 import { useState } from "react";
@@ -21,7 +24,10 @@ export default function RangoDeEfectos({ accion }) {
     titulo,
     cambiarTitulo,
     cambiarSizeFuente,
-    sizeFuente
+    sizeFuente,
+    setMultipleEdicion,
+    listaDeEfectos,
+    setListaDeEfectos
   } = useEditor();
   const {
     filtroGris,
@@ -43,6 +49,8 @@ export default function RangoDeEfectos({ accion }) {
   };
   const handlerVolverOriginal = () => {
     cambiarImagenModificada(imageOriginal);
+    almacenarFotos(imageOriginal, imageOriginal, datosDeImagen)
+    setListaDeEfectos([])
     localStorage.removeItem("ultimaEdicion");
   };
   const handlerGif = () => {
@@ -92,6 +100,20 @@ export default function RangoDeEfectos({ accion }) {
     );
     cambiarImagenModificada(imagenEditada);
   };
+
+  const handlerDeshacer = () =>{
+    const lastIndex = listaDeEfectos.length - 1;
+    if (lastIndex > 0) { // Comprobar que hay al menos dos elementos en el array
+      const penultimateLink = listaDeEfectos[lastIndex - 1];
+      setListaDeEfectos(prevLinks => prevLinks.slice(0, lastIndex));
+      almacenarUltimaEdicion(penultimateLink)
+      setMultipleEdicion(penultimateLink)
+      return
+    }
+    almacenarUltimaEdicion(imageOriginal)
+    cambiarImagenModificada(imageOriginal)
+  }
+
   const handlerSize = () => {
     if (largo === 0 || alto === 0) {
       return alert("Debe ingresar un tamaño");
@@ -245,7 +267,7 @@ export default function RangoDeEfectos({ accion }) {
     return (
       <div className={estilosContent}>
         <p className={estilosTitulos}>Deshacer el ultimo efectos</p>
-        <button className={estilosButton} onClick={handlerVolverOriginal}>
+        <button className={estilosButton} onClick={handlerDeshacer}>
           Vovler
         </button>
       </div>
