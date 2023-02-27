@@ -17,14 +17,15 @@ export default function ImageEditor() {
     let tries = 0;
 
     const loadImage = () => {
-      console.log("Loading image...");
       const img = new Image();
       img.src = multipleEdicion;
       img.onload = () => {
-        console.log("Image loaded.");
         cambiarProcesoDeImagen(false);
         clearInterval(intervalId);
       };
+      img.onerror = () =>{
+        cambiarProcesoDeImagen(true)
+      }
     };
 
     if (processingImage) {
@@ -32,6 +33,7 @@ export default function ImageEditor() {
       intervalId = setInterval(() => {
         tries++;
         if (tries < 20) {
+          
           loadImage();
         } else {
           clearInterval(intervalId);

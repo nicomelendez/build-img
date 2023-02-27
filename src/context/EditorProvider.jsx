@@ -97,7 +97,6 @@ const EditorProvider = ({ children }) => {
   }, [])
   
   useEffect(()=>{
-    console.log(listaDeEfectos)
       if(imageModificada !== imageOriginal){
 
           const { ultimaEdicion } = conseguirUltimaEdicion()
