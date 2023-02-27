@@ -43,14 +43,17 @@ export default function ImageEditor() {
         <div className="w-full flex flex-col flex-wrap">
            <div className="w-full flex flex-col lg:flex-row  items-center justify-center gap-4">
             {
-                imageOriginal === imageModificada ? (<img className="w-full" src={ imageOriginal } alt='Imagen para editar'/>) : (<>
+                imageOriginal === imageModificada 
+                ? (<div className='mx-auto lg:px-12'><img className="w-full" src={ imageOriginal } alt='Imagen para editar'/></div>) 
+                : (<>
                  <div className='mx-auto lg:px-12'>
-                {processingImage ? 
-                (<div className="flex w-[290px] lg:w-[500px] flex-col justify-center h-52 items-center">
-                  <Cargando />
-                </div>) : (<img className="w-full" src={ multipleEdicion } alt='Imagen para editar'/>)}
-               
-             </div></>)
+                    {processingImage 
+                    ? (<div className="flex w-[290px] lg:w-[500px] flex-col justify-center h-52 items-center">
+                    <Cargando />
+                    </div>) 
+                    : (<img className="w-full" src={ multipleEdicion } alt='Imagen para editar'/>)   
+                    }
+                </div></>)
             }
            </div>
            

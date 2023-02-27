@@ -99,7 +99,7 @@ const EditorProvider = ({ children }) => {
       if(imageModificada !== imageOriginal){
 
           const { ultimaEdicion } = conseguirUltimaEdicion()
-          console.log('Hola')
+          
           if(!ultimaEdicion){
               const ima = crearUltimaEdicion(imageModificada)
               setMultipleEdicion(ima)
