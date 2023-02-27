@@ -170,6 +170,7 @@ export default function RangoDeEfectos() {
   const estiloItem = "hover:underline hover:cursor-pointer";
   const estilosTitulos = "text-center font-bold text-sm sm:text-lg";
   const estiloP = 'font-bold text-[10px] sm:text-sm text-center border-t border-black pt-2'
+  const texto = 'Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el botón deshacer.'
   if (accion === "Blur") {
     return (
       <div className={estilosContent}>
@@ -189,7 +190,7 @@ export default function RangoDeEfectos() {
             Aplicar
           </button>
         </div>
-        <p className={estiloP}>Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el boton deshacer.</p>
+        <p className={estiloP}></p>
       </div>
     );
   }
@@ -226,7 +227,7 @@ export default function RangoDeEfectos() {
         <button className={estilosButton} onClick={handlerAvatar}>
           Aplicar
         </button>
-        <p className={estiloP}>Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el boton deshacer.</p>
+        <p className={estiloP}>{texto}</p>
       </div>
     );
   }
@@ -245,7 +246,7 @@ export default function RangoDeEfectos() {
         <button className={estilosButton} onClick={handlerSize}>
           Aplicar
         </button>
-        <p className={estiloP}>Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el boton deshacer.</p>
+        <p className={estiloP}>{texto}</p>
       </div>
     );
   }
@@ -256,7 +257,7 @@ export default function RangoDeEfectos() {
         <button className={estilosButton} onClick={handlerSacarFondo}>
           Aplicar
         </button>
-        <p className={estiloP}>Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el boton deshacer.</p>
+        <p className={estiloP}>{texto}</p>
       </div>
     );
   }
@@ -286,7 +287,7 @@ export default function RangoDeEfectos() {
             </button>
           </li>
         </ul>
-        <p className={estiloP}>Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el boton deshacer.</p>
+        <p className={estiloP}>{texto}</p>
       </div>
     );
   }
@@ -297,7 +298,7 @@ export default function RangoDeEfectos() {
         <button className={estilosButton} onClick={handlerVolverOriginal}>
           Limpiar
         </button>
-        <p className={estiloP}>Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el boton deshacer.</p>
+        <p className={estiloP}>{texto}</p>
       </div>
     );
   }
@@ -308,7 +309,7 @@ export default function RangoDeEfectos() {
         <button className={estilosButton} onClick={handlerDeshacer}>
           Vovler
         </button>
-        <p className="font-bold text-sm text-center">Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el boton deshacer.</p>
+        <p className={estiloP}>{texto}</p>
       </div>
     );
   }
@@ -332,7 +333,7 @@ export default function RangoDeEfectos() {
         <button className={estilosButton} onClick={handlerCrearTitulo}>
           Crear
         </button>
-        <p className={estiloP}>Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el boton deshacer.</p>
+        <p className={estiloP}>{texto}</p>
       </div>
     );
   } else {
