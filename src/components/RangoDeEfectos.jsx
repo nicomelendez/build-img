@@ -5,7 +5,7 @@ import useCloudinary from "@/hooks/useCloudinary";
 import useEditor from "@/hooks/useEditor";
 import { useState } from "react";
 
-export default function RangoDeEfectos({ accion }) {
+export default function RangoDeEfectos() {
   const {
     datosDeImagen,
     cambiarProcesoDeImagen,
@@ -27,7 +27,8 @@ export default function RangoDeEfectos({ accion }) {
     sizeFuente,
     setMultipleEdicion,
     listaDeEfectos,
-    setListaDeEfectos
+    setListaDeEfectos,
+    accion
   } = useEditor();
   const {
     filtroGris,
@@ -299,8 +300,9 @@ export default function RangoDeEfectos({ accion }) {
   } else {
     return (
       <div className={estilosContent + " justify-start lg:pt-5"}>
-        <p className="text-center font-bold">
-          Eliga un efecto para comenzar a modificar su imagen
+        <p className="font-bold text-center">Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el boton deshacer.</p>
+        <p className="text-center">
+          Eliga un efecto para comenzar a modificar su imagen.
         </p>
       </div>
     );

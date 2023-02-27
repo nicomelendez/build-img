@@ -1,12 +1,10 @@
 import useEditor from "@/hooks/useEditor";
-import {  useState } from "react";
-import { IconAtras, IconBlur, IconEfecto, IconRecargar, IconRecortar, IconsAjustar, IconsAvatar, IconsTexto } from "./Icons";
+import { IconBlur, IconEfecto, IconRecortar, IconsAjustar, IconsAvatar, IconsTexto } from "./Icons";
 import RangoDeEfectos from "./RangoDeEfectos";
 
 export default function Herramientas() {
   
-    const [accion, setAccion] = useState('')
-    const { imageOriginal, setHerramienta, herramienta } = useEditor()
+    const { imageOriginal, setHerramienta, herramienta, setAccion } = useEditor()
 
     const herramientas = [
         {
@@ -40,18 +38,7 @@ export default function Herramientas() {
           id:8,
           icons: <IconsTexto />,
           name: 'Texto'
-        },
-        {
-          id:6,
-          icons: <IconRecargar />,
-          name: 'Limpiar'
-        },
-        {
-          id:7,
-          icons: <IconAtras />,
-          name: 'Deshacer'
-        }
-        
+        },        
       ]
 
       const handlerEfecto = (her)=>{
@@ -62,7 +49,7 @@ export default function Herramientas() {
       if(imageOriginal !== null){
         return (
           <div className="flex flex-col lg:flex-row gap-4 justify-around">
-              <div className="mx-auto w-full grid grid-cols-4 gap-4 lg:grid-cols-1 place-content-center">
+              <div className="mx-auto w-full grid grid-cols-3 gap-4 lg:grid-cols-1 place-content-center">
                   {herramientas.map(her=>{
                   return(
                           <div className={`${herramienta === her.name ? 'bg-gradient-to-r from-blue-500 to-violet-600 text-white' : 'bg-slate-100'} mx-auto text-gray-900 w-12 h-12 text-[7px] lg:w-14 lg:h-14 lg:text-[10px] flex flex-col items-center justify-center hover:cursor-pointer rounded-full`} onClick={()=>{handlerEfecto(her)}} key={her.id}>
@@ -77,7 +64,7 @@ export default function Herramientas() {
                   })}
               </div>
            
-              <RangoDeEfectos accion={accion} />
+              <RangoDeEfectos />
                   
           </div>
         )

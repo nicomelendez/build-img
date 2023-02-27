@@ -1,6 +1,7 @@
 import useEditor from "@/hooks/useEditor";
 import { useEffect } from "react";
 import Cargando from "./Cargando";
+import RevertirCambios from "./RevertirCambios";
 import SinImagen from "./SinImagen";
 
 export default function ImageEditor() {
@@ -51,6 +52,7 @@ export default function ImageEditor() {
     <>
       {imageOriginal !== null ? (
         <div className="w-full flex flex-col flex-wrap">
+            <RevertirCambios />
           <div className="w-full flex flex-col lg:flex-row  items-center justify-center gap-4">
             {imageOriginal === imageModificada ? (
               <div className="mx-auto lg:px-12">

@@ -26,6 +26,7 @@ const EditorProvider = ({ children }) => {
   const [sizeFuente, setSizeFuente] = useState(null);
   const [listaDeEfectos, setListaDeEfectos] = useState([])
   const [herramienta, setHerramienta] = useState(null)
+  const [accion, setAccion] = useState('')
 
   const cambiarLetras = (event) => {
     setLetras(event.target.value);
@@ -141,6 +142,8 @@ const EditorProvider = ({ children }) => {
         cambiarAlto,
         resetearLargoAlto,
         cambiarSizeFuente,
+        accion,
+        setAccion,
         setListaDeEfectos,
         largo,
         alto,
