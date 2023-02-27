@@ -1,6 +1,6 @@
 export function conseguirFotos(){
-    const imagenOriginal = localStorage.getItem('imagenOriginal')
-    const imagenModificada = localStorage.getItem('imagenModificada')
+    const imagenOriginal = localStorage.getItem('fotoOriginal')
+    const imagenModificada = localStorage.getItem('fotoModificada')
     const datosImagen = localStorage.getItem('datosImagen')
  
     return {

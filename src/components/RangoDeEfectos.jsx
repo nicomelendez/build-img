@@ -43,6 +43,7 @@ export default function RangoDeEfectos({ accion }) {
   };
   const handlerVolverOriginal = () => {
     cambiarImagenModificada(imageOriginal);
+    localStorage.removeItem("ultimaEdicion");
   };
   const handlerGif = () => {
     cambiarProcesoDeImagen(true);

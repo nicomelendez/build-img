@@ -6,6 +6,7 @@ import { almacenarFotos } from "@/helpers/almacenarFotos";
 import { conseguirUltimaEdicion } from "@/helpers/conseguirUltimaEdicion.js";
 import { crearUltimaEdicion } from "@/helpers/crearUltimaEdicion";
 import { crearUrlConEfectos } from "@/helpers/crearUrlConEfectos";
+import { almacenarUltimaEdicion } from "@/helpers/almacenarUltimaEdicion";
 
 const EditorContext = createContext();
 
@@ -69,61 +70,54 @@ const EditorProvider = ({ children }) => {
   const cambiarProcesoDeImagen = (valor) => {
     setProcessingImage(valor);
   };
-
-  // useEffect(()=>{
-
-  //     if(imageOriginal === null || imageModificada === null){
-  //         const { imagenOriginal, imagenModificada, datosImagen } = conseguirFotos()
-  //         const { ultimaEdicion } = conseguirUltimaEdicion()
-  //         if(ultimaEdicion){
-  //             cambiarImagenModificada(ultimaEdicion)
-  //             setDatosDeImagen(datosImagen)
-  //             setImageOriginal(imagenOriginal)
-  //             setMultipleEdicion(ultimaEdicion)
-  //             return () => {}
-  //         }
-  //         if(!imagenOriginal || !imagenModificada){
-  //             return () => {}
-  //         }
-  //         if(!imageModificada){
-  //             cambiarImagenModificada(imagenOriginal)
-  //         }
-  //         setMultipleEdicion(ultimaEdicion)
-  //         setDatosDeImagen(datosImagen)
-  //         cambiarImagenModificada(imagenModificada)
-  //         setImageOriginal(imagenOriginal)
-  //     }
-
-  //     return () => {}
-  //     },[])
-
-  // useEffect(()=>{
-  //     if(imageModificada !== imageOriginal){
-  //         const { ultimaEdicion } = conseguirUltimaEdicion()
-  //         if(!ultimaEdicion || imageModificada !== null){
-  //             const ima = crearUltimaEdicion(imageModificada)
-  //             setMultipleEdicion(ima)
-  //             console.log(ima)
-  //             almacenarFotos(imageOriginal, imageModificada, datosDeImagen, ima)
-  //         }else if(ultimaEdicion !== imageModificada && imageModificada !== null){
-  //             const ima = crearUrlConEfectos(imageModificada, ultimaEdicion)
-  //             console.log(ima)
-  //             setMultipleEdicion(ima)
-  //             almacenarFotos(imageOriginal, imageModificada, datosDeImagen, ima)
-  //         }
-  //     }
-
-  //     if(imageModificada !== null){}
-  //     return () => {}
-  // },[imageModificada, imageOriginal, datosDeImagen])
-
   useEffect(() => {
-    cambiarImagenModificada(multipleEdicion);
-
-    if (multipleEdicion !== null) {
+    
+    const { imagenOriginal, imagenModificada, datosImagen } = conseguirFotos()
+  
+    const { ultimaEdicion } = conseguirUltimaEdicion()
+    
+    if (!imagenOriginal || !imagenModificada) {
+      return
     }
-    return () => {};
-  }, [multipleEdicion]);
+  
+    if (ultimaEdicion !== null) {
+      cambiarImagenModificada(ultimaEdicion)
+      setMultipleEdicion(ultimaEdicion)
+      setDatosDeImagen(datosImagen)
+      setImageOriginal(imagenOriginal)
+      return
+    }
+
+    setDatosDeImagen(datosImagen)
+    setImageOriginal(imagenOriginal)
+    cambiarImagenModificada(imagenModificada)
+  
+    return () => {}
+  }, [])
+  
+  useEffect(()=>{
+      if(imageModificada !== imageOriginal){
+
+          const { ultimaEdicion } = conseguirUltimaEdicion()
+          console.log('Hola')
+          if(!ultimaEdicion){
+              const ima = crearUltimaEdicion(imageModificada)
+              setMultipleEdicion(ima)
+              almacenarUltimaEdicion(ima)
+              almacenarFotos(imageOriginal, imageModificada, datosDeImagen)
+              return
+          }else if(ultimaEdicion !== imageModificada){
+              const ima = crearUrlConEfectos(imageModificada, ultimaEdicion)
+              almacenarUltimaEdicion(ima)
+              setMultipleEdicion(ima)
+              almacenarFotos(imageOriginal, imageModificada, datosDeImagen)
+              return
+          }
+      }
+
+      return () => {}
+  },[imageModificada, imageOriginal, datosDeImagen])
+
 
   return (
     <EditorContext.Provider

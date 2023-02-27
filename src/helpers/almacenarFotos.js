@@ -1,6 +1,5 @@
-export function almacenarFotos(fotoOriginal, fotoModificada, datosImagen, ultimaEdicion){
-    localStorage.setItem('imagenOriginal', fotoOriginal)
-    localStorage.setItem('imagenModificada', fotoModificada)
+export function almacenarFotos(fotoOriginal, fotoModificada, datosImagen){
+    localStorage.setItem('fotoOriginal', fotoOriginal)
+    localStorage.setItem('fotoModificada', fotoModificada)
     localStorage.setItem('datosImagen', datosImagen)
-    localStorage.setItem('ultimaEdicion', ultimaEdicion)
 }
