@@ -190,7 +190,7 @@ export default function RangoDeEfectos() {
             Aplicar
           </button>
         </div>
-        <p className={estiloP}></p>
+        <p className={estiloP}>{texto}</p>
       </div>
     );
   }
@@ -298,7 +298,6 @@ export default function RangoDeEfectos() {
         <button className={estilosButton} onClick={handlerVolverOriginal}>
           Limpiar
         </button>
-        <p className={estiloP}>{texto}</p>
       </div>
     );
   }
@@ -309,7 +308,6 @@ export default function RangoDeEfectos() {
         <button className={estilosButton} onClick={handlerDeshacer}>
           Vovler
         </button>
-        <p className={estiloP}>{texto}</p>
       </div>
     );
   }
