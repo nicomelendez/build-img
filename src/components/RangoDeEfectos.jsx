@@ -4,6 +4,7 @@ import { eliminarUltimoEffecto } from "@/helpers/eliminarUltimoEffecto";
 import useCloudinary from "@/hooks/useCloudinary";
 import useEditor from "@/hooks/useEditor";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function RangoDeEfectos() {
   const {
@@ -87,11 +88,19 @@ export default function RangoDeEfectos() {
   };
 
   const handlerAvatar = () => {
-    if (tamAvatar === '') {
-      return alert("Debe ingresar un tamaño");
+    if (tamAvatar === '' || tamAvatar === 'Elige el tamaño') {
+      return Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Debes elegir un tamaño!',
+      })
     }
     if (letras && !sizeLetra) {
-      return alert("Debe elegir un tamaño de fuente");
+      return Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Debes elegir un tamaño para el texto!',
+      })
     }
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroAvatar(
@@ -172,7 +181,7 @@ export default function RangoDeEfectos() {
 
         <p>Define las medidas</p>
 
-        <select onChange={cambiarTamAvatar} className="py-2">
+        <select onChange={cambiarTamAvatar} className="py-2 text-center">
           <option>Elige el tamaño</option>
           <option value='100'>100x100</option>
           <option value='200'>200x200</option>

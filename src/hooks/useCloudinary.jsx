@@ -116,7 +116,7 @@ export default function useCloudinary() {
     }
 
     const filtroAvatar = (public_id, tamAvatar, letras, sizeLetras) => {
-        console.log(tamAvatar)
+        
       if(letras && sizeLetras){
         const imagenAvatar = cloudinary.image(public_id).effect(Resize.fill().width(Number(tamAvatar)).height(Number(tamAvatar)).gravity(focusOn(face()))).roundCorners(max()).effect(blur().strength(200)).overlay(
           source(
