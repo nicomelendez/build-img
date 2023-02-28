@@ -35,7 +35,6 @@ export default function ImageEditor() {
       intervalId = setInterval(() => {
         tries++;
         if (tries < 20) {
-          
           loadImage();
         } else {
           clearInterval(intervalId);
@@ -57,7 +56,7 @@ export default function ImageEditor() {
             {imageOriginal === imageModificada ? (
               <div className="mx-auto lg:px-12">
                 <img
-                  className="w-full max-h-[500px] sombra"
+                  className="w-full min-w-[100px] max-h-[500px] sombra"
                   src={imageOriginal}
                   alt="Imagen para editar"
                 />
@@ -71,8 +70,8 @@ export default function ImageEditor() {
                     </div>
                   ) : (
                     <img
-                      className="w-full max-h-[500px] sombra"
-                      src={multipleEdicion}
+                      className="w-full min-w-[100px] max-h-[500px] sombra"
+                      src={ multipleEdicion }
                       alt="Imagen para editar"
                     />
                   )}

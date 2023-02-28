@@ -1,9 +1,5 @@
-import { almacenarFotos } from "@/helpers/almacenarFotos";
-import { almacenarUltimaEdicion } from "@/helpers/almacenarUltimaEdicion";
-import { eliminarUltimoEffecto } from "@/helpers/eliminarUltimoEffecto";
 import useCloudinary from "@/hooks/useCloudinary";
 import useEditor from "@/hooks/useEditor";
-import { useState } from "react";
 import Swal from "sweetalert2";
 
 export default function RangoDeEfectos() {

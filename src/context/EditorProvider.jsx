@@ -4,7 +4,6 @@ import { ImageStatus } from "./types.d";
 import { conseguirFotos } from "@/helpers/conseguirFotos";
 import { almacenarFotos } from "@/helpers/almacenarFotos";
 import { conseguirUltimaEdicion } from "@/helpers/conseguirUltimaEdicion.js";
-import { crearUltimaEdicion } from "@/helpers/crearUltimaEdicion";
 import { crearUrlConEfectos } from "@/helpers/crearUrlConEfectos";
 import { almacenarUltimaEdicion } from "@/helpers/almacenarUltimaEdicion";
 import Swal from "sweetalert2";
@@ -109,6 +108,7 @@ const EditorProvider = ({ children }) => {
   const router = useRouter();
 
   const cambiarImagenModificada = (url) => {
+    console.log(url)
     setImageModificada(url);
   };
 
@@ -122,7 +122,7 @@ const EditorProvider = ({ children }) => {
     const { ultimaEdicion } = conseguirUltimaEdicion()
     
     if (!imagenOriginal || !imagenModificada) {
-      return
+      return () => {}
     }
   
     if (ultimaEdicion !== null) {
@@ -130,7 +130,7 @@ const EditorProvider = ({ children }) => {
       setMultipleEdicion(ultimaEdicion)
       setDatosDeImagen(datosImagen)
       setImageOriginal(imagenOriginal)
-      return
+      return () => {}
     }
 
     setDatosDeImagen(datosImagen)
@@ -142,22 +142,20 @@ const EditorProvider = ({ children }) => {
   
   useEffect(()=>{
       if(imageModificada !== imageOriginal){
-
           const { ultimaEdicion } = conseguirUltimaEdicion()
           if(!ultimaEdicion){
-              const ima = crearUltimaEdicion(imageModificada)
-              setMultipleEdicion(ima)
-              setListaDeEfectos([...listaDeEfectos, ima])
-              almacenarUltimaEdicion(ima)
+              setMultipleEdicion(imageModificada)
+              setListaDeEfectos([...listaDeEfectos, imageModificada])
+              almacenarUltimaEdicion(imageModificada)
               almacenarFotos(imageOriginal, imageModificada, datosDeImagen)
-              return
+              return () => {}
           }else if(ultimaEdicion !== imageModificada){
               const ima = crearUrlConEfectos(imageModificada, ultimaEdicion)
               almacenarUltimaEdicion(ima)
               setListaDeEfectos([...listaDeEfectos, ima])
               setMultipleEdicion(ima)
               almacenarFotos(imageOriginal, imageModificada, datosDeImagen)
-              return
+              return () => {}
           }
       }
       return () => {}

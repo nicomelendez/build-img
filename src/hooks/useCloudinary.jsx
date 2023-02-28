@@ -108,9 +108,10 @@ export default function useCloudinary() {
     setDatosDeImagen(String(imagenBlur.publicID))
     return imagenBlur.toURL()
     }
-    const filtroTitulo = (public_id, texto)=>{
+
+    const filtroTitulo = (public_id, texto, sizeFuente)=>{
       const imagenTitulo = cloudinary.image(public_id).reshape(
-        cutByImage(text(String(texto), new TextStyle("Coustard", 160).fontWeight("bold")))
+        cutByImage(text(String(texto), new TextStyle("Coustard", sizeFuente).fontWeight("bold")))
       );
       return imagenTitulo.toURL()
     }
