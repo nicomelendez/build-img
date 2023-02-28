@@ -126,8 +126,7 @@ export default function RangoDeEfectos() {
       setMultipleEdicion(penultimateLink)
       return
     }
-    almacenarUltimaEdicion(imageOriginal)
-    cambiarImagenModificada(imageOriginal)
+    handlerVolverOriginal()
   }
 
   const handlerSize = () => {
