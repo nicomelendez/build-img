@@ -69,12 +69,12 @@ export default function useCloudinary() {
     }
     const filtroPrimavera = (public_id) => {
    
-      const imagenPrimaver = cloudinary.image(public_id).effect(colorize().level(10).color("#A1F36F")).effect(colorize().level(10).color("#0E8B42")).effect(colorize().level(10).color("#FFFFFF"));;
+      const imagenPrimaver = cloudinary.image(public_id).effect(colorize().level(10).color("#A1F36F")).effect(colorize().level(10).color("#FFFFFF")).effect(colorize().level(10).color("#FA00FF"));;
       setDatosDeImagen(String(imagenPrimaver.publicID))
       return imagenPrimaver.toURL()
     }
     const filtroOtnio = (public_id) => {
-      const imagenOtnio = cloudinary.image(public_id).effect(colorize().level(10).color("#FFA902")).effect(colorize().level(10).color("#FAFF07")).effect(colorize().level(10).color("#FFFFFF"));
+      const imagenOtnio = cloudinary.image(public_id).effect(colorize().level(10).color("#FFA902")).effect(colorize().level(10).color("#FAFF07")).effect(colorize().level(10).color("#618570"));
       setDatosDeImagen(String(imagenOtnio.publicID))
       return imagenOtnio.toURL()
     }

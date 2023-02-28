@@ -48,7 +48,7 @@ export default function Herramientas() {
 
       if(imageOriginal !== null){
         return (
-          <div className="flex flex-col lg:flex-row gap-4 justify-around">
+          <div className="flex flex-col lg:flex-row gap-4 items-center justify-around">
               <div className="mx-auto w-full grid grid-cols-3 gap-4 lg:grid-cols-1 place-content-center">
                   {herramientas.map(her=>{
                   return(

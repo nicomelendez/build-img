@@ -82,9 +82,14 @@ export default function RangoDeEfectos() {
   };
 
   const handlerSacarFondo = () => {
-    cambiarProcesoDeImagen(true);
-    const imagenEditada = filtroSacarFondo(datosDeImagen);
-    cambiarImagenModificada(imagenEditada);
+    return Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Deshabilitado hasta el día de la entrega, me quedan pocos usos para recortar!',
+    })
+    // cambiarProcesoDeImagen(true);
+    // const imagenEditada = filtroSacarFondo(datosDeImagen);
+    // cambiarImagenModificada(imagenEditada);
   };
 
   const handlerAvatar = () => {
@@ -166,7 +171,7 @@ export default function RangoDeEfectos() {
   const estilosButton =
     "mx-auto w-4/5 px-4 py-2 bg-gradient-to-r from-blue-500 to-violet-600 font-semibold rounded-lg text-white ";
   const estilosContent =
-    "min-w-[200px] bg-slate-100 mx-auto px-6 p-2 sm:p-4 w-4/5 rounded-xl shadow flex flex-col items-center space-y-2 sm:space-y-5 text-[11px] sm:text-sm sombra";
+    "min-w-[200px] max-h-[470px] bg-slate-100 mx-auto px-6 p-2 sm:p-4 w-4/5 rounded-xl shadow flex flex-col items-center space-y-2 sm:space-y-5 text-[11px] sm:text-sm sombra";
   const estiloItem = "hover:underline hover:cursor-pointer";
   const estilosTitulos = "text-center font-bold text-sm sm:text-lg";
   const estiloP = 'font-bold text-[10px] sm:text-sm text-center border-t border-black pt-2'

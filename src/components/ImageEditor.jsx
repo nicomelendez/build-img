@@ -57,7 +57,7 @@ export default function ImageEditor() {
             {imageOriginal === imageModificada ? (
               <div className="mx-auto lg:px-12">
                 <img
-                  className="w-full"
+                  className="w-full max-h-[500px] sombra"
                   src={imageOriginal}
                   alt="Imagen para editar"
                 />
@@ -71,7 +71,7 @@ export default function ImageEditor() {
                     </div>
                   ) : (
                     <img
-                      className="w-full"
+                      className="w-full max-h-[500px] sombra"
                       src={multipleEdicion}
                       alt="Imagen para editar"
                     />
