@@ -51,12 +51,7 @@ export default function RangoDeEfectos() {
     const imagenEditada = filtroGris(datosDeImagen);
     cambiarImagenModificada(imagenEditada);
   };
-  const handlerVolverOriginal = () => {
-    cambiarImagenModificada(imageOriginal);
-    almacenarFotos(imageOriginal, imageOriginal, datosDeImagen)
-    setListaDeEfectos([])
-    localStorage.removeItem("ultimaEdicion");
-  };
+  
   const handlerGif = () => {
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroGif(datosDeImagen);
@@ -117,17 +112,7 @@ export default function RangoDeEfectos() {
     cambiarImagenModificada(imagenEditada);
   };
 
-  const handlerDeshacer = () =>{
-    const lastIndex = listaDeEfectos.length - 1;
-    if (lastIndex > 0) { // Comprobar que hay al menos dos elementos en el array
-      const penultimateLink = listaDeEfectos[lastIndex - 1];
-      setListaDeEfectos(prevLinks => prevLinks.slice(0, lastIndex));
-      almacenarUltimaEdicion(penultimateLink)
-      setMultipleEdicion(penultimateLink)
-      return
-    }
-    handlerVolverOriginal()
-  }
+  
 
   const handlerSize = () => {
     if (largo === 0 || alto === 0) {
@@ -292,26 +277,6 @@ export default function RangoDeEfectos() {
           </li>
         </ul>
         <p className={estiloP}>{texto}</p>
-      </div>
-    );
-  }
-  if (accion === "Limpiar") {
-    return (
-      <div className={estilosContent}>
-        <p className={estilosTitulos}>Deshacer todos efectos</p>
-        <button className={estilosButton} onClick={handlerVolverOriginal}>
-          Limpiar
-        </button>
-      </div>
-    );
-  }
-  if (accion === "Deshacer") {
-    return (
-      <div className={estilosContent}>
-        <p className={estilosTitulos}>Deshacer el ultimo efectos</p>
-        <button className={estilosButton} onClick={handlerDeshacer}>
-          Vovler
-        </button>
       </div>
     );
   }

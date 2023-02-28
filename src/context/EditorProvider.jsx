@@ -7,6 +7,7 @@ import { conseguirUltimaEdicion } from "@/helpers/conseguirUltimaEdicion.js";
 import { crearUltimaEdicion } from "@/helpers/crearUltimaEdicion";
 import { crearUrlConEfectos } from "@/helpers/crearUrlConEfectos";
 import { almacenarUltimaEdicion } from "@/helpers/almacenarUltimaEdicion";
+import Swal from "sweetalert2";
 
 const EditorContext = createContext();
 
@@ -55,6 +56,42 @@ const EditorProvider = ({ children }) => {
     setAlto(0);
     setLargo(0);
   };
+
+  const handlerVolverOriginal = async () => {
+    if(listaDeEfectos.length <= 0){
+      return
+    }
+    const result = await Swal.fire({
+      title: '¿Deseas sacar todos los efectos?',
+      showDenyButton: true,
+      confirmButtonText: 'Confirmar',
+      denyButtonText: `Cancelar`
+    });
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      cambiarImagenModificada(imageOriginal);
+      almacenarFotos(imageOriginal, imageOriginal, datosDeImagen);
+      setListaDeEfectos([]);
+      localStorage.removeItem("ultimaEdicion");
+    } else if (result.isDenied) {
+      return;
+    }
+  };
+
+  const handlerDeshacer = () =>{
+    const lastIndex = listaDeEfectos.length - 1;
+    if (lastIndex > 0) { // Comprobar que hay al menos dos elementos en el array
+      const penultimateLink = listaDeEfectos[lastIndex - 1];
+      setListaDeEfectos(prevLinks => prevLinks.slice(0, lastIndex));
+      almacenarUltimaEdicion(penultimateLink)
+      setMultipleEdicion(penultimateLink)
+      return
+    }
+    cambiarImagenModificada(imageOriginal);
+    almacenarFotos(imageOriginal, imageOriginal, datosDeImagen);
+    setListaDeEfectos([]);
+    localStorage.removeItem("ultimaEdicion");
+  }
 
   const cambiarLargo = (event) => {
     setLargo(event.target.value);
@@ -141,7 +178,9 @@ const EditorProvider = ({ children }) => {
         imageOriginal,
         conseguirImagenLocalSotre,
         blurId,
+        handlerVolverOriginal,
         listaDeEfectos,
+        handlerDeshacer,
         cambiarLargo,
         cambiarAlto,
         resetearLargoAlto,
