@@ -67,11 +67,12 @@ const EditorProvider = ({ children }) => {
       confirmButtonText: 'Confirmar',
       denyButtonText: `Cancelar`
     });
-    /* Read more about isConfirmed, isDenied below */
+
     if (result.isConfirmed) {
       cambiarImagenModificada(imageOriginal);
       almacenarFotos(imageOriginal, imageOriginal, datosDeImagen);
       setListaDeEfectos([]);
+      setHerramienta(null)
       localStorage.removeItem("ultimaEdicion");
     } else if (result.isDenied) {
       return;
@@ -80,7 +81,7 @@ const EditorProvider = ({ children }) => {
 
   const handlerDeshacer = () =>{
     const lastIndex = listaDeEfectos.length - 1;
-    if (lastIndex > 0) { // Comprobar que hay al menos dos elementos en el array
+    if (lastIndex > 0) { 
       const penultimateLink = listaDeEfectos[lastIndex - 1];
       setListaDeEfectos(prevLinks => prevLinks.slice(0, lastIndex));
       almacenarUltimaEdicion(penultimateLink)

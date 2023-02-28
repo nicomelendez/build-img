@@ -18,13 +18,14 @@ export default function RevertirCambios() {
           }
     ]
     
-    const handlerEfecto = (her)=>{
-        setHerramienta(her.name)
-    }
+        const handlerEfecto = (her)=>{
+            setHerramienta(her.name)
+        }
 
     
 
       const handlerDeshacerOption = (her) =>{
+        handlerEfecto(her)
         if(her.name === 'Limpiar'){
             return handlerVolverOriginal()
         }else if(her.name === 'Deshacer'){

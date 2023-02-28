@@ -21,14 +21,10 @@ export default function RangoDeEfectos() {
     cambiarSizeLetras,
     letras,
     sizeLetra,
-    imageOriginal,
     titulo,
     cambiarTitulo,
     cambiarSizeFuente,
     sizeFuente,
-    setMultipleEdicion,
-    listaDeEfectos,
-    setListaDeEfectos,
     accion,
     cambiarTamAvatar,
     tamAvatar
@@ -290,7 +286,7 @@ export default function RangoDeEfectos() {
         </div>
         <div className="w-full">
           <label className="text-black">Tamaño de fuente</label>
-          <input
+          <input required
             placeholder="Ej: 120"
             className="w-full"
             onChange={cambiarSizeFuente}
