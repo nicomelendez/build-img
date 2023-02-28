@@ -22,7 +22,9 @@ export default function ImageEditor() {
       const img = new Image();
       img.src = multipleEdicion;
       img.onload = () => {
-        cambiarProcesoDeImagen(false);
+        setTimeout(() => {
+          cambiarProcesoDeImagen(false);
+        }, 1500);
         clearInterval(intervalId);
       };
       img.onerror = () =>{
@@ -53,33 +55,20 @@ export default function ImageEditor() {
         <div className="w-full flex flex-col flex-wrap">
             <RevertirCambios />
           <div className="w-full flex flex-col lg:flex-row  items-center justify-center gap-4">
-            {imageOriginal === imageModificada ? (
-              <div className="mx-auto lg:px-12">
-                <img
-                  className="w-full min-w-[100px] max-h-[500px] sombra"
-                  src={imageOriginal}
-                  alt="Imagen para editar"
-                />
-              </div>
-            ) : (
-              <>
-                <div className="mx-auto lg:px-12">
-                  {processingImage ? (
-                    <div className="flex w-[290px] lg:w-[500px] flex-col justify-center h-52 items-center">
-                      <Cargando />
-                    </div>
-                  ) : (
-                    <img
-                      className="w-full min-w-[100px] max-h-[500px] sombra"
-                      src={ multipleEdicion }
-                      alt="Imagen para editar"
-                    />
-                  )}
-                </div>
-              </>
-            )}
+            <div className="mx-auto lg:px-12">
+                {processingImage ? (
+                  <div className="flex w-[290px] lg:w-[500px] flex-col justify-center h-52 items-center">
+                    <Cargando />
+                  </div>
+                ) : (
+                  <img
+                    className="w-full min-w-[100px] max-h-[500px] sombra"
+                    src={ imageOriginal === imageModificada ? imageOriginal : multipleEdicion }
+                    alt="Imagen para editar"
+                  />
+                )}
+            </div>
           </div>
-
           <button
             onClick={() => {
               router.push("/resultado");
@@ -95,3 +84,4 @@ export default function ImageEditor() {
     </>
   );
 }
+

@@ -15,7 +15,7 @@ const EditorProvider = ({ children }) => {
   const [imageOriginal, setImageOriginal] = useState(null);
   const [imageModificada, setImageModificada] = useState(null);
   const [datosDeImagen, setDatosDeImagen] = useState(null);
-  const [processingImage, setProcessingImage] = useState(true);
+  const [processingImage, setProcessingImage] = useState(false);
   const [blurId, setBlur] = useState(0);
   const [largo, setLargo] = useState(0);
   const [alto, setAlto] = useState(0);
