@@ -27,6 +27,7 @@ import {compass} from "@cloudinary/url-gen/qualifiers/gravity";
 
 // We'll also scale our overlay, we'll need this for later.
 import {scale} from "@cloudinary/url-gen/actions/resize";
+import Swal from "sweetalert2";
 
 export default function useCloudinary() {
 
@@ -187,18 +188,22 @@ export default function useCloudinary() {
     }
     
     const filtroOverlayLentes = (public_id, overlay, medidas) =>{
-      
-      const imagenOverlay = cloudinary.image(public_id).overlay(
-        source(
-          image(overlay).transformation(
-            new Transformation().resize(scale().width(medidas).regionRelative())
-          )
-        ).position(new Position().gravity(focusOn(advancedEyes())))
-      );
-      console.log(imagenOverlay.toURL())
-      setDatosDeImagen(String(imagenOverlay.publicID))
+      return Swal.fire({
+        icon: 'info',
+        title: 'En construcción',
+        text: 'Disponible a la brevedad!',
+      })
+      // const imagenOverlay = cloudinary.image(public_id).overlay(
+      //   source(
+      //     image(overlay).transformation(
+      //       new Transformation().resize(scale().width(medidas).regionRelative())
+      //     )
+      //   ).position(new Position().gravity(focusOn(advancedEyes())))
+      // );
+      // console.log(imagenOverlay.toURL())
+      // setDatosDeImagen(String(imagenOverlay.publicID))
             
-      return imagenOverlay.toURL()
+      // return imagenOverlay.toURL()
     }
   return {
     filtroBlur,
