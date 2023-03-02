@@ -1,5 +1,5 @@
 import useEditor from "@/hooks/useEditor";
-import { IconBlur, IconEfecto, IconRecortar, IconsAjustar, IconsAvatar, IconsTexto } from "./Icons";
+import { IconBlur, IconEfecto, IconRecortar, IconsAjustar, IconsAvatar, IconsFace, IconsPixel, IconsTexto } from "./Icons";
 import RangoDeEfectos from "./RangoDeEfectos";
 
 export default function Herramientas() {
@@ -38,7 +38,17 @@ export default function Herramientas() {
           id:8,
           icons: <IconsTexto />,
           name: 'Texto'
-        },        
+        },     
+        {
+          id:9,
+          icons: <IconsFace />,
+          name: 'Overlay'
+        },   
+        {
+          id:10,
+          icons: <IconsPixel/>,
+          name: 'Pixelear'
+        }, 
       ]
 
       const handlerEfecto = (her)=>{
@@ -49,7 +59,7 @@ export default function Herramientas() {
       if(imageOriginal !== null){
         return (
           <div className="flex flex-col lg:flex-row gap-4 items-center justify-around">
-              <div className="mx-auto w-full grid grid-cols-3 gap-4 lg:grid-cols-1 place-content-center">
+              <div className="mx-auto w-full grid grid-cols-4 gap-4 lg:grid-cols-2 place-content-center">
                   {herramientas.map(her=>{
                   return(
                           <div className={`${herramienta === her.name ? 'bg-gradient-to-r from-blue-500 to-violet-600' : 'bg-slate-100'} mx-auto text-gray-900 w-12 h-12 text-[7px] lg:w-14 lg:h-14 lg:text-[10px] flex flex-col items-center justify-center hover:cursor-pointer rounded-full`} onClick={()=>{handlerEfecto(her)}} key={her.id}>

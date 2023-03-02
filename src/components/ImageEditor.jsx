@@ -62,6 +62,7 @@ export default function ImageEditor() {
                   </div>
                 ) : (
                   <img
+                    id='image'
                     className="w-full min-w-[100px] max-h-[500px] sombra"
                     src={ imageOriginal === imageModificada ? imageOriginal : multipleEdicion }
                     alt="Imagen para editar"

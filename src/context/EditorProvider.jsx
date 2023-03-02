@@ -108,7 +108,6 @@ const EditorProvider = ({ children }) => {
   const router = useRouter();
 
   const cambiarImagenModificada = (url) => {
-    console.log(url)
     setImageModificada(url);
   };
 

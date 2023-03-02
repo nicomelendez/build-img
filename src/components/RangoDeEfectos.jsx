@@ -1,6 +1,7 @@
 import useCloudinary from "@/hooks/useCloudinary";
 import useEditor from "@/hooks/useEditor";
 import Swal from "sweetalert2";
+import Overlay from "./Overlay";
 
 export default function RangoDeEfectos() {
   const {
@@ -23,7 +24,7 @@ export default function RangoDeEfectos() {
     sizeFuente,
     accion,
     cambiarTamAvatar,
-    tamAvatar
+    tamAvatar    
   } = useEditor();
   const {
     filtroGris,
@@ -35,7 +36,8 @@ export default function RangoDeEfectos() {
     filtroInvierno,
     filtroOtnio,
     filtroGif,
-    filtroTitulo
+    filtroTitulo,
+    filtroOverlay
   } = useCloudinary();
 
   const handlerGris = () => {
@@ -104,7 +106,21 @@ export default function RangoDeEfectos() {
     cambiarImagenModificada(imagenEditada);
   };
 
-  
+  const handlerOverlay = async() => {
+    const image = document.getElementById("image");
+    const {y, x, h, w} = await new Promise((resolve) => {
+      image.addEventListener("click", function(event) {
+        const h = image.height;
+        const w = image.width;
+        const y = event.offsetY;
+        const x = event.offsetX;
+        resolve({y,x, h, w});
+      }, { once: true });
+    });
+    cambiarProcesoDeImagen(true);
+    const imagenEditada = filtroOverlay(datosDeImagen, y, x, h, w);
+    cambiarImagenModificada(imagenEditada);
+  }
 
   const handlerSize = () => {
     if (largo === 0 || alto === 0) {
@@ -152,6 +168,18 @@ export default function RangoDeEfectos() {
   const estilosTitulos = "text-center font-bold text-sm sm:text-lg";
   const estiloP = 'font-bold text-[10px] sm:text-sm text-center border-t border-black pt-2'
   const texto = 'Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el botón deshacer.'
+
+  if(accion === 'Overlay'){
+      return(
+        <div className={estilosContent}>
+          <p className={estilosTitulos}>Overlay</p>
+          <div className="flex w-full flex-col items-center justify-start space-y-2 my-5">
+            <Overlay />
+          </div>
+          <p className={estiloP}>{texto}</p>
+        </div>
+      )
+  }
   if (accion === "Blur") {
     return (
       <div className={estilosContent}>
@@ -161,6 +189,7 @@ export default function RangoDeEfectos() {
             Grado de blur <strong>{blurId}</strong>
           </label>
           <input
+            defaultValue='0'
             className=""
             type="range"
             min="0"
@@ -194,11 +223,12 @@ export default function RangoDeEfectos() {
         </select>
         <div className="w-full">
           <label className="text-black">Texto - Opcional</label>
-          <input className="w-full" placeholder="Ej: NM" onChange={cambiarLetras} type="text" />
+          <input defaultValue='' className="w-full" placeholder="Ej: NM" onChange={cambiarLetras} type="text" />
         </div>
         <div className="w-full">
           <label className="text-black">Tamaño de fuente</label>
           <input
+            defaultValue=''
             placeholder="Ej: 60"
             className="w-full"
             onChange={cambiarSizeLetras}
@@ -218,11 +248,11 @@ export default function RangoDeEfectos() {
         <p className={estilosTitulos}>Modificar tamaño</p>
         <div>
           <label className="text-black">Largo</label>
-          <input className="w-full" placeholder="Ej: 300" onChange={cambiarLargo} type="number" />
+          <input defaultValue='' className="w-full" placeholder="Ej: 300" onChange={cambiarLargo} type="number" />
         </div>
         <div>
           <label className="text-black">Alto</label>
-          <input className="w-full" placeholder="Ej: 200" onChange={cambiarAlto} type="number" />
+          <input defaultValue='' className="w-full" placeholder="Ej: 200" onChange={cambiarAlto} type="number" />
         </div>
         <button className={estilosButton} onClick={handlerSize}>
           Aplicar
@@ -278,11 +308,12 @@ export default function RangoDeEfectos() {
         <p className={estilosTitulos}>Crea un texto texturado</p>
         <div className="w-full">
           <label className="text-black">Texto</label>
-          <input className="w-full" placeholder="Ej: MiduDev" onChange={cambiarTitulo} type="text" />
+          <input defaultValue='' className="w-full" placeholder="Ej: MiduDev" onChange={cambiarTitulo} type="text" />
         </div>
         <div className="w-full">
           <label className="text-black">Tamaño de fuente</label>
-          <input required
+          <input 
+            defaultValue=''
             placeholder="Ej: 120"
             className="w-full"
             onChange={cambiarSizeFuente}

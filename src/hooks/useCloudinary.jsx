@@ -1,8 +1,10 @@
 import { max } from "@cloudinary/url-gen/actions/roundCorners"
 import { grayscale, blur, backgroundRemoval, colorize } from "@cloudinary/url-gen/actions/effect"
 import { focusOn } from "@cloudinary/url-gen/qualifiers/gravity";
+import { Position } from "@cloudinary/url-gen/qualifiers";
 import { source } from "@cloudinary/url-gen/actions/overlay";
-import { face } from "@cloudinary/url-gen/qualifiers/focusOn";
+import {  advancedEyes } from "@cloudinary/transformation-builder-sdk/qualifiers/focusOn";
+import { face, faces } from "@cloudinary/url-gen/qualifiers/focusOn";
 import { Resize } from "@cloudinary/url-gen/actions/resize";
 import { Cloudinary } from "@cloudinary/url-gen";
 import useEditor from "./useEditor";
@@ -11,10 +13,24 @@ import { TextStyle } from '@cloudinary/transformation-builder-sdk/qualifiers/tex
 import { ImageStatus } from '@/context/types.d';
 import { almacenarFotos } from "@/helpers/almacenarFotos";
 import { cutByImage } from '@cloudinary/url-gen/actions/reshape'
+import { Transformation  } from '@cloudinary/url-gen/transformation/Transformation'
+
+// An overlay is built from several parts
+// Import video or image overlay, based on your asset
+import {Overlay} from "@cloudinary/url-gen/actions/overlay";
+// Import the source of the layer, this determines if the layer is an image, text or video
+import {image} from "@cloudinary/url-gen/qualifiers/source";
+
+// Import how to position your layer
+import {north, southEast} from "@cloudinary/url-gen/qualifiers/compass";
+import {compass} from "@cloudinary/url-gen/qualifiers/gravity";
+
+// We'll also scale our overlay, we'll need this for later.
+import {scale} from "@cloudinary/url-gen/actions/resize";
 
 export default function useCloudinary() {
 
-    const {setDatosDeImagen, setImageOriginal, setImageModificada, setImageStatus, router, setMultipleEdicion} = useEditor()
+    const {setDatosDeImagen, setImageOriginal, setImageModificada, setImageStatus, router, setMultipleEdicion,cambiarProcesoDeImagen, cambiarImagenModificada} = useEditor()
 
   
   const uploadImage = async (file) => {
@@ -59,8 +75,43 @@ export default function useCloudinary() {
     });
 
 
-    
+    const filtroOverlayFace = (public_id, idOverlay, medida) => {
 
+      cambiarProcesoDeImagen(true);
+      const imagenMostacho = cloudinary.image(public_id).overlay(
+        source(
+          image(idOverlay).transformation(
+            new Transformation().resize(scale().width(medida).regionRelative())
+          )
+        ).position(new Position().gravity(focusOn(face())))
+      );
+      setDatosDeImagen(String(imagenMostacho.publicID))
+            
+      cambiarImagenModificada(imagenMostacho.toURL());
+      return 
+    }
+
+    const filtroOverlayCabeza = (public_id, idOverlay) => {
+
+      cambiarProcesoDeImagen(true);
+      const imagenEditada = cloudinary.image(public_id).overlay(
+        source(
+          image(idOverlay).transformation(
+            new Transformation().resize(scale().width('1.09').regionRelative())
+          )
+        ).position(new Position().gravity(focusOn(north())))
+      );
+      setDatosDeImagen(String(imagenEditada.publicID))
+            
+      cambiarImagenModificada(imagenEditada.toURL());
+
+      return 
+    }
+
+    const conseguirImagen = (public_id) => {
+      const imagen = cloudinary.image(public_id)
+      return imagen.toURL()
+    }
     const filtroGris = (public_id) => {
       const imagenGris = cloudinary.image(public_id).effect(grayscale());
      
@@ -134,18 +185,36 @@ export default function useCloudinary() {
     setDatosDeImagen(String(imagenAvatar.publicID))
     return imagenAvatar.toURL()
     }
-
+    
+    const filtroOverlayLentes = (public_id, overlay, medidas) =>{
+      
+      const imagenOverlay = cloudinary.image(public_id).overlay(
+        source(
+          image(overlay).transformation(
+            new Transformation().resize(scale().width(medidas).regionRelative())
+          )
+        ).position(new Position().gravity(focusOn(advancedEyes())))
+      );
+      console.log(imagenOverlay.toURL())
+      setDatosDeImagen(String(imagenOverlay.publicID))
+            
+      return imagenOverlay.toURL()
+    }
   return {
     filtroBlur,
     filtroGris,
     filtroSacarFondo,
+    filtroOverlayLentes,
     filtroSize,
+    filtroOverlayFace,
     filtroAvatar,
     filtroPrimavera,
+    conseguirImagen,
     filtroOtnio,
     filtroInvierno,
     filtroGif,
     filtroTitulo,
+    filtroOverlayCabeza,
     uploadImage
   }
 }
