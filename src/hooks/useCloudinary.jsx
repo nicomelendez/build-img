@@ -84,7 +84,7 @@ export default function useCloudinary() {
           image(idOverlay).transformation(
             new Transformation().resize(scale().width(medida).regionRelative())
           )
-        ).position(new Position().gravity(focusOn(face())))
+        ).position(new Position().gravity(focusOn(faces())))
       );
       setDatosDeImagen(String(imagenMostacho.publicID))
             

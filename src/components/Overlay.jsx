@@ -41,9 +41,17 @@ export default function Overlay() {
             img:'veeplc4er1oyt54k9ypk',
             action: filtroOverlayFace,
             scale: '1.4'
+        },
+        {
+            id:6,
+            name:'Midu',
+            img:'lbducroers3f7dkp0e5i',
+            action: filtroOverlayFace,
+            scale: '1'
         }
         
     ]
+    
   return (
     <ul className='w-full grid grid-cols-2 place-content-center gap-3'>
         {overalys.map(over => {

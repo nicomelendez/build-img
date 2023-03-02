@@ -1,5 +1,6 @@
 import useCloudinary from "@/hooks/useCloudinary";
 import useEditor from "@/hooks/useEditor";
+import Image from "next/image";
 import Swal from "sweetalert2";
 import Overlay from "./Overlay";
 
@@ -164,11 +165,11 @@ export default function RangoDeEfectos() {
     "mx-auto w-4/5 px-4 py-2 bg-gradient-to-r from-blue-500 to-violet-600 font-semibold rounded-lg text-white ";
   const estilosContent =
     "min-w-[200px] max-h-[470px] bg-slate-100 mx-auto px-6 p-2 sm:p-4 w-4/5 rounded-xl shadow flex flex-col items-center space-y-2 sm:space-y-5 text-[11px] sm:text-sm sombra";
-  const estiloItem = "hover:underline hover:cursor-pointer";
+  const estiloItem = "flex gap-2 hover:underline hover:cursor-pointer";
   const estilosTitulos = "text-center font-bold text-sm sm:text-lg";
   const estiloP = 'font-bold text-[10px] sm:text-sm text-center border-t border-black pt-2'
   const texto = 'Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el botón deshacer.'
-
+  
   if(accion === 'Overlay'){
       return(
         <div className={estilosContent}>
@@ -179,6 +180,17 @@ export default function RangoDeEfectos() {
           <p className={estiloP}>{texto}</p>
         </div>
       )
+  }
+  if(accion === 'Pixelear'){
+    return(
+      <div className={estilosContent}>
+        <p className={estilosTitulos}>Pixelear caras</p>
+        <div className="flex w-full flex-col items-center justify-start space-y-2 my-5">
+          <p>En proceso...</p>
+        </div>
+        <p className={estiloP}>{texto}</p>
+      </div>
+    )
   }
   if (accion === "Blur") {
     return (
@@ -222,7 +234,8 @@ export default function RangoDeEfectos() {
           <option value='700'>700 x 700</option>
         </select>
         <div className="w-full">
-          <label className="text-black">Texto - Opcional</label>
+          <p className='font-semibold text-center'>Opcional</p>
+          <label className="text-black">Texto</label>
           <input defaultValue='' className="w-full" placeholder="Ej: NM" onChange={cambiarLetras} type="text" />
         </div>
         <div className="w-full">
@@ -276,25 +289,25 @@ export default function RangoDeEfectos() {
     return (
       <div className={estilosContent}>
         <p className={estilosTitulos}>Elige un efecto</p>
-        <ul className="flex flex-row flex-wrap gap-5 lg:gap-0 lg:items-start justify-around items-center w-full lg:flex-col lg:space-y-5 pt-4 font-semibold list-disc px-4">
+        <ul className="flex flex-row flex-wrap gap-5 lg:gap-0 lg:items-start justify-around items-center w-full lg:flex-col lg:space-y-5 pt-4 font-semibold px-4">
           <li>
             <button className={estiloItem} onClick={handlerGris}>
-              Gris
+              <Image src='/assets/gris.png' width={20} height={20} alt='gris'/> Gris
             </button>
           </li>
           <li>
             <button className={estiloItem} onClick={handlerPrimavera}>
-              Primavera
+            <Image src='/assets/primavera.png' width={20} height={20} alt='gris'/> Primavera
             </button>
           </li>
           <li>
             <button className={estiloItem} onClick={handlerOtnio}>
-              Otoño
+            <Image src='/assets/otonio.png' width={20} height={20} alt='gris'/> Otoño
             </button>
           </li>
           <li>
             <button className={estiloItem} onClick={handlerInvierno}>
-              Invierno
+            <Image src='/assets/invierno.png' width={20} height={20} alt='gris'/> Invierno
             </button>
           </li>
         </ul>
