@@ -14,20 +14,11 @@ import { ImageStatus } from '@/context/types.d';
 import { almacenarFotos } from "@/helpers/almacenarFotos";
 import { cutByImage } from '@cloudinary/url-gen/actions/reshape'
 import { Transformation  } from '@cloudinary/url-gen/transformation/Transformation'
-
-// An overlay is built from several parts
-// Import video or image overlay, based on your asset
-import {Overlay} from "@cloudinary/url-gen/actions/overlay";
-// Import the source of the layer, this determines if the layer is an image, text or video
 import {image} from "@cloudinary/url-gen/qualifiers/source";
-
-// Import how to position your layer
-import {north, southEast} from "@cloudinary/url-gen/qualifiers/compass";
-import {compass} from "@cloudinary/url-gen/qualifiers/gravity";
-
-// We'll also scale our overlay, we'll need this for later.
+import {north} from "@cloudinary/url-gen/qualifiers/compass";
 import {scale} from "@cloudinary/url-gen/actions/resize";
 import Swal from "sweetalert2";
+import { viesusCorrect } from "@cloudinary/url-gen/actions/adjust";
 
 export default function useCloudinary() {
 
@@ -136,9 +127,11 @@ export default function useCloudinary() {
       return imagenInvierno.toURL()
     }
     
-    const filtroGif = async(image_url) => {
-     
-
+    const filtroMejorar = (public_id) => {
+      const imagenMejorada = cloudinary.image(public_id).adjust(viesusCorrect()).setSignature("58dQFhjW")
+      console.log(imagenMejorada.toURL())
+      setDatosDeImagen(String(imagenMejorada.publicID))
+      return imagenMejorada.toURL()
     }
 
     const filtroSacarFondo = (public_id) => {
@@ -186,7 +179,7 @@ export default function useCloudinary() {
     setDatosDeImagen(String(imagenAvatar.publicID))
     return imagenAvatar.toURL()
     }
-    
+
     const pixelearZona = (public_id) => {
       const imagenPixel= cloudinary.image(public_id).effect(
         pixelate()
@@ -203,6 +196,7 @@ export default function useCloudinary() {
         title: 'En construcción',
         text: 'Disponible a la brevedad!',
       })
+      // cambiarProcesoDeImagen(true);
       // const imagenOverlay = cloudinary.image(public_id).overlay(
       //   source(
       //     image(overlay).transformation(
@@ -210,10 +204,9 @@ export default function useCloudinary() {
       //     )
       //   ).position(new Position().gravity(focusOn(advancedEyes())))
       // );
-      // console.log(imagenOverlay.toURL())
       // setDatosDeImagen(String(imagenOverlay.publicID))
-            
-      // return imagenOverlay.toURL()
+      // cambiarImagenModificada(imagenOverlay.toURL());      
+      // return 
     }
   return {
     filtroBlur,
@@ -229,7 +222,7 @@ export default function useCloudinary() {
     filtroOtnio,
     filtroInvierno,
     pixelearZona,
-    filtroGif,
+    filtroMejorar,
     filtroTitulo,
     filtroOverlayCabeza,
     uploadImage

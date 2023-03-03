@@ -2,6 +2,7 @@ import useCloudinary from "@/hooks/useCloudinary";
 import useEditor from "@/hooks/useEditor";
 import Image from "next/image";
 import Swal from "sweetalert2";
+import { IconsMagic } from "./Icons";
 import Overlay from "./Overlay";
 
 export default function RangoDeEfectos() {
@@ -36,7 +37,7 @@ export default function RangoDeEfectos() {
     filtroPrimavera,
     filtroInvierno,
     filtroOtnio,
-    filtroGif,
+    filtroMejorar,
     filtroTitulo,
     pixelearZona
   } = useCloudinary();
@@ -46,7 +47,16 @@ export default function RangoDeEfectos() {
     const imagenEditada = filtroGris(datosDeImagen);
     cambiarImagenModificada(imagenEditada);
   };
-  
+  const handlerMejorar = () => {
+    return Swal.fire({
+      icon: 'info',
+      title: 'En construcción',
+      text: 'Disponible a la brevedad!',
+    })
+    // cambiarProcesoDeImagen(true);
+    // const imagenEditada = filtroMejorar(datosDeImagen);
+    // cambiarImagenModificada(imagenEditada);
+  };
   const handlerPixel = () => {
     cambiarProcesoDeImagen(true);
     const imagenEditada = pixelearZona(datosDeImagen);
@@ -165,7 +175,7 @@ export default function RangoDeEfectos() {
     "mx-auto w-4/5 px-4 py-2 bg-gradient-to-r from-blue-500 to-violet-600 font-semibold rounded-lg text-white ";
   const estilosContent =
     "min-w-[200px] max-h-[470px] bg-slate-100 mx-auto px-6 p-2 sm:p-4 w-4/5 rounded-xl shadow flex flex-col items-center space-y-2 sm:space-y-5 text-[11px] sm:text-sm sombra";
-  const estiloItem = "flex gap-2 hover:underline hover:cursor-pointer";
+  const estiloItem = "flex w-[80px] lg:w-auto gap-2 hover:underline hover:cursor-pointer";
   const estilosTitulos = "text-center font-bold text-sm sm:text-lg";
   const estiloP = 'font-bold text-[10px] sm:text-sm text-center border-t border-black pt-2'
   const texto = 'Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el botón deshacer.'
@@ -187,9 +197,9 @@ export default function RangoDeEfectos() {
         <p className={estilosTitulos}>Pixelear caras</p>
         <div className="flex w-full flex-col items-center justify-start space-y-2 my-5">
           <p>En proceso...</p>
-          {/* <button className={estilosButton} onClick={handlerPixel}>
+          <button className={estilosButton} onClick={handlerPixel}>
             Aplicar
-          </button> */}
+          </button>
         </div>
         <p className={estiloP}>{texto}</p>
       </div>
@@ -314,6 +324,9 @@ export default function RangoDeEfectos() {
             </button>
           </li>
         </ul>
+        <button className='mx-auto flex gap-2 px-3 py-3 bg-gradient-to-r from-blue-500 to-violet-600 font-semibold rounded-full text-white hover:scale-105' onClick={handlerMejorar}>
+          <IconsMagic/>Mejorar
+        </button>
         <p className={estiloP}>{texto}</p>
       </div>
     );
