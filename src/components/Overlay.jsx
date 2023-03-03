@@ -47,7 +47,7 @@ export default function Overlay() {
             name:'Midu',
             img:'lbducroers3f7dkp0e5i',
             action: filtroOverlayFace,
-            scale: '1'
+            scale: '1.1'
         }
         
     ]

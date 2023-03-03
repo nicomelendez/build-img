@@ -301,7 +301,7 @@ export default function RangoDeEfectos() {
   if (accion === "Efectos") {
     return (
       <div className={estilosContent}>
-        <p className={estilosTitulos}>Elige un efecto</p>
+        <p className={estilosTitulos}>Efectos</p>
         <ul className="flex flex-row flex-wrap gap-5 lg:gap-0 lg:items-start justify-around items-center w-full lg:flex-col lg:space-y-5 pt-4 font-semibold px-4">
           <li>
             <button className={estiloItem} onClick={handlerGris}>
