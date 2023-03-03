@@ -27,6 +27,7 @@ export default function RangoDeEfectos() {
     accion,
     cambiarTamAvatar,
     tamAvatar,
+    restablecerInputs
   } = useEditor();
   const {
     filtroGris,
@@ -46,6 +47,7 @@ export default function RangoDeEfectos() {
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroGris(datosDeImagen);
     cambiarImagenModificada(imagenEditada);
+    restablecerInputs()
   };
   const handlerMejorar = () => {
     return Swal.fire({
@@ -56,29 +58,34 @@ export default function RangoDeEfectos() {
     // cambiarProcesoDeImagen(true);
     // const imagenEditada = filtroMejorar(datosDeImagen);
     // cambiarImagenModificada(imagenEditada);
+    // restablecerInputs()
   };
   const handlerPixel = () => {
     cambiarProcesoDeImagen(true);
     const imagenEditada = pixelearZona(datosDeImagen);
     cambiarImagenModificada(imagenEditada);
+    restablecerInputs()
   };
 
   const handlerPrimavera = () => {
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroPrimavera(datosDeImagen);
     cambiarImagenModificada(imagenEditada);
+    restablecerInputs()
   };
 
   const handlerOtnio = () => {
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroOtnio(datosDeImagen);
     cambiarImagenModificada(imagenEditada);
+    restablecerInputs()
   };
 
   const handlerInvierno = () => {
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroInvierno(datosDeImagen);
     cambiarImagenModificada(imagenEditada);
+    restablecerInputs()
   };
 
   const handlerSacarFondo = () => {
@@ -90,6 +97,7 @@ export default function RangoDeEfectos() {
     // cambiarProcesoDeImagen(true);
     // const imagenEditada = filtroSacarFondo(datosDeImagen);
     // cambiarImagenModificada(imagenEditada);
+    // restablecerInputs()
   };
 
   const handlerAvatar = () => {
@@ -115,26 +123,7 @@ export default function RangoDeEfectos() {
       sizeLetra
     );
     cambiarImagenModificada(imagenEditada);
-  };
-
-  const handlerOverlay = async () => {
-    const image = document.getElementById("image");
-    const { y, x, h, w } = await new Promise((resolve) => {
-      image.addEventListener(
-        "click",
-        function (event) {
-          const h = image.height;
-          const w = image.width;
-          const y = event.offsetY;
-          const x = event.offsetX;
-          resolve({ y, x, h, w });
-        },
-        { once: true }
-      );
-    });
-    cambiarProcesoDeImagen(true);
-    const imagenEditada = filtroOverlay(datosDeImagen, y, x, h, w);
-    cambiarImagenModificada(imagenEditada);
+    restablecerInputs()
   };
 
   const handlerSize = () => {
@@ -148,12 +137,14 @@ export default function RangoDeEfectos() {
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroSize(datosDeImagen, largo, alto);
     cambiarImagenModificada(imagenEditada);
+    restablecerInputs()
   };
 
   const handlerBlur = () => {
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroBlur(datosDeImagen, blurId);
     cambiarImagenModificada(imagenEditada);
+    restablecerInputs()
   };
   const handlerCrearTitulo = () => {
     if (!sizeFuente) {
@@ -173,6 +164,7 @@ export default function RangoDeEfectos() {
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroTitulo(datosDeImagen, titulo, sizeFuente);
     cambiarImagenModificada(imagenEditada);
+    restablecerInputs()
   };
 
   const estilosButton =

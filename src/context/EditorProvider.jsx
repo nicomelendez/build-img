@@ -55,7 +55,15 @@ const EditorProvider = ({ children }) => {
     setAlto(0);
     setLargo(0);
   };
-
+  const restablecerInputs = () => {
+    setBlur(0)
+    setAlto(0);
+    setLargo(0);
+    setSizeFuente(null);
+    setTitulo(null)
+    setSizeLetras(null)
+    setTamAvatar(null)
+  }
   const handlerVolverOriginal = async () => {
     if (listaDeEfectos.length <= 0) {
       return;
@@ -191,6 +199,7 @@ const EditorProvider = ({ children }) => {
         router,
         sizeFuente,
         cambiarImagenModificada,
+        restablecerInputs,
         almacenarFotos,
         cambiarTamAvatar,
         tamAvatar,
