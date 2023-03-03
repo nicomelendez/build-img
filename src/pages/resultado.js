@@ -8,7 +8,7 @@ export default function Resultado() {
   return (
     <Layout pagina="Resultados">
       <div className="w-full flex flex-col py-5 space-y-5 items-center justify-center mx-auto">
-        <h2 className="text-4xl font-extrabold text-white">
+        <h2 className="text-2xl sm:text-4xl text-center font-extrabold text-white">
           ¡Resultado final!
         </h2>
 

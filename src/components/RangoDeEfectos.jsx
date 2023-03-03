@@ -42,7 +42,7 @@ export default function RangoDeEfectos() {
     filtroTitulo,
     pixelearZona,
   } = useCloudinary();
-
+  
   const handlerGris = () => {
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroGris(datosDeImagen);

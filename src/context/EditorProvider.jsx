@@ -7,6 +7,8 @@ import { conseguirUltimaEdicion } from "@/helpers/conseguirUltimaEdicion.js";
 import { crearUrlConEfectos } from "@/helpers/crearUrlConEfectos";
 import { almacenarUltimaEdicion } from "@/helpers/almacenarUltimaEdicion";
 import Swal from "sweetalert2";
+import { almacenarListaDeEfectos } from "@/helpers/almacenarListaDeEfectos";
+import { conseguirListaDeEfectos } from "@/helpers/conseguirListaEfectos";
 
 const EditorContext = createContext();
 
@@ -123,9 +125,14 @@ const EditorProvider = ({ children }) => {
   const cambiarProcesoDeImagen = (valor) => {
     setProcessingImage(valor);
   };
+  
+  const añadirEfecto = (efecto) => {
+    setListaDeEfectos([...listaDeEfectos, efecto]);
+  }
+
   useEffect(() => {
     const { imagenOriginal, imagenModificada, datosImagen } = conseguirFotos();
-
+    const { listaDeEfectosG } = conseguirListaDeEfectos() 
     const { ultimaEdicion } = conseguirUltimaEdicion();
 
     if (!imagenOriginal || !imagenModificada) {
@@ -133,13 +140,14 @@ const EditorProvider = ({ children }) => {
     }
 
     if (ultimaEdicion !== null) {
+      setListaDeEfectos(listaDeEfectosG)
       cambiarImagenModificada(ultimaEdicion);
       setMultipleEdicion(ultimaEdicion);
       setDatosDeImagen(datosImagen);
       setImageOriginal(imagenOriginal);
       return () => {};
     }
-
+    
     setDatosDeImagen(datosImagen);
     setImageOriginal(imagenOriginal);
     cambiarImagenModificada(imagenModificada);
@@ -152,14 +160,14 @@ const EditorProvider = ({ children }) => {
       const { ultimaEdicion } = conseguirUltimaEdicion();
       if (!ultimaEdicion) {
         setMultipleEdicion(imageModificada);
-        setListaDeEfectos([...listaDeEfectos, imageModificada]);
+        añadirEfecto(imageModificada)
         almacenarUltimaEdicion(imageModificada);
         almacenarFotos(imageOriginal, imageModificada, datosDeImagen);
         return () => {};
       } else if (ultimaEdicion !== imageModificada) {
         const ima = crearUrlConEfectos(imageModificada, ultimaEdicion);
         almacenarUltimaEdicion(ima);
-        setListaDeEfectos([...listaDeEfectos, ima]);
+        añadirEfecto(ima)
         setMultipleEdicion(ima);
         almacenarFotos(imageOriginal, imageModificada, datosDeImagen);
         return () => {};
@@ -168,6 +176,9 @@ const EditorProvider = ({ children }) => {
     return () => {};
   }, [imageModificada, imageOriginal, datosDeImagen]);
 
+  useEffect(()=>{
+    almacenarListaDeEfectos(listaDeEfectos)
+  },[listaDeEfectos])
   return (
     <EditorContext.Provider
       value={{

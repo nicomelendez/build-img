@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import Cargando from "./Cargando";
 
@@ -33,14 +34,18 @@ const TwoUp = ({ imageOriginal, imagenModificada }) => {
   return (
     <div className="sombra">
       <two-up ref={ref}>
-        <img
-          className="max-w-[280px] lg:max-w-[500px]"
+        <Image
+          width={1200}
+          height={1000}
+          className="max-w-[280px] lg:max-w-[500px] xl:max-w-[800px]"
           slot="before"
           src={imageOriginal}
           alt="Before"
         />
-        <img
-          className="max-w-[280px] lg:max-w-[500px]"
+        <Image
+          width={1200}
+          height={1000}
+          className="max-w-[280px] lg:max-w-[500px] xl:max-w-[800px]"
           slot="after"
           src={imagenModificada}
           alt="After"

@@ -127,27 +127,28 @@ export default function useCloudinary() {
   const filtroPrimavera = (public_id) => {
     const imagenPrimaver = cloudinary
       .image(public_id)
-      .effect(colorize().level(10).color("#A1F36F"))
-      .effect(colorize().level(10).color("#FFFFFF"))
-      .effect(colorize().level(10).color("#FA00FF"));
-    setDatosDeImagen(String(imagenPrimaver.publicID));
+      .effect(colorize().level(10).color("#FF00FF"))
+      .effect(colorize().level(10).color("#00FFFF"))
+      .effect(colorize().level(10).color("#FFC0CB"))
+    setDatosDeImagen(String(imagenPrimaver.publicID))
     return imagenPrimaver.toURL();
   };
+
   const filtroOtnio = (public_id) => {
     const imagenOtnio = cloudinary
       .image(public_id)
-      .effect(colorize().level(10).color("#FFA902"))
-      .effect(colorize().level(10).color("#FAFF07"))
-      .effect(colorize().level(10).color("#618570"));
+      .effect(colorize().level(10).color("#FFD700"))
+      .effect(colorize().level(10).color("#FF4500"))
+      .effect(colorize().level(10).color("#FF7F50"))
     setDatosDeImagen(String(imagenOtnio.publicID));
     return imagenOtnio.toURL();
   };
   const filtroInvierno = (public_id) => {
     const imagenInvierno = cloudinary
       .image(public_id)
-      .effect(colorize().level(10).color("#02F0FF"))
-      .effect(colorize().level(10).color("#076FFF"))
-      .effect(colorize().level(10).color("#FFFFFF"));
+      .effect(colorize().level(10).color("#66CCFF"))
+      .effect(colorize().level(10).color("#0033FF"))
+      .effect(colorize().level(10).color("#00FFCC"));
     setDatosDeImagen(String(imagenInvierno.publicID));
     return imagenInvierno.toURL();
   };
@@ -156,7 +157,6 @@ export default function useCloudinary() {
     const imagenMejorada = cloudinary
       .image(public_id)
       .adjust(viesusCorrect())
-      .setSignature("58dQFhjW");
     console.log(imagenMejorada.toURL());
     setDatosDeImagen(String(imagenMejorada.publicID));
     return imagenMejorada.toURL();
@@ -179,7 +179,7 @@ export default function useCloudinary() {
   };
 
   const filtroBlur = (public_id, gradoBlur) => {
-    const valor = gradoBlur * (1000 - 0) / 100 + 0
+    const valor = (gradoBlur * (1000 - 0)) / 100 + 0;
     const imagenBlur = cloudinary
       .image(public_id)
       .effect(blur().strength(valor));
