@@ -8,12 +8,10 @@ cloudinary.v2.config({
 
 export default async function celebrityDetection(req, res) {
     const { publicId } = req.body;
-     console.log(publicId)
     try {
       const result = await cloudinary.uploader.upload(publicId, {
         detection: "aws_rek_face",
       });
-      console.log(result)
       res.status(200).json(result);
     } catch (error) {
         console.log(error)
