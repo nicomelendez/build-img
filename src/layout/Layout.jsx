@@ -12,7 +12,7 @@ export default function Layout({ children, pagina }) {
     clase = "max-w-[1000px] grid place-content mx-auto p-5 aver";
   }
   if (pagina === "Resultados") {
-    clase = "max-w-[1000px] grid place-content mx-auto p-5";
+    clase = "max-w-[1000px] grid place-content mx-auto sm:p-5";
   }
 
   return (

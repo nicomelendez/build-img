@@ -218,14 +218,14 @@ export default function RangoDeEfectos() {
         <p className={estilosTitulos}>Añadir blur</p>
         <div className="flex flex-col items-center justify-start space-y-2 my-5">
           <label htmlFor="" className="text-black text-sm">
-            Grado de blur <strong>{blurId}</strong>
+            Grado de blur <strong>{blurId}%</strong>
           </label>
           <input
             defaultValue="0"
             className=""
             type="range"
             min="0"
-            max="1000"
+            max="100"
             onChange={blurMedida}
           />
           <button className={estilosButton} onClick={handlerBlur}>

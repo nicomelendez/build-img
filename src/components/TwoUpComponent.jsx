@@ -34,13 +34,13 @@ const TwoUp = ({ imageOriginal, imagenModificada }) => {
     <div className="sombra">
       <two-up ref={ref}>
         <img
-          className="max-w-[250px] lg:max-w-[500px]"
+          className="max-w-[280px] lg:max-w-[500px]"
           slot="before"
           src={imageOriginal}
           alt="Before"
         />
         <img
-          className="max-w-[250px] lg:max-w-[500px]"
+          className="max-w-[280px] lg:max-w-[500px]"
           slot="after"
           src={imagenModificada}
           alt="After"

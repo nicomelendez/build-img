@@ -179,9 +179,10 @@ export default function useCloudinary() {
   };
 
   const filtroBlur = (public_id, gradoBlur) => {
+    const valor = gradoBlur * (1000 - 0) / 100 + 0
     const imagenBlur = cloudinary
       .image(public_id)
-      .effect(blur().strength(gradoBlur));
+      .effect(blur().strength(valor));
     setDatosDeImagen(String(imagenBlur.publicID));
     return imagenBlur.toURL();
   };
