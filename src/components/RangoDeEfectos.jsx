@@ -8,6 +8,7 @@ import Overlay from "./Overlay";
 export default function RangoDeEfectos() {
   const {
     datosDeImagen,
+    imageOriginal,
     cambiarProcesoDeImagen,
     cambiarImagenModificada,
     largo,
@@ -60,11 +61,20 @@ export default function RangoDeEfectos() {
     // cambiarImagenModificada(imagenEditada);
     // restablecerInputs()
   };
-  const handlerPixel = () => {
-    cambiarProcesoDeImagen(true);
-    const imagenEditada = pixelearZona(datosDeImagen);
-    cambiarImagenModificada(imagenEditada);
-    restablecerInputs()
+  const handlerPixel = async() => {
+    const res = await fetch("/api/celebrity", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ publicId: imageOriginal }),
+    });
+    const data = await res.json();
+    console.log(data)
+    // cambiarProcesoDeImagen(true);
+    // const imagenEditada = pixelearZona(datosDeImagen);
+    // cambiarImagenModificada(imagenEditada);
+    // restablecerInputs()
   };
 
   const handlerPrimavera = () => {
@@ -196,9 +206,9 @@ export default function RangoDeEfectos() {
         <p className={estilosTitulos}>Pixelear caras</p>
         <div className="flex w-full flex-col items-center justify-start space-y-2 my-5">
           <p>En proceso...</p>
-          {/* <button className={estilosButton} onClick={handlerPixel}>
+          <button className={estilosButton} onClick={handlerPixel}>
             Aplicar
-          </button> */}
+          </button>
         </div>
         <p className={estiloP}>{texto}</p>
       </div>

@@ -41,10 +41,11 @@ export default function useCloudinary() {
   const uploadImage = async (file) => {
     setImageStatus(ImageStatus.UPLOADING);
     localStorage.clear();
+    
     const formData = new FormData();
-    formData.append("upload_preset", "mi0or3cn");
+    formData.append("upload_preset", process.env.NEXT_PUBLIC_UPLOAD_PRESET);
     formData.append("timestamp", Date.now() / 1000);
-    formData.append("api_key", 456894211284456);
+    formData.append("api_key", process.env.NEXT_PUBLIC_API_KEY);
     formData.append("file", file);
 
     const response = await fetch(

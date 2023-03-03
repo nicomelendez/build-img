@@ -12,6 +12,7 @@
     "@cloudinary/react": "^1.11.0",
     "@cloudinary/url-gen": "^1.9.1",
     "@next/font": "13.1.6",
+    "cloudinary": "^1.34.0",
     "cloudinary-core": "^2.13.0",
     "dotenv": "^16.0.3",
     "dropzone": "^6.0.0-beta.2",
