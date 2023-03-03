@@ -22,12 +22,12 @@ const EditorProvider = ({ children }) => {
   const [letras, setLetras] = useState(null);
   const [sizeLetra, setSizeLetras] = useState(null);
   const [multipleEdicion, setMultipleEdicion] = useState(null);
-  const [titulo, setTitulo] = useState('')
+  const [titulo, setTitulo] = useState("");
   const [sizeFuente, setSizeFuente] = useState(null);
-  const [listaDeEfectos, setListaDeEfectos] = useState([])
-  const [herramienta, setHerramienta] = useState(null)
-  const [accion, setAccion] = useState('')
-  const [tamAvatar, setTamAvatar] = useState('')
+  const [listaDeEfectos, setListaDeEfectos] = useState([]);
+  const [herramienta, setHerramienta] = useState(null);
+  const [accion, setAccion] = useState("");
+  const [tamAvatar, setTamAvatar] = useState("");
 
   const cambiarLetras = (event) => {
     setLetras(event.target.value);
@@ -39,7 +39,7 @@ const EditorProvider = ({ children }) => {
   const cambiarSizeLetras = (event) => {
     setSizeLetras(event.target.value);
   };
-  
+
   const cambiarSizeFuente = (event) => {
     setSizeFuente(event.target.value);
   };
@@ -57,42 +57,42 @@ const EditorProvider = ({ children }) => {
   };
 
   const handlerVolverOriginal = async () => {
-    if(listaDeEfectos.length <= 0){
-      return
+    if (listaDeEfectos.length <= 0) {
+      return;
     }
     const result = await Swal.fire({
-      title: '¿Deseas sacar todos los efectos?',
+      title: "¿Deseas sacar todos los efectos?",
       showDenyButton: true,
-      confirmButtonText: 'Confirmar',
-      denyButtonText: `Cancelar`
+      confirmButtonText: "Confirmar",
+      denyButtonText: `Cancelar`,
     });
 
     if (result.isConfirmed) {
       cambiarImagenModificada(imageOriginal);
       almacenarFotos(imageOriginal, imageOriginal, datosDeImagen);
       setListaDeEfectos([]);
-      setHerramienta(null)
+      setHerramienta(null);
       localStorage.removeItem("ultimaEdicion");
     } else if (result.isDenied) {
       return;
     }
   };
 
-  const handlerDeshacer = () =>{
+  const handlerDeshacer = () => {
     const lastIndex = listaDeEfectos.length - 1;
-    if (lastIndex > 0) { 
+    if (lastIndex > 0) {
       const penultimateLink = listaDeEfectos[lastIndex - 1];
-      setListaDeEfectos(prevLinks => prevLinks.slice(0, lastIndex));
-      almacenarUltimaEdicion(penultimateLink)
-      cambiarImagenModificada(penultimateLink)
-      setMultipleEdicion(penultimateLink)
-      return
+      setListaDeEfectos((prevLinks) => prevLinks.slice(0, lastIndex));
+      almacenarUltimaEdicion(penultimateLink);
+      cambiarImagenModificada(penultimateLink);
+      setMultipleEdicion(penultimateLink);
+      return;
     }
     cambiarImagenModificada(imageOriginal);
     almacenarFotos(imageOriginal, imageOriginal, datosDeImagen);
     setListaDeEfectos([]);
     localStorage.removeItem("ultimaEdicion");
-  }
+  };
 
   const cambiarLargo = (event) => {
     setLargo(event.target.value);
@@ -116,51 +116,49 @@ const EditorProvider = ({ children }) => {
     setProcessingImage(valor);
   };
   useEffect(() => {
-    
-    const { imagenOriginal, imagenModificada, datosImagen } = conseguirFotos()
-  
-    const { ultimaEdicion } = conseguirUltimaEdicion()
-    
+    const { imagenOriginal, imagenModificada, datosImagen } = conseguirFotos();
+
+    const { ultimaEdicion } = conseguirUltimaEdicion();
+
     if (!imagenOriginal || !imagenModificada) {
-      return () => {}
+      return () => {};
     }
-  
+
     if (ultimaEdicion !== null) {
-      cambiarImagenModificada(ultimaEdicion)
-      setMultipleEdicion(ultimaEdicion)
-      setDatosDeImagen(datosImagen)
-      setImageOriginal(imagenOriginal)
-      return () => {}
+      cambiarImagenModificada(ultimaEdicion);
+      setMultipleEdicion(ultimaEdicion);
+      setDatosDeImagen(datosImagen);
+      setImageOriginal(imagenOriginal);
+      return () => {};
     }
 
-    setDatosDeImagen(datosImagen)
-    setImageOriginal(imagenOriginal)
-    cambiarImagenModificada(imagenModificada)
-  
-    return () => {}
-  }, [])
-  
-  useEffect(()=>{
-      if(imageModificada !== imageOriginal){
-          const { ultimaEdicion } = conseguirUltimaEdicion()
-          if(!ultimaEdicion){
-              setMultipleEdicion(imageModificada)
-              setListaDeEfectos([...listaDeEfectos, imageModificada])
-              almacenarUltimaEdicion(imageModificada)
-              almacenarFotos(imageOriginal, imageModificada, datosDeImagen)
-              return () => {}
-          }else if(ultimaEdicion !== imageModificada){
-              const ima = crearUrlConEfectos(imageModificada, ultimaEdicion)
-              almacenarUltimaEdicion(ima)
-              setListaDeEfectos([...listaDeEfectos, ima])
-              setMultipleEdicion(ima)
-              almacenarFotos(imageOriginal, imageModificada, datosDeImagen)
-              return () => {}
-          }
-      }
-      return () => {}
-  },[imageModificada, imageOriginal, datosDeImagen])
+    setDatosDeImagen(datosImagen);
+    setImageOriginal(imagenOriginal);
+    cambiarImagenModificada(imagenModificada);
 
+    return () => {};
+  }, []);
+
+  useEffect(() => {
+    if (imageModificada !== imageOriginal) {
+      const { ultimaEdicion } = conseguirUltimaEdicion();
+      if (!ultimaEdicion) {
+        setMultipleEdicion(imageModificada);
+        setListaDeEfectos([...listaDeEfectos, imageModificada]);
+        almacenarUltimaEdicion(imageModificada);
+        almacenarFotos(imageOriginal, imageModificada, datosDeImagen);
+        return () => {};
+      } else if (ultimaEdicion !== imageModificada) {
+        const ima = crearUrlConEfectos(imageModificada, ultimaEdicion);
+        almacenarUltimaEdicion(ima);
+        setListaDeEfectos([...listaDeEfectos, ima]);
+        setMultipleEdicion(ima);
+        almacenarFotos(imageOriginal, imageModificada, datosDeImagen);
+        return () => {};
+      }
+    }
+    return () => {};
+  }, [imageModificada, imageOriginal, datosDeImagen]);
 
   return (
     <EditorContext.Provider

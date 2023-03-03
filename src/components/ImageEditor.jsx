@@ -27,9 +27,9 @@ export default function ImageEditor() {
         }, 1500);
         clearInterval(intervalId);
       };
-      img.onerror = () =>{
-        cambiarProcesoDeImagen(true)
-      }
+      img.onerror = () => {
+        cambiarProcesoDeImagen(true);
+      };
     };
 
     if (processingImage) {
@@ -53,21 +53,25 @@ export default function ImageEditor() {
     <>
       {imageOriginal !== null ? (
         <div className="w-full flex flex-col flex-wrap">
-            <RevertirCambios />
+          <RevertirCambios />
           <div className="w-full flex flex-col lg:flex-row  items-center justify-center gap-4">
             <div className="mx-auto lg:px-12">
-                {processingImage ? (
-                  <div className="flex w-[290px] lg:w-[500px] flex-col justify-center h-52 items-center">
-                    <Cargando />
-                  </div>
-                ) : (
-                  <img
-                    id='image'
-                    className="w-full min-w-[100px] max-h-[500px] sombra"
-                    src={ imageOriginal === imageModificada ? imageOriginal : multipleEdicion }
-                    alt="Imagen para editar"
-                  />
-                )}
+              {processingImage ? (
+                <div className="flex w-[290px] lg:w-[500px] flex-col justify-center h-52 items-center">
+                  <Cargando />
+                </div>
+              ) : (
+                <img
+                  id="image"
+                  className="w-full min-w-[100px] max-h-[500px] sombra"
+                  src={
+                    imageOriginal === imageModificada
+                      ? imageOriginal
+                      : multipleEdicion
+                  }
+                  alt="Imagen para editar"
+                />
+              )}
             </div>
           </div>
           <button
@@ -85,4 +89,3 @@ export default function ImageEditor() {
     </>
   );
 }
-

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import EditorContext from "@/context/EditorProvider";
 
 const useEditor = () => {
-    return useContext(EditorContext)
-}
+  return useContext(EditorContext);
+};
 
-export default useEditor
+export default useEditor;

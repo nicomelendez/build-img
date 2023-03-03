@@ -26,7 +26,7 @@ export default function RangoDeEfectos() {
     sizeFuente,
     accion,
     cambiarTamAvatar,
-    tamAvatar    
+    tamAvatar,
   } = useEditor();
   const {
     filtroGris,
@@ -39,7 +39,7 @@ export default function RangoDeEfectos() {
     filtroOtnio,
     filtroMejorar,
     filtroTitulo,
-    pixelearZona
+    pixelearZona,
   } = useCloudinary();
 
   const handlerGris = () => {
@@ -49,10 +49,10 @@ export default function RangoDeEfectos() {
   };
   const handlerMejorar = () => {
     return Swal.fire({
-      icon: 'info',
-      title: 'En construcción',
-      text: 'Disponible a la brevedad!',
-    })
+      icon: "info",
+      title: "En construcción",
+      text: "Disponible a la brevedad!",
+    });
     // cambiarProcesoDeImagen(true);
     // const imagenEditada = filtroMejorar(datosDeImagen);
     // cambiarImagenModificada(imagenEditada);
@@ -62,7 +62,7 @@ export default function RangoDeEfectos() {
     const imagenEditada = pixelearZona(datosDeImagen);
     cambiarImagenModificada(imagenEditada);
   };
-  
+
   const handlerPrimavera = () => {
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroPrimavera(datosDeImagen);
@@ -83,29 +83,29 @@ export default function RangoDeEfectos() {
 
   const handlerSacarFondo = () => {
     return Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Deshabilitado hasta el día de la entrega, me quedan pocos usos para recortar!',
-    })
+      icon: "error",
+      title: "Oops...",
+      text: "Deshabilitado hasta el día de la entrega, me quedan pocos usos para recortar!",
+    });
     // cambiarProcesoDeImagen(true);
     // const imagenEditada = filtroSacarFondo(datosDeImagen);
     // cambiarImagenModificada(imagenEditada);
   };
 
   const handlerAvatar = () => {
-    if (tamAvatar === '' || tamAvatar === 'Elige el tamaño') {
+    if (tamAvatar === "" || tamAvatar === "Elige el tamaño") {
       return Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Debes elegir un tamaño!',
-      })
+        icon: "error",
+        title: "Oops...",
+        text: "Debes elegir un tamaño!",
+      });
     }
     if (letras && !sizeLetra) {
       return Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Debes elegir un tamaño para el texto!',
-      })
+        icon: "error",
+        title: "Oops...",
+        text: "Debes elegir un tamaño para el texto!",
+      });
     }
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroAvatar(
@@ -117,29 +117,33 @@ export default function RangoDeEfectos() {
     cambiarImagenModificada(imagenEditada);
   };
 
-  const handlerOverlay = async() => {
+  const handlerOverlay = async () => {
     const image = document.getElementById("image");
-    const {y, x, h, w} = await new Promise((resolve) => {
-      image.addEventListener("click", function(event) {
-        const h = image.height;
-        const w = image.width;
-        const y = event.offsetY;
-        const x = event.offsetX;
-        resolve({y,x, h, w});
-      }, { once: true });
+    const { y, x, h, w } = await new Promise((resolve) => {
+      image.addEventListener(
+        "click",
+        function (event) {
+          const h = image.height;
+          const w = image.width;
+          const y = event.offsetY;
+          const x = event.offsetX;
+          resolve({ y, x, h, w });
+        },
+        { once: true }
+      );
     });
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroOverlay(datosDeImagen, y, x, h, w);
     cambiarImagenModificada(imagenEditada);
-  }
+  };
 
   const handlerSize = () => {
     if (largo === 0 || alto === 0) {
       return Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Debes elegir un tamaño!',
-      })
+        icon: "error",
+        title: "Oops...",
+        text: "Debes elegir un tamaño!",
+      });
     }
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroSize(datosDeImagen, largo, alto);
@@ -151,48 +155,51 @@ export default function RangoDeEfectos() {
     const imagenEditada = filtroBlur(datosDeImagen, blurId);
     cambiarImagenModificada(imagenEditada);
   };
-  const handlerCrearTitulo = () =>{
-    if(!sizeFuente){
+  const handlerCrearTitulo = () => {
+    if (!sizeFuente) {
       return Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Debes elegir un tamaño!',
-      })
+        icon: "error",
+        title: "Oops...",
+        text: "Debes elegir un tamaño!",
+      });
     }
-    if(!titulo){
+    if (!titulo) {
       return Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Debes escribir un texto!',
-      })
+        icon: "error",
+        title: "Oops...",
+        text: "Debes escribir un texto!",
+      });
     }
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroTitulo(datosDeImagen, titulo, sizeFuente);
     cambiarImagenModificada(imagenEditada);
-  }
+  };
 
   const estilosButton =
     "mx-auto w-4/5 px-4 py-2 bg-gradient-to-r from-blue-500 to-violet-600 font-semibold rounded-lg text-white ";
   const estilosContent =
     "min-w-[200px] max-h-[470px] bg-slate-100 mx-auto px-6 p-2 sm:p-4 w-4/5 rounded-xl shadow flex flex-col items-center space-y-2 sm:space-y-5 text-[11px] sm:text-sm sombra";
-  const estiloItem = "flex w-[80px] lg:w-auto gap-2 hover:underline hover:cursor-pointer";
+  const estiloItem =
+    "flex w-[80px] lg:w-auto gap-2 hover:underline hover:cursor-pointer";
   const estilosTitulos = "text-center font-bold text-sm sm:text-lg";
-  const estiloP = 'font-bold text-[10px] sm:text-sm text-center border-t border-black pt-2'
-  const texto = 'Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el botón deshacer.'
-  
-  if(accion === 'Overlay'){
-      return(
-        <div className={estilosContent}>
-          <p className={estilosTitulos}>Overlay</p>
-          <div className="flex w-full flex-col items-center justify-start space-y-2 my-5">
-            <Overlay />
-          </div>
-          <p className={estiloP}>{texto}</p>
+  const estiloP =
+    "font-bold text-[10px] sm:text-sm text-center border-t border-black pt-2";
+  const texto =
+    "Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el botón deshacer.";
+
+  if (accion === "Overlay") {
+    return (
+      <div className={estilosContent}>
+        <p className={estilosTitulos}>Overlay</p>
+        <div className="flex w-full flex-col items-center justify-start space-y-2 my-5">
+          <Overlay />
         </div>
-      )
+        <p className={estiloP}>{texto}</p>
+      </div>
+    );
   }
-  if(accion === 'Pixelear'){
-    return(
+  if (accion === "Pixelear") {
+    return (
       <div className={estilosContent}>
         <p className={estilosTitulos}>Pixelear caras</p>
         <div className="flex w-full flex-col items-center justify-start space-y-2 my-5">
@@ -203,7 +210,7 @@ export default function RangoDeEfectos() {
         </div>
         <p className={estiloP}>{texto}</p>
       </div>
-    )
+    );
   }
   if (accion === "Blur") {
     return (
@@ -214,7 +221,7 @@ export default function RangoDeEfectos() {
             Grado de blur <strong>{blurId}</strong>
           </label>
           <input
-            defaultValue='0'
+            defaultValue="0"
             className=""
             type="range"
             min="0"
@@ -238,23 +245,29 @@ export default function RangoDeEfectos() {
 
         <select onChange={cambiarTamAvatar} className="py-2 text-center">
           <option>Elige el tamaño</option>
-          <option value='100'>100 x 100</option>
-          <option value='200'>200 x 200</option>
-          <option value='300'>300 x 300</option>
-          <option value='400'>400 x 400</option>
-          <option value='500'>500 x 500</option>
-          <option value='600'>600 x 600</option>
-          <option value='700'>700 x 700</option>
+          <option value="100">100 x 100</option>
+          <option value="200">200 x 200</option>
+          <option value="300">300 x 300</option>
+          <option value="400">400 x 400</option>
+          <option value="500">500 x 500</option>
+          <option value="600">600 x 600</option>
+          <option value="700">700 x 700</option>
         </select>
         <div className="w-full">
-          <p className='font-semibold text-center'>Opcional</p>
+          <p className="font-semibold text-center">Opcional</p>
           <label className="text-black">Texto</label>
-          <input defaultValue='' className="w-full" placeholder="Ej: NM" onChange={cambiarLetras} type="text" />
+          <input
+            defaultValue=""
+            className="w-full"
+            placeholder="Ej: NM"
+            onChange={cambiarLetras}
+            type="text"
+          />
         </div>
         <div className="w-full">
           <label className="text-black">Tamaño de fuente</label>
           <input
-            defaultValue=''
+            defaultValue=""
             placeholder="Ej: 60"
             className="w-full"
             onChange={cambiarSizeLetras}
@@ -274,11 +287,23 @@ export default function RangoDeEfectos() {
         <p className={estilosTitulos}>Modificar tamaño</p>
         <div>
           <label className="text-black">Largo</label>
-          <input defaultValue='' className="w-full" placeholder="Ej: 300" onChange={cambiarLargo} type="number" />
+          <input
+            defaultValue=""
+            className="w-full"
+            placeholder="Ej: 300"
+            onChange={cambiarLargo}
+            type="number"
+          />
         </div>
         <div>
           <label className="text-black">Alto</label>
-          <input defaultValue='' className="w-full" placeholder="Ej: 200" onChange={cambiarAlto} type="number" />
+          <input
+            defaultValue=""
+            className="w-full"
+            placeholder="Ej: 200"
+            onChange={cambiarAlto}
+            type="number"
+          />
         </div>
         <button className={estilosButton} onClick={handlerSize}>
           Aplicar
@@ -305,27 +330,50 @@ export default function RangoDeEfectos() {
         <ul className="flex flex-row flex-wrap gap-5 lg:gap-0 lg:items-start justify-around items-center w-full lg:flex-col lg:space-y-5 pt-4 font-semibold px-4">
           <li>
             <button className={estiloItem} onClick={handlerGris}>
-              <Image src='/assets/gris.png' width={20} height={20} alt='gris'/>Gris
+              <Image src="/assets/gris.png" width={20} height={20} alt="gris" />
+              Gris
             </button>
           </li>
           <li>
             <button className={estiloItem} onClick={handlerPrimavera}>
-            <Image src='/assets/primavera.png' width={20} height={20} alt='gris'/>Primavera
+              <Image
+                src="/assets/primavera.png"
+                width={20}
+                height={20}
+                alt="gris"
+              />
+              Primavera
             </button>
           </li>
           <li>
             <button className={estiloItem} onClick={handlerOtnio}>
-            <Image src='/assets/otonio.png' width={20} height={20} alt='gris'/>Otoño
+              <Image
+                src="/assets/otonio.png"
+                width={20}
+                height={20}
+                alt="gris"
+              />
+              Otoño
             </button>
           </li>
           <li>
             <button className={estiloItem} onClick={handlerInvierno}>
-            <Image src='/assets/invierno.png' width={20} height={20} alt='gris'/>Invierno
+              <Image
+                src="/assets/invierno.png"
+                width={20}
+                height={20}
+                alt="gris"
+              />
+              Invierno
             </button>
           </li>
         </ul>
-        <button className='mx-auto flex gap-2 px-3 py-3 bg-gradient-to-r from-blue-500 to-violet-600 font-semibold rounded-full text-white hover:scale-105' onClick={handlerMejorar}>
-          <IconsMagic/>Mejorar
+        <button
+          className="mx-auto flex gap-2 px-3 py-3 bg-gradient-to-r from-blue-500 to-violet-600 font-semibold rounded-full text-white hover:scale-105"
+          onClick={handlerMejorar}
+        >
+          <IconsMagic />
+          Mejorar
         </button>
         <p className={estiloP}>{texto}</p>
       </div>
@@ -337,12 +385,18 @@ export default function RangoDeEfectos() {
         <p className={estilosTitulos}>Crea un texto texturado</p>
         <div className="w-full">
           <label className="text-black">Texto</label>
-          <input defaultValue='' className="w-full" placeholder="Ej: MiduDev" onChange={cambiarTitulo} type="text" />
+          <input
+            defaultValue=""
+            className="w-full"
+            placeholder="Ej: MiduDev"
+            onChange={cambiarTitulo}
+            type="text"
+          />
         </div>
         <div className="w-full">
           <label className="text-black">Tamaño de fuente</label>
-          <input 
-            defaultValue=''
+          <input
+            defaultValue=""
             placeholder="Ej: 120"
             className="w-full"
             onChange={cambiarSizeFuente}

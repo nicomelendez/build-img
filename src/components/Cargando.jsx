@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export default function Cargando() {
-  return (
-    <div className="loader"></div>
-  )
+  return <div className="loader"></div>;
 }

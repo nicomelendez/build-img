@@ -3,7 +3,6 @@ import { IconCloudBinary } from "./Icons";
 export default function Footer() {
   return (
     <footer className="p-5 flex flex-col text-xs sm:gap-4 lg:flex-row lg:gap-0 justify-around items-center text-white lg:text-xl w-full mx-auto bg-[#07182E] rounded-t-lg">
-      
       <a
         className="text-center"
         href="https://cloudinary.com"
@@ -49,7 +48,10 @@ export default function Footer() {
               </g>
             </svg>
           </a>
-          <a className="social-link" href="https://www.linkedin.com/in/nicol%C3%A1s-mel%C3%A9ndez-60ba32160/">
+          <a
+            className="social-link"
+            href="https://www.linkedin.com/in/nicol%C3%A1s-mel%C3%A9ndez-60ba32160/"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="800"
@@ -68,7 +70,6 @@ export default function Footer() {
           </a>
         </div>
       </div>
-      
     </footer>
   );
 }
