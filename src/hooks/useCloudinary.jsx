@@ -43,9 +43,9 @@ export default function useCloudinary() {
     localStorage.clear();
     
     const formData = new FormData();
-    formData.append("upload_preset", process.env.NEXT_PUBLIC_UPLOAD_PRESET);
+    formData.append("upload_preset", 'djslvlh8h');
     formData.append("timestamp", Date.now() / 1000);
-    formData.append("api_key", process.env.NEXT_PUBLIC_API_KEY);
+    formData.append("api_key", 'mi0or3cn');
     formData.append("file", file);
 
     const response = await fetch(
