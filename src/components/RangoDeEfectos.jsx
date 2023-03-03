@@ -38,7 +38,7 @@ export default function RangoDeEfectos() {
     filtroOtnio,
     filtroGif,
     filtroTitulo,
-    filtroOverlay
+    pixelearZona
   } = useCloudinary();
 
   const handlerGris = () => {
@@ -47,12 +47,12 @@ export default function RangoDeEfectos() {
     cambiarImagenModificada(imagenEditada);
   };
   
-  const handlerGif = () => {
+  const handlerPixel = () => {
     cambiarProcesoDeImagen(true);
-    const imagenEditada = filtroGif(datosDeImagen);
+    const imagenEditada = pixelearZona(datosDeImagen);
     cambiarImagenModificada(imagenEditada);
   };
-
+  
   const handlerPrimavera = () => {
     cambiarProcesoDeImagen(true);
     const imagenEditada = filtroPrimavera(datosDeImagen);
@@ -187,6 +187,9 @@ export default function RangoDeEfectos() {
         <p className={estilosTitulos}>Pixelear caras</p>
         <div className="flex w-full flex-col items-center justify-start space-y-2 my-5">
           <p>En proceso...</p>
+          {/* <button className={estilosButton} onClick={handlerPixel}>
+            Aplicar
+          </button> */}
         </div>
         <p className={estiloP}>{texto}</p>
       </div>
@@ -292,22 +295,22 @@ export default function RangoDeEfectos() {
         <ul className="flex flex-row flex-wrap gap-5 lg:gap-0 lg:items-start justify-around items-center w-full lg:flex-col lg:space-y-5 pt-4 font-semibold px-4">
           <li>
             <button className={estiloItem} onClick={handlerGris}>
-              <Image src='/assets/gris.png' width={20} height={20} alt='gris'/> Gris
+              <Image src='/assets/gris.png' width={20} height={20} alt='gris'/>Gris
             </button>
           </li>
           <li>
             <button className={estiloItem} onClick={handlerPrimavera}>
-            <Image src='/assets/primavera.png' width={20} height={20} alt='gris'/> Primavera
+            <Image src='/assets/primavera.png' width={20} height={20} alt='gris'/>Primavera
             </button>
           </li>
           <li>
             <button className={estiloItem} onClick={handlerOtnio}>
-            <Image src='/assets/otonio.png' width={20} height={20} alt='gris'/> Otoño
+            <Image src='/assets/otonio.png' width={20} height={20} alt='gris'/>Otoño
             </button>
           </li>
           <li>
             <button className={estiloItem} onClick={handlerInvierno}>
-            <Image src='/assets/invierno.png' width={20} height={20} alt='gris'/> Invierno
+            <Image src='/assets/invierno.png' width={20} height={20} alt='gris'/>Invierno
             </button>
           </li>
         </ul>

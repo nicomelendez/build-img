@@ -1,5 +1,5 @@
 import { max } from "@cloudinary/url-gen/actions/roundCorners"
-import { grayscale, blur, backgroundRemoval, colorize } from "@cloudinary/url-gen/actions/effect"
+import { grayscale, blur, backgroundRemoval, colorize, pixelate } from "@cloudinary/url-gen/actions/effect"
 import { focusOn } from "@cloudinary/url-gen/qualifiers/gravity";
 import { Position } from "@cloudinary/url-gen/qualifiers";
 import { source } from "@cloudinary/url-gen/actions/overlay";
@@ -187,6 +187,16 @@ export default function useCloudinary() {
     return imagenAvatar.toURL()
     }
     
+    const pixelearZona = (public_id) => {
+      const imagenPixel= cloudinary.image(public_id).effect(
+        pixelate()
+          .squareSize(50)
+          .region(faces())
+      )
+      setDatosDeImagen(String(imagenPixel.publicID))
+      return imagenPixel.toURL()
+
+    }
     const filtroOverlayLentes = (public_id, overlay, medidas) =>{
       return Swal.fire({
         icon: 'info',
@@ -208,6 +218,7 @@ export default function useCloudinary() {
   return {
     filtroBlur,
     filtroGris,
+    pixelearZona,
     filtroSacarFondo,
     filtroOverlayLentes,
     filtroSize,
@@ -217,6 +228,7 @@ export default function useCloudinary() {
     conseguirImagen,
     filtroOtnio,
     filtroInvierno,
+    pixelearZona,
     filtroGif,
     filtroTitulo,
     filtroOverlayCabeza,

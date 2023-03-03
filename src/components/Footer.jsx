@@ -3,11 +3,19 @@ import { IconCloudBinary } from "./Icons";
 export default function Footer() {
   return (
     <footer className="p-5 flex flex-col text-xs sm:gap-4 lg:flex-row lg:gap-0 justify-around items-center text-white lg:text-xl w-full mx-auto bg-[#07182E] rounded-t-lg">
+      
+      <a
+        className="text-center"
+        href="https://cloudinary.com"
+        target="_blank"
+        rel="noreferrer"
+      >
+        {" "}
+        <span className="">Hecho con</span> <IconCloudBinary />
+      </a>
+
       <div>
-        <p className="text-center pb-2">
-          Diseñado por <strong>Nicolás Meléndez</strong>
-        </p>
-        <div className="card2 scale-50 sm:scale-100 mx-auto">
+        <div className="card2 scale-[0.7] sm:scale-100 mx-auto">
           <span>Contactos</span>
           <a className="social-link" href="https://github.com/nicomelendez">
             <svg
@@ -60,15 +68,7 @@ export default function Footer() {
           </a>
         </div>
       </div>
-      <a
-        className="text-center"
-        href="https://cloudinary.com"
-        target="_blank"
-        rel="noreferrer"
-      >
-        {" "}
-        <span className="">Hecho con</span> <IconCloudBinary />
-      </a>
+      
     </footer>
   );
 }
