@@ -84,6 +84,7 @@ const EditorProvider = ({ children }) => {
       const penultimateLink = listaDeEfectos[lastIndex - 1];
       setListaDeEfectos(prevLinks => prevLinks.slice(0, lastIndex));
       almacenarUltimaEdicion(penultimateLink)
+      cambiarImagenModificada(penultimateLink)
       setMultipleEdicion(penultimateLink)
       return
     }

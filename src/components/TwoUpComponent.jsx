@@ -33,8 +33,8 @@ const TwoUp = ({ imageOriginal, imagenModificada }) => {
   return (
     <div className='sombra'>
       <two-up ref={ref}>
-        <img slot="before" src={imageOriginal} alt="Before" />
-        <img slot="after" src={imagenModificada} alt="After" />
+        <img className='max-w-[500px]' slot="before" src={imageOriginal} alt="Before" />
+        <img className='max-w-[500px]' slot="after" src={imagenModificada} alt="After" />
       </two-up>
     </div>
   );
