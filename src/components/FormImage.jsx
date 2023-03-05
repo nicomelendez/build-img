@@ -5,7 +5,7 @@ import Cargando from "./Cargando";
 import useCloudinary from "@/hooks/useCloudinary";
 
 export default function FormImage() {
-  const { imageStatus } = useEditor();
+  const { imageStatus, isGlobalStateTrue } = useEditor();
   const { uploadImage } = useCloudinary();
 
   const { getRootProps, getInputProps, open } = useDropzone({
@@ -27,7 +27,7 @@ export default function FormImage() {
   return (
     <section
       {...getRootProps({ className: "dropzone" })}
-      className="card mx-auto flex flex-col w-11/12 lg:min-w-[400px] sm:max-h-[400px] aspect-square sombra"
+      className="card mx-auto flex flex-col w-11/12 lg:min-h-[400px] lg:min-w-[400px] sm:max-h-[400px] sombra"
     >
       <div>
         <h2
@@ -35,17 +35,38 @@ export default function FormImage() {
           style={{ lineHeight: "1.2", wordWrap: "break-word" }}
         >
           <span className="block">
-            ¡Sube una{" "}
-            <span className="bg-gradient-to-r text-transparent from-blue-500 to-violet-600 bg-clip-text">
-              imagen
-            </span>
+            {isGlobalStateTrue ? (
+              <>
+                <span className="block">
+                  ¡Sube una{" "}
+                  <span className="bg-gradient-to-r text-transparent from-blue-500 to-violet-600 bg-clip-text">
+                    imagen
+                  </span>
+                </span>{" "}
+                y comienza a{" "}
+                <span className="bg-gradient-to-r text-transparent from-blue-500 to-violet-600 bg-clip-text">
+                  personalizarla
+                </span>
+                !
+              </>
+            ) : (
+              <>
+                <span className="block">
+                  UPLOAD AN{" "}
+                  <span className="bg-gradient-to-r text-transparent from-blue-500 to-violet-600 bg-clip-text">
+                    IMAGE
+                  </span>
+                </span>{" "}
+                AND START{" "}
+                <span className="bg-gradient-to-r text-transparent from-blue-500 to-violet-600 bg-clip-text">
+                  CUSTOMIZING IT
+                </span>
+                !
+              </>
+            )}
           </span>{" "}
-          y comienza a{" "}
-          <span className="bg-gradient-to-r text-transparent from-blue-500 to-violet-600 bg-clip-text">
-            personalizarla
-          </span>
-          !
         </h2>
+
       </div>
       {imageStatus === ImageStatus.UPLOADING ? (
         <Cargando />
@@ -58,9 +79,9 @@ export default function FormImage() {
               onClick={open}
               className="hover:cursor-pointer hover:underline text-white rounded-full bg-gradient-to-r from-blue-500 to-violet-600 text-bold px-6 py-4"
             >
-              Subir archivo
+              {isGlobalStateTrue ? 'Subir archivo' : 'Upload file'}
             </button>
-            <strong>O arrastra un archivo.</strong>
+            <strong>{isGlobalStateTrue ? 'O arrastra un archivo.' : 'Or drag a file.'}</strong>
           </div>
         </div>
       )}

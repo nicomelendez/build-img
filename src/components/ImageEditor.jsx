@@ -12,6 +12,7 @@ export default function ImageEditor() {
     cambiarProcesoDeImagen,
     router,
     imageModificada,
+    isGlobalStateTrue
   } = useEditor();
 
   useEffect(() => {
@@ -80,7 +81,7 @@ export default function ImageEditor() {
             }}
             className="hover:cursor-pointer hover:underline text-white rounded-full bg-gradient-to-r from-blue-500 to-violet-600 font-bold mt-10 text-bold px-6 py-4 text-center mx-auto"
           >
-            Terminar edición
+            {isGlobalStateTrue ? 'Terminar' : 'Finish'}
           </button>
         </div>
       ) : (

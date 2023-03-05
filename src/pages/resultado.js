@@ -3,13 +3,13 @@ import useEditor from "@/hooks/useEditor";
 import Layout from "@/layout/Layout";
 
 export default function Resultado() {
-  const { imageOriginal, imageModificada, router } = useEditor();
+  const { imageOriginal, imageModificada, router, isGlobalStateTrue } = useEditor();
 
   return (
     <Layout pagina="Resultados">
       <div className="w-full flex flex-col py-5 space-y-5 items-center justify-center mx-auto">
         <h2 className="text-2xl sm:text-4xl text-center font-extrabold text-white">
-          ¡Resultado final!
+         {isGlobalStateTrue ? '¡Resultado final!' : 'Final result!'}
         </h2>
 
         <TwoUp
@@ -23,7 +23,7 @@ export default function Resultado() {
             href={imageModificada}
             className="hover:cursor-pointer hover:underline text-white rounded-full bg-gradient-to-r from-blue-500 to-violet-600 mt-5 sm:mt-10 text-bold px-6 py-4 text-center mx-auto sombra"
           >
-            Descargar imagen
+            {isGlobalStateTrue ? 'Descargar imagen' : 'Download image'}
           </a>
 
           <button
@@ -32,7 +32,7 @@ export default function Resultado() {
               router.push("/");
             }}
           >
-            Editar otra imagen
+            {isGlobalStateTrue ? 'Editar otra imagen' : 'Edit another image'}
           </button>
         </div>
       </div>

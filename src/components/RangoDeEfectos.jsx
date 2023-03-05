@@ -28,7 +28,8 @@ export default function RangoDeEfectos() {
     accion,
     cambiarTamAvatar,
     tamAvatar,
-    restablecerInputs
+    restablecerInputs,
+    isGlobalStateTrue
   } = useEditor();
   const {
     filtroGris,
@@ -176,18 +177,18 @@ export default function RangoDeEfectos() {
     cambiarImagenModificada(imagenEditada);
     restablecerInputs()
   };
-
+  const textoButton = isGlobalStateTrue ? 'Aplicar' : 'Apply'
   const estilosButton =
     "mx-auto w-4/5 px-4 py-2 bg-gradient-to-r from-blue-500 to-violet-600 font-semibold rounded-lg text-white ";
   const estilosContent =
-    "min-w-[200px] max-h-[470px] bg-slate-100 mx-auto px-6 p-2 sm:p-4 w-4/5 rounded-xl shadow flex flex-col items-center space-y-2 sm:space-y-5 text-[11px] sm:text-sm sombra";
+    "min-w-[200px] max-h-[500px] bg-slate-100 mx-auto px-6 p-2 sm:p-4 w-4/5 rounded-xl shadow flex flex-col items-center space-y-2 sm:space-y-5 text-[11px] sm:text-sm sombra";
   const estiloItem =
     "flex w-[80px] lg:w-auto gap-2 hover:underline hover:cursor-pointer";
   const estilosTitulos = "text-center font-bold text-sm sm:text-lg";
   const estiloP =
     "font-bold text-[10px] sm:text-sm text-center border-t border-black pt-2";
-  const texto =
-    "Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el botón deshacer.";
+  const texto = isGlobalStateTrue ?
+    'Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el botón deshacer.' : 'All effects are accumulated when you choose one to reverse the change use the undo button.';
 
   if (accion === "Overlay") {
     return (
@@ -217,10 +218,10 @@ export default function RangoDeEfectos() {
   if (accion === "Blur") {
     return (
       <div className={estilosContent}>
-        <p className={estilosTitulos}>Añadir blur</p>
+        <p className={estilosTitulos}>{isGlobalStateTrue ? 'Añadir blur' : 'Add blur'}</p>
         <div className="flex flex-col items-center justify-start space-y-2 my-5">
           <label htmlFor="" className="text-black text-sm">
-            Grado de blur <strong>{blurId}%</strong>
+            {isGlobalStateTrue ? 'Grado de blur' : 'Degree of blur'} <strong>{blurId}%</strong>
           </label>
           <input
             defaultValue="0"
@@ -231,7 +232,7 @@ export default function RangoDeEfectos() {
             onChange={blurMedida}
           />
           <button className={estilosButton} onClick={handlerBlur}>
-            Aplicar
+           {textoButton}
           </button>
         </div>
         <p className={estiloP}>{texto}</p>
@@ -241,12 +242,12 @@ export default function RangoDeEfectos() {
   if (accion === "Avatar") {
     return (
       <div className={estilosContent}>
-        <p className={estilosTitulos}>Crear un avatar</p>
+        <p className={estilosTitulos}>{isGlobalStateTrue ? 'Crear un avatar' : 'Create an avatar'}</p>
 
-        <p>Define las medidas</p>
+        <p>{isGlobalStateTrue ? 'Define las medidas' : 'Define the measures'}</p>
 
         <select onChange={cambiarTamAvatar} className="py-2 text-center">
-          <option>Elige el tamaño</option>
+          <option>{isGlobalStateTrue ? 'Elige el tamaño' : 'Choose size'}</option>
           <option value="100">100 x 100</option>
           <option value="200">200 x 200</option>
           <option value="300">300 x 300</option>
@@ -256,8 +257,8 @@ export default function RangoDeEfectos() {
           <option value="700">700 x 700</option>
         </select>
         <div className="w-full">
-          <p className="font-semibold text-center">Opcional</p>
-          <label className="text-black">Texto</label>
+          <p className="font-semibold text-center">{isGlobalStateTrue ? 'Opcional' : 'Optional'}</p>
+          <label className="text-black">{isGlobalStateTrue ? 'Texto' : 'Text'}</label>
           <input
             defaultValue=""
             className="w-full"
@@ -267,7 +268,7 @@ export default function RangoDeEfectos() {
           />
         </div>
         <div className="w-full">
-          <label className="text-black">Tamaño de fuente</label>
+          <label className="text-black">{isGlobalStateTrue ? 'Tamaño de fuente' : 'Font size'}</label>
           <input
             defaultValue=""
             placeholder="Ej: 60"
@@ -277,18 +278,18 @@ export default function RangoDeEfectos() {
           />
         </div>
         <button className={estilosButton} onClick={handlerAvatar}>
-          Aplicar
+          {textoButton}
         </button>
         <p className={estiloP}>{texto}</p>
       </div>
     );
   }
-  if (accion === "Ajustar") {
+  if (accion === "Ajustar" || accion === 'Adjust') {
     return (
       <div className={estilosContent}>
-        <p className={estilosTitulos}>Modificar tamaño</p>
+        <p className={estilosTitulos}>{isGlobalStateTrue ? 'Modificar tamaño' : 'Modify size'}</p>
         <div>
-          <label className="text-black">Largo</label>
+          <label className="text-black">{isGlobalStateTrue ? 'Largo' : 'Width'}</label>
           <input
             defaultValue=""
             className="w-full"
@@ -298,7 +299,7 @@ export default function RangoDeEfectos() {
           />
         </div>
         <div>
-          <label className="text-black">Alto</label>
+          <label className="text-black">{isGlobalStateTrue ? 'Alto' : 'Height'}</label>
           <input
             defaultValue=""
             className="w-full"
@@ -308,32 +309,32 @@ export default function RangoDeEfectos() {
           />
         </div>
         <button className={estilosButton} onClick={handlerSize}>
-          Aplicar
+          {textoButton}
         </button>
         <p className={estiloP}>{texto}</p>
       </div>
     );
   }
-  if (accion === "Recortar") {
+  if (accion === "Recortar" || accion === 'Cut') {
     return (
       <div className={estilosContent}>
-        <p className={estilosTitulos}>Recortar fondo</p>
+        <p className={estilosTitulos}>{isGlobalStateTrue ? 'Recortar fondo' : 'Cut out background'}</p>
         <button className={estilosButton} onClick={handlerSacarFondo}>
-          Aplicar
+          {textoButton}
         </button>
         <p className={estiloP}>{texto}</p>
       </div>
     );
   }
-  if (accion === "Efectos") {
+  if (accion === "Efectos" || accion === 'Effects') {
     return (
       <div className={estilosContent}>
-        <p className={estilosTitulos}>Efectos</p>
+        <p className={estilosTitulos}>{isGlobalStateTrue ? 'Efectos' : 'Effects'}</p>
         <ul className="flex flex-row flex-wrap gap-5 lg:gap-0 lg:items-start justify-around items-center w-full lg:flex-col lg:space-y-5 pt-4 font-semibold px-4">
           <li>
             <button className={estiloItem} onClick={handlerGris}>
               <Image src="/assets/gris.png" width={20} height={20} alt="gris" />
-              Gris
+              {isGlobalStateTrue ? 'Gris' : 'Gray'}
             </button>
           </li>
           <li>
@@ -344,7 +345,7 @@ export default function RangoDeEfectos() {
                 height={20}
                 alt="gris"
               />
-              Primavera
+              {isGlobalStateTrue ? 'Primavera' : 'Spring'}
             </button>
           </li>
           <li>
@@ -355,7 +356,7 @@ export default function RangoDeEfectos() {
                 height={20}
                 alt="gris"
               />
-              Otoño
+              {isGlobalStateTrue ? 'Otoño' : 'Autumn'}
             </button>
           </li>
           <li>
@@ -366,7 +367,7 @@ export default function RangoDeEfectos() {
                 height={20}
                 alt="gris"
               />
-              Invierno
+             {isGlobalStateTrue ? 'Invierno' : 'Winter'} 
             </button>
           </li>
         </ul>
@@ -375,18 +376,18 @@ export default function RangoDeEfectos() {
           onClick={handlerMejorar}
         >
           <IconsMagic />
-          Mejorar
+          {isGlobalStateTrue ? 'Mejorar' : 'Improve'}
         </button>
         <p className={estiloP}>{texto}</p>
       </div>
     );
   }
-  if (accion === "Texto") {
+  if (accion === "Texto" || accion === 'Text') {
     return (
       <div className={estilosContent}>
-        <p className={estilosTitulos}>Crea un texto texturado</p>
+        <p className={estilosTitulos}>{isGlobalStateTrue ? 'Crea un texto texturado' : 'Creates a textured text'}</p>
         <div className="w-full">
-          <label className="text-black">Texto</label>
+          <label className="text-black">{isGlobalStateTrue ? 'Texto' : 'Text'}</label>
           <input
             defaultValue=""
             className="w-full"
@@ -396,7 +397,7 @@ export default function RangoDeEfectos() {
           />
         </div>
         <div className="w-full">
-          <label className="text-black">Tamaño de fuente</label>
+          <label className="text-black">{isGlobalStateTrue ? 'Tamaño de fuente' : 'Font size'}</label>
           <input
             defaultValue=""
             placeholder="Ej: 120"
@@ -406,7 +407,7 @@ export default function RangoDeEfectos() {
           />
         </div>
         <button className={estilosButton} onClick={handlerCrearTitulo}>
-          Crear
+          {isGlobalStateTrue ? 'Crear' : 'Create'}
         </button>
         <p className={estiloP}>{texto}</p>
       </div>
@@ -415,7 +416,7 @@ export default function RangoDeEfectos() {
     return (
       <div className={estilosContent + " justify-start lg:pt-5"}>
         <p className="text-center">
-          Eliga un efecto para comenzar a modificar su imagen.
+        {isGlobalStateTrue ? 'Eliga un efecto para comenzar a modificar su imagen.' : 'Choose an effect to start modifying your image.'}
         </p>
       </div>
     );

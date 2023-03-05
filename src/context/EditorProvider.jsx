@@ -30,6 +30,7 @@ const EditorProvider = ({ children }) => {
   const [herramienta, setHerramienta] = useState(null);
   const [accion, setAccion] = useState("");
   const [tamAvatar, setTamAvatar] = useState("");
+  const [isGlobalStateTrue, setIsGlobalStateTrue] = useState(false);
 
   const cambiarLetras = (event) => {
     setLetras(event.target.value);
@@ -71,10 +72,10 @@ const EditorProvider = ({ children }) => {
       return;
     }
     const result = await Swal.fire({
-      title: "¿Deseas sacar todos los efectos?",
+      title: isGlobalStateTrue ? '¿Deseas sacar todos los efectos?' : 'Do you want to remove all the effects?',
       showDenyButton: true,
-      confirmButtonText: "Confirmar",
-      denyButtonText: `Cancelar`,
+      confirmButtonText: isGlobalStateTrue ? 'Confirmar' : 'Confirm',
+      denyButtonText: isGlobalStateTrue ? 'Cancelar' : 'Cancel',
     });
 
     if (result.isConfirmed) {
@@ -130,6 +131,9 @@ const EditorProvider = ({ children }) => {
     setListaDeEfectos([...listaDeEfectos, efecto]);
   }
 
+  useEffect(()=>{
+    console.log('Hola')
+  },[isGlobalStateTrue])
   useEffect(() => {
     const { imagenOriginal, imagenModificada, datosImagen } = conseguirFotos();
     const { listaDeEfectosG } = conseguirListaDeEfectos() 
@@ -206,6 +210,8 @@ const EditorProvider = ({ children }) => {
         setListaDeEfectos,
         largo,
         alto,
+        isGlobalStateTrue,
+        setIsGlobalStateTrue,
         blurMedida,
         router,
         sizeFuente,

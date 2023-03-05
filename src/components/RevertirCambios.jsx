@@ -8,17 +8,18 @@ export default function RevertirCambios() {
     setHerramienta,
     handlerVolverOriginal,
     handlerDeshacer,
+    isGlobalStateTrue
   } = useEditor();
   const herramientas = [
     {
       id: 6,
       icons: <IconRecargar />,
-      name: "Limpiar",
+      name: isGlobalStateTrue ? 'Limpiar' : 'Clean',
     },
     {
       id: 7,
       icons: <IconAtras />,
-      name: "Deshacer",
+      name: isGlobalStateTrue ? 'Deshacer' : 'Undo',
     },
   ];
 
@@ -28,9 +29,9 @@ export default function RevertirCambios() {
 
   const handlerDeshacerOption = (her) => {
     handlerEfecto(her);
-    if (her.name === "Limpiar") {
+    if (her.name === "Limpiar" || her.name === 'Clean') {
       return handlerVolverOriginal();
-    } else if (her.name === "Deshacer") {
+    } else if (her.name === "Deshacer" || her.name === 'Undo') {
       return handlerDeshacer();
     }
   };

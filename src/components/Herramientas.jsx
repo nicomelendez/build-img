@@ -12,13 +12,14 @@ import {
 import RangoDeEfectos from "./RangoDeEfectos";
 
 export default function Herramientas() {
-  const { imageOriginal, setHerramienta, herramienta, setAccion } = useEditor();
+
+  const { imageOriginal, setHerramienta, herramienta, setAccion, isGlobalStateTrue } = useEditor();
 
   const herramientas = [
     {
       id: 1,
       icons: <IconRecortar />,
-      name: "Recortar",
+      name: isGlobalStateTrue ? 'Recortar' : 'Cut',
     },
     {
       id: 2,
@@ -28,12 +29,12 @@ export default function Herramientas() {
     {
       id: 3,
       icons: <IconEfecto />,
-      name: "Efectos",
+      name: isGlobalStateTrue ? 'Efectos' : 'Effects',
     },
     {
       id: 4,
       icons: <IconsAjustar />,
-      name: "Ajustar",
+      name: isGlobalStateTrue ? 'Ajustar' : 'Adjust',
     },
     {
       id: 5,
@@ -43,7 +44,7 @@ export default function Herramientas() {
     {
       id: 8,
       icons: <IconsTexto />,
-      name: "Texto",
+      name: isGlobalStateTrue ? 'Texto' : 'Text',
     },
     {
       id: 9,

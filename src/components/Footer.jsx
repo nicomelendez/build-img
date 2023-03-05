@@ -1,6 +1,9 @@
+import useEditor from "@/hooks/useEditor";
 import { IconCloudBinary } from "./Icons";
 
 export default function Footer() {
+  const { isGlobalStateTrue } = useEditor();
+
   return (
     <footer className="p-5 flex flex-col text-xs sm:gap-4 lg:flex-row lg:gap-0 justify-around items-center text-white lg:text-xl w-full mx-auto bg-[#07182E] rounded-t-lg">
       <a
@@ -10,12 +13,15 @@ export default function Footer() {
         rel="noreferrer"
       >
         {" "}
-        <span className="">Hecho con</span> <IconCloudBinary />
+        <span className="">
+          {isGlobalStateTrue ? "Hecho con" : "Made with"}
+        </span>{" "}
+        <IconCloudBinary />
       </a>
 
       <div>
         <div className="card2 scale-[0.7] sm:scale-100 mx-auto">
-          <span>Contactos</span>
+          <span>{isGlobalStateTrue ? "Contactos" : "Contacts"}</span>
           <a className="social-link" href="https://github.com/nicomelendez">
             <svg
               xmlns="http://www.w3.org/2000/svg"

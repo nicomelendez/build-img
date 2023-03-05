@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 .card {
   background: #07182E;
   position: relative;
@@ -11,6 +13,7 @@
   place-content: center;
   place-items: center;
   overflow: hidden;
+  min-height: 270px;
   border-radius: 20px;
 }
 .aver{
