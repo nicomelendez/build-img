@@ -5,7 +5,7 @@ export default function Nav() {
   const { router } = useEditor();
 
   return (
-    <nav className="bg-[#07182E] px-2 sm:px-5 w-full border-gray-200 rounded-b-lg ">
+    <nav className="bg-[#07182E] px-2 sm:px-5 w-full border-gray-200 ">
       <div className="flex items-center sm:flex-row justify-between mx-auto max-w-screen-xl">
         <div className="flex items-center justify-center py-5 hover:cursor-default">
           <button

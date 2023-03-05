@@ -5,7 +5,7 @@ export default function Footer() {
   const { isGlobalStateTrue } = useEditor();
 
   return (
-    <footer className="p-5 flex flex-col text-xs sm:gap-4 lg:flex-row lg:gap-0 justify-around items-center text-white lg:text-xl w-full mx-auto bg-[#07182E] rounded-t-lg">
+    <footer className="p-5 flex flex-col text-xs sm:gap-4 lg:flex-row lg:gap-0 justify-around items-center text-white lg:text-xl w-full mx-auto bg-[#07182E]">
       <a
         className="text-center"
         href="https://cloudinary.com"
