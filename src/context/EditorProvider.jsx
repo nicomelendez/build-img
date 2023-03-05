@@ -59,7 +59,6 @@ const EditorProvider = ({ children }) => {
     setLargo(0);
   };
   const restablecerInputs = () => {
-    setBlur(0)
     setAlto(0);
     setLargo(0);
     setSizeFuente(null);
