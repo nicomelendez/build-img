@@ -130,9 +130,6 @@ const EditorProvider = ({ children }) => {
     setListaDeEfectos([...listaDeEfectos, efecto]);
   }
 
-  useEffect(()=>{
-    console.log('Hola')
-  },[isGlobalStateTrue])
   useEffect(() => {
     const { imagenOriginal, imagenModificada, datosImagen } = conseguirFotos();
     const { listaDeEfectosG } = conseguirListaDeEfectos() 
