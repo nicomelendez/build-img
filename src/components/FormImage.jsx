@@ -34,7 +34,7 @@ export default function FormImage() {
           className="text-center px-2 text-xl lg:text-2xl font-black text-white uppercase pb-5 sombra"
           style={{ lineHeight: "1.2", wordWrap: "break-word" }}
         >
-          <span className="block">
+          <span className="block px-4">
             {isGlobalStateTrue ? (
               <>
                 <span className="block">
