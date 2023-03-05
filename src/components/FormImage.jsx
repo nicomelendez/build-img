@@ -79,9 +79,9 @@ export default function FormImage() {
               onClick={open}
               className="hover:cursor-pointer hover:underline text-white rounded-full bg-gradient-to-r from-blue-500 to-violet-600 text-bold px-6 py-4"
             >
-              {isGlobalStateTrue ? 'Subir archivo' : 'Upload file'}
+              {isGlobalStateTrue ? 'Subir imagen' : 'Upload image'}
             </button>
-            <strong>{isGlobalStateTrue ? 'O arrastra un archivo.' : 'Or drag a file.'}</strong>
+            <strong>{isGlobalStateTrue ? 'O arrastra una imagen.' : 'Or drag a image.'}</strong>
           </div>
         </div>
       )}
