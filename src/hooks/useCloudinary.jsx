@@ -9,7 +9,10 @@ import {
 import { focusOn } from "@cloudinary/url-gen/qualifiers/gravity";
 import { Position } from "@cloudinary/url-gen/qualifiers";
 import { source } from "@cloudinary/url-gen/actions/overlay";
-import { advancedEyes } from "@cloudinary/transformation-builder-sdk/qualifiers/focusOn";
+import {
+  advancedEyes,
+  advancedFaces,
+} from "@cloudinary/transformation-builder-sdk/qualifiers/focusOn";
 import { face, faces } from "@cloudinary/url-gen/qualifiers/focusOn";
 import { Resize } from "@cloudinary/url-gen/actions/resize";
 import { Cloudinary } from "@cloudinary/url-gen";
@@ -36,14 +39,16 @@ export default function useCloudinary() {
     setMultipleEdicion,
     cambiarProcesoDeImagen,
     cambiarImagenModificada,
+    nuevaImagenOverlay,
+    setModal,
   } = useEditor();
 
   const uploadImage = async (file) => {
     setImageStatus(ImageStatus.UPLOADING);
     localStorage.clear();
-    
+
     const formData = new FormData();
-    formData.append("upload_preset", 'mi0or3cn');
+    formData.append("upload_preset", "mi0or3cn");
     formData.append("timestamp", Date.now() / 1000);
     formData.append("api_key", 456894211284456);
     formData.append("file", file);
@@ -71,6 +76,35 @@ export default function useCloudinary() {
     setImageStatus(ImageStatus.READY);
   };
 
+  const uploadImageOverlay = async (file) => {
+    setImageStatus(ImageStatus.UPLOADING);
+
+    const formData = new FormData();
+    formData.append("upload_preset", "mi0or3cn");
+    formData.append("timestamp", Date.now() / 1000);
+    formData.append("api_key", 456894211284456);
+    formData.append("file", file);
+
+    const response = await fetch(
+      "https://api.cloudinary.com/v1_1/djslvlh8h/image/upload",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      const { public_id: publicId, secure_url: url } = data;
+
+      nuevaImagenOverlay(publicId);
+      setImageStatus(ImageStatus.DONE);
+      setModal(false);
+    }
+    setModal(false);
+    setImageStatus(ImageStatus.READY);
+  };
+
   const cloudinary = new Cloudinary({
     cloud: {
       cloudName: "djslvlh8h",
@@ -90,6 +124,23 @@ export default function useCloudinary() {
             new Transformation().resize(scale().width(medida).regionRelative())
           )
         ).position(new Position().gravity(focusOn(faces())))
+      );
+    setDatosDeImagen(String(imagenMostacho.publicID));
+
+    cambiarImagenModificada(imagenMostacho.toURL());
+    return;
+  };
+
+  const filtroOverlayFaceAdv = (public_id, idOverlay) => {
+    cambiarProcesoDeImagen(true);
+    const imagenMostacho = cloudinary
+      .image(public_id)
+      .overlay(
+        source(
+          image(idOverlay).transformation(
+            new Transformation().resize(scale().width("1.7").regionRelative())
+          )
+        ).position(new Position().gravity(focusOn(advancedFaces())))
       );
     setDatosDeImagen(String(imagenMostacho.publicID));
 
@@ -130,8 +181,8 @@ export default function useCloudinary() {
       .image(public_id)
       .effect(colorize().level(10).color("#FF00FF"))
       .effect(colorize().level(10).color("#00FFFF"))
-      .effect(colorize().level(10).color("#FFC0CB"))
-    setDatosDeImagen(String(imagenPrimaver.publicID))
+      .effect(colorize().level(10).color("#FFC0CB"));
+    setDatosDeImagen(String(imagenPrimaver.publicID));
     return imagenPrimaver.toURL();
   };
 
@@ -140,7 +191,7 @@ export default function useCloudinary() {
       .image(public_id)
       .effect(colorize().level(10).color("#FFD700"))
       .effect(colorize().level(10).color("#FF4500"))
-      .effect(colorize().level(10).color("#FF7F50"))
+      .effect(colorize().level(10).color("#FF7F50"));
     setDatosDeImagen(String(imagenOtnio.publicID));
     return imagenOtnio.toURL();
   };
@@ -155,9 +206,7 @@ export default function useCloudinary() {
   };
 
   const filtroMejorar = (public_id) => {
-    const imagenMejorada = cloudinary
-      .image(public_id)
-      .adjust(viesusCorrect())
+    const imagenMejorada = cloudinary.image(public_id).adjust(viesusCorrect());
     console.log(imagenMejorada.toURL());
     setDatosDeImagen(String(imagenMejorada.publicID));
     return imagenMejorada.toURL();
@@ -271,6 +320,7 @@ export default function useCloudinary() {
     filtroSacarFondo,
     filtroOverlayLentes,
     filtroSize,
+    filtroOverlayFaceAdv,
     filtroOverlayFace,
     filtroAvatar,
     filtroPrimavera,
@@ -280,6 +330,7 @@ export default function useCloudinary() {
     pixelearZona,
     filtroMejorar,
     filtroTitulo,
+    uploadImageOverlay,
     filtroOverlayCabeza,
     uploadImage,
   };

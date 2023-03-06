@@ -1,10 +1,27 @@
 import Footer from "@/components/Footer";
+import ModalForm from "@/components/modal/ModalForm";
 import Nav from "@/components/Nav";
+import useEditor from "@/hooks/useEditor";
 import Head from "next/head";
+import Modal from 'react-modal'
+
+const customStyles = {
+  content: {
+    background: 'trasparent',
+    border: 'none',
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+Modal.setAppElement('#__next');
 
 export default function Layout({ children, pagina }) {
   let clase = "";
-
+  const { modal } = useEditor()
   if (pagina === "Inicio") {
     clase = "max-w-[1000px] grid place-content sm:grid-cols-2 mx-auto p-5";
   }
@@ -29,6 +46,10 @@ export default function Layout({ children, pagina }) {
         <main className={clase}>{children}</main>
         <Footer />
       </div>
+
+      {modal && (<Modal isOpen={modal} style={customStyles}>
+         <ModalForm />
+      </Modal>)}
     </>
   );
 }

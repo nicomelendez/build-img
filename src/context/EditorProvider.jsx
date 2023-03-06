@@ -31,10 +31,15 @@ const EditorProvider = ({ children }) => {
   const [accion, setAccion] = useState("");
   const [tamAvatar, setTamAvatar] = useState("");
   const [isGlobalStateTrue, setIsGlobalStateTrue] = useState(false);
-
+  const [imagenOverlay, setImagenOverlay] = useState(null)
+  const [modal, setModal] = useState(false)
   const cambiarLetras = (event) => {
     setLetras(event.target.value);
   };
+
+  const nuevaImagenOverlay = (imagenNueva) => {
+    setImagenOverlay(imagenNueva)
+  }
 
   const cambiarTamAvatar = (event) => {
     setTamAvatar(event.target.value);
@@ -202,6 +207,8 @@ const EditorProvider = ({ children }) => {
         resetearLargoAlto,
         cambiarSizeFuente,
         accion,
+        modal,
+        setModal,
         setAccion,
         setListaDeEfectos,
         largo,
@@ -212,6 +219,7 @@ const EditorProvider = ({ children }) => {
         router,
         sizeFuente,
         cambiarImagenModificada,
+        imagenOverlay,
         restablecerInputs,
         almacenarFotos,
         cambiarTamAvatar,
@@ -223,6 +231,7 @@ const EditorProvider = ({ children }) => {
         herramienta,
         cambiarLetras,
         letras,
+        nuevaImagenOverlay,
         sizeLetra,
         cambiarSizeLetras,
         datosDeImagen,

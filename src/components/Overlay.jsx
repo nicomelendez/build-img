@@ -1,15 +1,15 @@
 import useCloudinary from "@/hooks/useCloudinary";
 import useEditor from "@/hooks/useEditor";
-import React from "react";
+import { IconsPlus } from "./Icons";;
 
 export default function Overlay() {
   const {
     conseguirImagen,
     filtroOverlayFace,
-    filtroOverlayCabeza,
     filtroOverlayLentes,
+    filtroOverlayFaceAdv,
   } = useCloudinary();
-  const { datosDeImagen } = useEditor();
+  const { datosDeImagen, setModal, imagenOverlay } = useEditor();
   const overalys = [
     {
       id: 1,
@@ -40,19 +40,12 @@ export default function Overlay() {
       scale: "1.4",
     },
     {
-      id: 5,
-      name: "Mascara de gas",
-      img: "veeplc4er1oyt54k9ypk",
-      action: filtroOverlayFace,
-      scale: "1.4",
-    },
-    {
       id: 6,
       name: "Midu",
       img: "lbducroers3f7dkp0e5i",
       action: filtroOverlayFace,
       scale: "1.1",
-    },
+    }
   ];
 
   return (
@@ -74,6 +67,24 @@ export default function Overlay() {
           </li>
         );
       })}
+      {imagenOverlay !== null ? (<>
+        <li
+            onClick={() => {
+              filtroOverlayFaceAdv(datosDeImagen, imagenOverlay)
+            }}
+            className="flex flex-col justify-center items-center cursor-pointer hover:scale-105"
+          >
+            <img
+              className="max-w-[40px]"
+              src={conseguirImagen(imagenOverlay)}
+              alt={`Nueva Imagen del overlay`}
+            />
+          </li>
+      </>)
+       : (<></>)}
+      <li className="flex flex-col justify-center items-center cursor-pointer hover:scale-105">
+        <button onClick={()=>{setModal(true)}}><IconsPlus/></button>
+      </li>
     </ul>
   );
 }
