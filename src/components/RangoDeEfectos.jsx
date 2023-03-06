@@ -190,6 +190,7 @@ export default function RangoDeEfectos() {
     "font-bold text-[10px] sm:text-sm text-center border-t border-black pt-2";
   const texto = isGlobalStateTrue ?
     'Todos los efectos se acumulan al momento de elegir uno para revertir el cambio utilice el botón deshacer.' : 'All effects are accumulated when you choose one to reverse the change use the undo button.';
+  const estilosInput = 'w-full py-2 px-2'
 
   if (accion === "Overlay") {
     return (
@@ -261,7 +262,7 @@ export default function RangoDeEfectos() {
           <label className="text-black">{isGlobalStateTrue ? 'Texto' : 'Text'}</label>
           <input
             defaultValue=""
-            className="w-full"
+            className={estilosInput}
             placeholder="Ej: NM"
             onChange={cambiarLetras}
             type="text"
@@ -272,7 +273,7 @@ export default function RangoDeEfectos() {
           <input
             defaultValue=""
             placeholder="Ej: 60"
-            className="w-full"
+            className={estilosInput}
             onChange={cambiarSizeLetras}
             type="number"
           />
@@ -292,7 +293,7 @@ export default function RangoDeEfectos() {
           <label className="text-black">{isGlobalStateTrue ? 'Largo' : 'Width'}</label>
           <input
             defaultValue=""
-            className="w-full"
+            className={estilosInput}
             placeholder="Ej: 300"
             onChange={cambiarLargo}
             type="number"
@@ -302,7 +303,7 @@ export default function RangoDeEfectos() {
           <label className="text-black">{isGlobalStateTrue ? 'Alto' : 'Height'}</label>
           <input
             defaultValue=""
-            className="w-full"
+            className={estilosInput}
             placeholder="Ej: 200"
             onChange={cambiarAlto}
             type="number"
@@ -390,7 +391,7 @@ export default function RangoDeEfectos() {
           <label className="text-black">{isGlobalStateTrue ? 'Texto' : 'Text'}</label>
           <input
             defaultValue=""
-            className="w-full"
+            className={estilosInput}
             placeholder="Ej: MiduDev"
             onChange={cambiarTitulo}
             type="text"
@@ -401,7 +402,7 @@ export default function RangoDeEfectos() {
           <input
             defaultValue=""
             placeholder="Ej: 120"
-            className="w-full"
+            className={estilosInput}
             onChange={cambiarSizeFuente}
             type="number"
           />
