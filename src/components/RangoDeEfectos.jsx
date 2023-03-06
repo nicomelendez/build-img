@@ -43,7 +43,6 @@ export default function RangoDeEfectos() {
     filtroMejorar,
     reconocerImagen,
     filtroTitulo,
-    pixelearZona,
   } = useCloudinary();
   
   const handlerGris = () => {
@@ -53,30 +52,15 @@ export default function RangoDeEfectos() {
     restablecerInputs()
   };
   const handlerMejorar = () => {
-    return Swal.fire({
-      icon: "info",
-      title: "En construcción",
-      text: "Disponible a la brevedad!",
-    });
-    // cambiarProcesoDeImagen(true);
-    // const imagenEditada = filtroMejorar(datosDeImagen);
-    // cambiarImagenModificada(imagenEditada);
-    // restablecerInputs()
-  };
-  const handlerPixel = async() => {
-    const res = await fetch("/api/celebrity", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ publicId: imageOriginal }),
-    });
-    const data = await res.json();
-    console.log(data)
-    // cambiarProcesoDeImagen(true);
-    // const imagenEditada = pixelearZona(datosDeImagen);
-    // cambiarImagenModificada(imagenEditada);
-    // restablecerInputs()
+    // return Swal.fire({
+    //   icon: "info",
+    //   title: "En construcción",
+    //   text: "Disponible a la brevedad!",
+    // });
+    cambiarProcesoDeImagen(true);
+    const imagenEditada = filtroMejorar(datosDeImagen);
+    cambiarImagenModificada(imagenEditada);
+    restablecerInputs()
   };
 
   const handlerPrimavera = () => {
@@ -101,15 +85,15 @@ export default function RangoDeEfectos() {
   };
 
   const handlerSacarFondo = () => {
-    return Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "Deshabilitado hasta el día de la entrega, me quedan pocos usos para recortar!",
-    });
-    // cambiarProcesoDeImagen(true);
-    // const imagenEditada = filtroSacarFondo(datosDeImagen);
-    // cambiarImagenModificada(imagenEditada);
-    // restablecerInputs()
+    // return Swal.fire({
+    //   icon: "error",
+    //   title: "Oops...",
+    //   text: "Deshabilitado hasta el día de la entrega, me quedan pocos usos para recortar!",
+    // });
+    cambiarProcesoDeImagen(true);
+    const imagenEditada = filtroSacarFondo(datosDeImagen);
+    cambiarImagenModificada(imagenEditada);
+    restablecerInputs()
   };
 
   const handlerAvatar = () => {
