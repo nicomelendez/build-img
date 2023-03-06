@@ -316,18 +316,23 @@ export default function useCloudinary() {
   };
   
   const reconocerImagen = async(public_id) => {
-    const response = await fetch("/api/detect", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ public_id }),
+    return Swal.fire({
+      icon: "info",
+      title: "En construcción",
+      text: "Disponible a la brevedad!",
     });
-    const peticion = await response.json();
-    if(peticion.respuesta === 'error'){
-      return console.log('error')
-    }
-    return console.log(peticion.data)
+    // const response = await fetch("/api/detect", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ public_id }),
+    // });
+    // const peticion = await response.json();
+    // if(peticion.respuesta === 'error'){
+    //   return console.log('error')
+    // }
+    // return console.log(peticion.data)
   }
 
   return {
