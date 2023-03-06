@@ -41,6 +41,7 @@ export default function RangoDeEfectos() {
     filtroInvierno,
     filtroOtnio,
     filtroMejorar,
+    reconocerImagen,
     filtroTitulo,
     pixelearZona,
   } = useCloudinary();
@@ -201,15 +202,14 @@ export default function RangoDeEfectos() {
       </div>
     );
   }
-  if (accion === "Pixelear") {
+  if (accion === "Detectar" || accion === 'Detect') {
     return (
       <div className={estilosContent}>
-        <p className={estilosTitulos}>Pixelear caras</p>
+        <p className={estilosTitulos}>{isGlobalStateTrue ? '¿Qué contiene la imagen?' : 'What does the image contain?'}</p>
         <div className="flex w-full flex-col items-center justify-start space-y-2 my-5">
-          <p>En proceso...</p>
-          {/* <button className={estilosButton} onClick={handlerPixel}>
-            Aplicar
-          </button> */}
+          <button className={estilosButton} onClick={()=>reconocerImagen(imageOriginal)}>
+          {isGlobalStateTrue ? 'Analizar' : 'Analyze'}
+          </button>
         </div>
         <p className={estiloP}>{texto}</p>
       </div>

@@ -6,7 +6,7 @@ import {
   IconsAjustar,
   IconsAvatar,
   IconsFace,
-  IconsPixel,
+  IconsSearch,
   IconsTexto,
 } from "./Icons";
 import RangoDeEfectos from "./RangoDeEfectos";
@@ -53,8 +53,8 @@ export default function Herramientas() {
     },
     {
       id: 10,
-      icons: <IconsPixel />,
-      name: "Pixelear",
+      icons: <IconsSearch />,
+      name: isGlobalStateTrue ? 'Detectar' : 'Detect',
     },
   ];
 

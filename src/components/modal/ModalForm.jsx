@@ -25,7 +25,7 @@ export default function ModalForm() {
   };
 
   return (
-    <div className="bg-[#07182E] w-[280px] h-[200px] sm:w-[400px] h-sm:[300px] rounded-xl grid grid-cols-1 place-content-around px-5">
+    <div className="bg-[#07182E] w-[280px] h-[280px] sm:w-[400px] h-sm:[300px] rounded-xl grid grid-cols-1 place-content-around px-5">
       <div className="flex items-center justify-between gap-5 text-white">
         <h2 className="text-xl font-bold">
           {isGlobalStateTrue ? "Nuevo overlay" : "New overlay"}

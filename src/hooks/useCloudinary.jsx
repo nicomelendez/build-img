@@ -6,15 +6,16 @@ import {
   colorize,
   pixelate,
 } from "@cloudinary/url-gen/actions/effect";
-import { focusOn } from "@cloudinary/url-gen/qualifiers/gravity";
+import { autoGravity, focusOn } from "@cloudinary/url-gen/qualifiers/gravity";
 import { Position } from "@cloudinary/url-gen/qualifiers";
 import { source } from "@cloudinary/url-gen/actions/overlay";
 import {
   advancedEyes,
   advancedFaces,
+  sink,
 } from "@cloudinary/transformation-builder-sdk/qualifiers/focusOn";
 import { face, faces } from "@cloudinary/url-gen/qualifiers/focusOn";
-import { Resize } from "@cloudinary/url-gen/actions/resize";
+import { Resize, thumbnail } from "@cloudinary/url-gen/actions/resize";
 import { Cloudinary } from "@cloudinary/url-gen";
 import useEditor from "./useEditor";
 import { text } from "@cloudinary/url-gen/qualifiers/source";
@@ -313,6 +314,22 @@ export default function useCloudinary() {
     // cambiarImagenModificada(imagenOverlay.toURL());
     // return
   };
+  
+  const reconocerImagen = async(public_id) => {
+    const response = await fetch("/api/detect", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ public_id }),
+    });
+    const peticion = await response.json();
+    if(peticion.respuesta === 'error'){
+      return console.log('error')
+    }
+    return console.log(peticion.data)
+  }
+
   return {
     filtroBlur,
     filtroGris,
@@ -333,5 +350,6 @@ export default function useCloudinary() {
     uploadImageOverlay,
     filtroOverlayCabeza,
     uploadImage,
+    reconocerImagen
   };
 }
