@@ -315,7 +315,7 @@ export default function RangoDeEfectos() {
     return (
       <div className={estilosContent}>
         <p className={estilosTitulos}>{isGlobalStateTrue ? 'Efectos' : 'Effects'}</p>
-        <ul className="flex flex-row flex-wrap gap-5 lg:gap-0 lg:items-start justify-around items-center w-full lg:flex-col lg:space-y-5 pt-4 font-semibold px-4">
+        <ul className="flex flex-row flex-wrap gap-5 lg:gap-0 lg:items-start justify-around items-center w-full lg:flex-col lg:space-y-5 pb-2 pt-4 font-semibold px-4">
           <li>
             <button className={estiloItem} onClick={handlerGris}>
               <Image src="/assets/gris.png" width={20} height={20} alt="gris" />
