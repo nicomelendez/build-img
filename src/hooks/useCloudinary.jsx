@@ -39,6 +39,7 @@ export default function useCloudinary() {
     router,
     setMultipleEdicion,
     cambiarProcesoDeImagen,
+    isGlobalStateTrue,
     cambiarImagenModificada,
     nuevaImagenOverlay,
     setModal,
@@ -318,8 +319,8 @@ export default function useCloudinary() {
   const reconocerImagen = async(public_id) => {
     return Swal.fire({
       icon: "info",
-      title: "En construcción",
-      text: "Disponible a la brevedad!",
+      title: isGlobalStateTrue ? "En construcción" : 'In construction',
+      text:  isGlobalStateTrue ? "Disponible a la brevedad!" : 'Available soon!',
     });
     // const response = await fetch("/api/detect", {
     //   method: "POST",
