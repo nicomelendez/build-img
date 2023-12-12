@@ -50,9 +50,9 @@ export default function useCloudinary() {
     localStorage.clear();
 
     const formData = new FormData();
-    formData.append("upload_preset", "mi0or3cn");
+    formData.append("upload_preset", process.env.NEXT_PUBLIC_UPLOAD_PRESET);
     formData.append("timestamp", Date.now() / 1000);
-    formData.append("api_key", 456894211284456);
+    formData.append("api_key", process.env.NEXT_PUBLIC_API_KEY);
     formData.append("file", file);
 
     const response = await fetch(
@@ -82,9 +82,9 @@ export default function useCloudinary() {
     setImageStatus(ImageStatus.UPLOADING);
 
     const formData = new FormData();
-    formData.append("upload_preset", "mi0or3cn");
+    formData.append("upload_preset", process.env.NEXT_PUBLIC_UPLOAD_PRESET);
     formData.append("timestamp", Date.now() / 1000);
-    formData.append("api_key", 456894211284456);
+    formData.append("api_key", process.env.NEXT_PUBLIC_API_KEY);
     formData.append("file", file);
 
     const response = await fetch(
@@ -109,7 +109,7 @@ export default function useCloudinary() {
 
   const cloudinary = new Cloudinary({
     cloud: {
-      cloudName: "djslvlh8h",
+      cloudName: process.env.NEXT_PUBLIC_CLOUD_NAME,
     },
     url: {
       secure: true,
@@ -215,11 +215,11 @@ export default function useCloudinary() {
   };
 
   const filtroSacarFondo = (public_id) => {
-      const imageWithoutBackground = cloudinary
-        .image(public_id)
-        .effect(backgroundRemoval());
-      setDatosDeImagen(String(imageWithoutBackground.publicID));
-      return imageWithoutBackground.toURL();
+    const imageWithoutBackground = cloudinary
+      .image(public_id)
+      .effect(backgroundRemoval());
+    setDatosDeImagen(String(imageWithoutBackground.publicID));
+    return imageWithoutBackground.toURL();
   };
 
   const filtroSize = (public_id, largo, alto) => {
@@ -304,23 +304,25 @@ export default function useCloudinary() {
     //   text: "Disponible a la brevedad!",
     // });
     cambiarProcesoDeImagen(true);
-    const imagenOverlay = cloudinary.image(public_id).overlay(
-      source(
-        image(overlay).transformation(
-          new Transformation().resize(scale().width(medidas).regionRelative())
-        )
-      ).position(new Position().gravity(focusOn(advancedEyes())))
-    );
-    setDatosDeImagen(String(imagenOverlay.publicID))
+    const imagenOverlay = cloudinary
+      .image(public_id)
+      .overlay(
+        source(
+          image(overlay).transformation(
+            new Transformation().resize(scale().width(medidas).regionRelative())
+          )
+        ).position(new Position().gravity(focusOn(advancedEyes())))
+      );
+    setDatosDeImagen(String(imagenOverlay.publicID));
     cambiarImagenModificada(imagenOverlay.toURL());
-    return
+    return;
   };
-  
-  const reconocerImagen = async(public_id) => {
+
+  const reconocerImagen = async (public_id) => {
     return Swal.fire({
       icon: "info",
-      title: isGlobalStateTrue ? "En construcción" : 'In construction',
-      text:  isGlobalStateTrue ? "Disponible a la brevedad!" : 'Available soon!',
+      title: isGlobalStateTrue ? "En construcción" : "In construction",
+      text: isGlobalStateTrue ? "Disponible a la brevedad!" : "Available soon!",
     });
     // const response = await fetch("/api/detect", {
     //   method: "POST",
@@ -334,7 +336,7 @@ export default function useCloudinary() {
     //   return console.log('error')
     // }
     // return console.log(peticion.data)
-  }
+  };
 
   return {
     filtroBlur,
@@ -356,6 +358,6 @@ export default function useCloudinary() {
     uploadImageOverlay,
     filtroOverlayCabeza,
     uploadImage,
-    reconocerImagen
+    reconocerImagen,
   };
 }
