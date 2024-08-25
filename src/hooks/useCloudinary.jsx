@@ -132,8 +132,32 @@ export default function useCloudinary() {
     cambiarImagenModificada(imagenMostacho.toURL());
     return;
   };
-
   const filtroOverlayFaceAdv = (public_id, idOverlay) => {
+    cambiarProcesoDeImagen(true);
+    
+    const imagenMostacho = cloudinary
+      .image(public_id)
+      .overlay(
+        source(
+          image(idOverlay).transformation(
+            new Transformation()
+              .resize(scale().width("1.05").regionRelative()) 
+          )
+        )
+        .position(
+          new Position()
+            .gravity(focusOn(advancedFaces()))
+            .offsetY("-5") 
+        )
+      );
+      
+    setDatosDeImagen(String(imagenMostacho.publicID));
+    cambiarImagenModificada(imagenMostacho.toURL());
+    
+    return;
+  };
+  
+/*   const filtroOverlayFaceAdv = (public_id, idOverlay) => {
     cambiarProcesoDeImagen(true);
     const imagenMostacho = cloudinary
       .image(public_id)
@@ -148,7 +172,7 @@ export default function useCloudinary() {
 
     cambiarImagenModificada(imagenMostacho.toURL());
     return;
-  };
+  }; */
 
   const filtroOverlayCabeza = (public_id, idOverlay) => {
     cambiarProcesoDeImagen(true);
@@ -298,11 +322,6 @@ export default function useCloudinary() {
     return imagenPixel.toURL();
   };
   const filtroOverlayLentes = (public_id, overlay, medidas) => {
-    // return Swal.fire({
-    //   icon: "info",
-    //   title: "En construcción",
-    //   text: "Disponible a la brevedad!",
-    // });
     cambiarProcesoDeImagen(true);
     const imagenOverlay = cloudinary
       .image(public_id)
