@@ -1,6 +1,6 @@
-import useCloudinary from "@/hooks/useCloudinary";
-import useEditor from "@/hooks/useEditor";
-import { IconsPlus } from "./Icons";;
+import useCloudinary from '@/hooks/useCloudinary'
+import useEditor from '@/hooks/useEditor'
+import { IconsPlus } from './Icons'
 
 export default function Overlay() {
   const {
@@ -8,83 +8,92 @@ export default function Overlay() {
     filtroOverlayFace,
     filtroOverlayLentes,
     filtroOverlayFaceAdv,
-  } = useCloudinary();
-  const { datosDeImagen, setModal, imagenOverlay } = useEditor();
+  } = useCloudinary()
+  const { datosDeImagen, setModal, imagenOverlay } = useEditor()
   const overalys = [
     {
       id: 1,
-      name: "Lentes",
-      img: "u18uydlbgfqxlkjk5rz4",
+      name: 'Lentes',
+      img: 'doc-ai/overlay/tndnfuu08lqxdn1qzocm',
       action: filtroOverlayLentes,
-      scale: "1.5",
+      scale: '1.5',
     },
     {
       id: 2,
-      name: "Anonymous",
-      img: "kyxpaggqqmosta91i0xa",
+      name: 'Anonymous',
+      img: 'doc-ai/overlay/q7rgoprjodxd5zi4vnjq',
       action: filtroOverlayFace,
-      scale: "1.04",
+      scale: '1.04',
     },
     {
       id: 3,
-      name: "Mascara Casa de papel",
-      img: "ohmkt1sthbnfxhdtxphm",
+      name: 'Mascara Casa de papel',
+      img: 'doc-ai/overlay/usqipkc8vuj5lkmw0j28',
       action: filtroOverlayFace,
-      scale: "1.3",
+      scale: '1.3',
     },
     {
       id: 4,
-      name: "S.A.W",
-      img: "ha3tvn6qzmulfdrxjlxr",
+      name: 'S.A.W',
+      img: 'doc-ai/overlay/ajb2sg4osp0lt95arhet',
       action: filtroOverlayFace,
-      scale: "1.4",
+      scale: '1.4',
     },
     {
       id: 6,
-      name: "Midu",
-      img: "lbducroers3f7dkp0e5i",
-      action: filtroOverlayFace,
-      scale: "1.1",
-    }
-  ];
+      name: 'Lentes de sol',
+      img: 'doc-ai/overlay/a1g7qu9gyv3geqkh1poo',
+      action: filtroOverlayLentes,
+      scale: '1.5',
+    },
+  ]
 
   return (
-    <ul className="w-full grid grid-cols-2 place-content-center gap-3">
+    <ul className='w-full grid grid-cols-2 place-content-center gap-3'>
       {overalys.map((over) => {
         return (
           <li
             onClick={() => {
-              over.action(datosDeImagen, over.img, over?.scale);
+              over.action(datosDeImagen, over.img, over?.scale)
             }}
-            className="flex flex-col justify-center items-center cursor-pointer hover:scale-105"
+            className='flex flex-col justify-center items-center cursor-pointer hover:scale-105'
             key={over.id}
           >
             <img
-              className="max-w-[40px]"
+              className='max-w-[40px]'
               src={conseguirImagen(over.img)}
               alt={`Imagen del overlay ${over.name}`}
             />
           </li>
-        );
+        )
       })}
-      {imagenOverlay !== null ? (<>
-        <li
+      {imagenOverlay !== null ? (
+        <>
+          <li
             onClick={() => {
               filtroOverlayFaceAdv(datosDeImagen, imagenOverlay)
             }}
-            className="flex flex-col justify-center items-center cursor-pointer hover:scale-105"
+            className='flex flex-col justify-center items-center cursor-pointer hover:scale-105'
           >
             <img
-              className="max-w-[40px]"
+              className='max-w-[40px]'
               src={conseguirImagen(imagenOverlay)}
               alt={`Nueva Imagen del overlay`}
             />
           </li>
-      </>)
-       : (<></>)}
-      <li className="flex flex-col justify-center items-center cursor-pointer hover:scale-105">
-        <button onClick={()=>{setModal(true)}}><IconsPlus/></button>
+        </>
+      ) : (
+        <></>
+      )}
+      <li className='flex flex-col justify-center items-center cursor-pointer hover:scale-105'>
+        <button
+          onClick={() => {
+            setModal(true)
+          }}
+        >
+          <IconsPlus />
+        </button>
       </li>
     </ul>
-  );
+  )
 }
